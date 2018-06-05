@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgRedux, select } from '@angular-redux/store';
+import { NgRedux, select} from '@angular-redux/store';
 import { IAppState} from '../store'
 import { ACTION1 } from '../actions'; 
 
@@ -8,13 +8,14 @@ import { ACTION1 } from '../actions';
   templateUrl: './transactions-page.component.html',
   styleUrls: ['./transactions-page.component.css']
 })
-export class TransactionsPageComponent implements OnInit {
-  
-  @select() data;
+export class TransactionsPageComponent implements OnInit { 
+
+  @select() counter; 
+
   constructor(private ngRedux: NgRedux<IAppState>) { }
 
   testFunction(){
-  	this.ngRedux.dispatch({ type: 'ACTION1'});
+ 	this.ngRedux.dispatch({ type: ACTION1 });
   }
 
   ngOnInit() {
