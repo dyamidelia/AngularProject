@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgRedux, select } from '@angular-redux/store';
+import { IAppState} from '../store'
+import { ACTION1 } from '../actions'; 
 
 @Component({
   selector: 'app-transactions-page',
@@ -6,8 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transactions-page.component.css']
 })
 export class TransactionsPageComponent implements OnInit {
+  
+  @select() data;
+  constructor(private ngRedux: NgRedux<IAppState>) { }
 
-  constructor() { }
+  testFunction(){
+  	this.ngRedux.dispatch({ type: 'ACTION1'});
+  }
 
   ngOnInit() {
   }
