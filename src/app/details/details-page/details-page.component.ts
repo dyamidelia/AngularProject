@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgRedux, select} from '@angular-redux/store';
 import { ActivatedRoute } from '@angular/router';
-import { NgRedux, select } from 'ng2-redux'; 
-import { IAppState } from '../../store'; 
-import { INCREMENT, DECREMENT } from '../actions'; 
+import { IAppState} from '../../store'
+import { ACTION1 } from '../actions'; 
 
 @Component({
   selector: 'app-details-page',

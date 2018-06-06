@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgRedux, select} from '@angular-redux/store';
-import { IAppState} from '../store'
+import { ActivatedRoute } from '@angular/router';
+import { IAppState} from '../../store'
 import { ACTION1 } from '../actions'; 
 
 @Component({
@@ -10,7 +11,7 @@ import { ACTION1 } from '../actions';
 })
 export class TransactionsPageComponent implements OnInit { 
 
-  @select('counter') count; 
+  @select(s => s.transactions.newMessages) newMessages; 
 
   constructor(private ngRedux: NgRedux<IAppState>) { }
 

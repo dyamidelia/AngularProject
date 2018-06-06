@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgReduxModule } from '@angular-redux/store';
+import { TransactionsPageComponent } from './transactions-page/transactions-page.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    NgReduxModule
   ],
-  declarations: []
+  declarations: [TransactionsPageComponent],
+  exports: [TransactionsPageComponent]
 })
 export class TransactionsModule { }

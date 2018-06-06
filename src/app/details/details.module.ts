@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DetailsPageComponent } from './details/details-page.component';
+import { NgReduxModule } from '@angular-redux/store';
+import { DetailsPageComponent } from './details-page/details-page.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    NgReduxModule
   ],
   declarations: [DetailsPageComponent],
   exports: [DetailsPageComponent]

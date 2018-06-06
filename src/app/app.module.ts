@@ -7,47 +7,32 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
 import { AppComponent } from './app.component';
 import { IAppState, rootReducer, INITIAL_STATE} from './store'
 
-import { SettingsPageComponent } from './settings-page/settings-page.component';
-import { TransactionsPageComponent } from './transactions-page/transactions-page.component';
-import { DetailsPageComponent } from './details-page/details-page.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { SideNavigationComponent } from './side-navigation/side-navigation.component';
-import { HomePageComponent } from './home-page/home-page.component';
+import { TransactionsPageComponent } from './transactions/transactions-page/transactions-page.component';
+import { DetailsPageComponent } from './details/details-page/details-page.component';
+
+
+import { DetailsModule } from './details/details.module';
+import { TransactionsModule } from './transactions/transactions.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SettingsPageComponent,
-    TransactionsPageComponent,
-    DetailsPageComponent,
-    NotFoundComponent,
-    SideNavigationComponent,
-    HomePageComponent
   ],
   imports: [
     BrowserModule,
     NgReduxModule,
+    HttpModule,
+    DetailsModule,
+    TransactionsModule,
     RouterModule.forRoot([
     {
       path: '', 
-      component: HomePageComponent
-    },
-     {
-      path: 'transactions', 
       component: TransactionsPageComponent
     },
     {
-      path: 'details/:transactionid', 
+      path: 'details', 
       component: DetailsPageComponent
-    },
-    {
-      path: 'settings', 
-      component: SettingsPageComponent
-    },
-    {
-      path: '**', 
-      component: NotFoundComponent
-    },
+    }
     ])
   ],
   providers: [],
