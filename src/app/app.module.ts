@@ -32,6 +32,10 @@ import { TransactionsModule } from './transactions/transactions.module';
     {
       path: 'details', 
       component: DetailsPageComponent
+    },
+    {
+      path: 'transactions', 
+      component: TransactionsPageComponent
     }
     ])
   ],
