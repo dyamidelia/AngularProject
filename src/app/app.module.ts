@@ -9,6 +9,7 @@ import { IAppState, rootReducer, INITIAL_STATE} from './store'
 
 import { TransactionsPageComponent } from './transactions/transactions-page/transactions-page.component';
 import { DetailsPageComponent } from './details/details-page/details-page.component';
+import { NavigationComponent } from './side-navigation/navigation/navigation.component';
 
 
 

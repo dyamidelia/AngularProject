@@ -15,6 +15,7 @@ export class TransactionsPageComponent implements OnInit {
 
   @select(s => s.transactions.newMessages) newMessages; 
   @select(s => s.transactions.todos) todos;
+  @select(s => s.transactions.users) users;
 
   constructor(private ngRedux: NgRedux<IAppState>, private service: TransactionsService) { 
  
@@ -22,6 +23,14 @@ export class TransactionsPageComponent implements OnInit {
 
   ngOnInit() {
     this.service.loadTransactions();
+    this.service.loadColumnHeaders();
   }
 
+  loadFilters(){
+    
+  }
+  
+  loadColumnSelection(){
+
+  }
 }
