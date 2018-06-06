@@ -3,3 +3,9 @@
 </p>
 Counter: {{ newMessages | async }}
 <button (click)="testFunction()"> Make it Go up Bub! </button>
+<ul>
+  <li *ngFor="let t of todos | async">
+    <span [class.completed]="t.isCompleted">{{ t.title }}</span> 
+    <button > Remove </button>
+  </li>
+</ul>
