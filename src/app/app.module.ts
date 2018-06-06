@@ -11,8 +11,10 @@ import { TransactionsPageComponent } from './transactions/transactions-page/tran
 import { DetailsPageComponent } from './details/details-page/details-page.component';
 
 
+
 import { DetailsModule } from './details/details.module';
 import { TransactionsModule } from './transactions/transactions.module';
+import { SideNavigationModule } from './side-navigation/side-navigation.module'
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { TransactionsModule } from './transactions/transactions.module';
     HttpModule,
     DetailsModule,
     TransactionsModule,
+    SideNavigationModule,
     RouterModule.forRoot([
     {
       path: '', 
