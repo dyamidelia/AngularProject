@@ -1,0 +1,55 @@
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+
+    <!-- Id Column -->
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Position</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.position}}</mat-cell>
+    </ng-container>
+
+    <!-- Id Column -->
+    <ng-container matColumnDef="weight">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>weight</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.weight}}</mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="symbol">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>symbol</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.symbol}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+    [length]="dataSource.data.length"
+    [pageIndex]="0"
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 50, 100]">
+  </mat-paginator>
+</div>
+
+<mat-tab-group class="demo-tab-group">
+  <mat-tab label="Tab 1">
+    <div class="demo-tab-content">
+      Column List
+    </div>
+  </mat-tab>
+  <mat-tab label="Tab 2">
+    <div class="demo-tab-content">
+      Filters Component
+    </div>  
+  </mat-tab>
+</mat-tab-group>

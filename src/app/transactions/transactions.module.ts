@@ -3,11 +3,14 @@ import { CommonModule } from '@angular/common';
 import { NgReduxModule } from '@angular-redux/store';
 import { TransactionsPageComponent } from './transactions-page/transactions-page.component';
 import { TransactionsService } from './services/transactions.service';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
-    NgReduxModule
+    NgReduxModule,
+    MatButtonModule, 
+    MatCheckboxModule
   ],
   declarations: [
     TransactionsPageComponent
