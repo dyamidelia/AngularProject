@@ -1,51 +1,54 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
 
 import { AppComponent } from './app.component';
-import { SettingsPageComponent } from './settings-page/settings-page.component';
-import { TransactionsPageComponent } from './transactions-page/transactions-page.component';
-import { DetailsPageComponent } from './details-page/details-page.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { SideNavigationComponent } from './side-navigation/side-navigation.component';
-import { HomePageComponent } from './home-page/home-page.component';
+import { IAppState, rootReducer, INITIAL_STATE} from './store'
+
+import { TransactionsPageComponent } from './transactions/transactions-page/transactions-page.component';
+import { DetailsPageComponent } from './details/details-page/details-page.component';
+import { NavigationComponent } from './side-navigation/navigation/navigation.component';
+
+
+
+import { DetailsModule } from './details/details.module';
+import { TransactionsModule } from './transactions/transactions.module';
+import { SideNavigationModule } from './side-navigation/side-navigation.module'
 
 @NgModule({
   declarations: [
     AppComponent,
-    SettingsPageComponent,
-    TransactionsPageComponent,
-    DetailsPageComponent,
-    NotFoundComponent,
-    SideNavigationComponent,
-    HomePageComponent
   ],
   imports: [
     BrowserModule,
+    NgReduxModule,
+    HttpModule,
+    DetailsModule,
+    TransactionsModule,
+    SideNavigationModule,
     RouterModule.forRoot([
     {
       path: '', 
-      component: HomePageComponent
-    },
-     {
-      path: 'transactions', 
       component: TransactionsPageComponent
     },
     {
-      path: 'details/:transactionid', 
+      path: 'details', 
       component: DetailsPageComponent
     },
     {
-      path: 'settings', 
-      component: SettingsPageComponent
-    },
-    {
-      path: '**', 
-      component: NotFoundComponent
-    },
+      path: 'transactions', 
+      component: TransactionsPageComponent
+    }
     ])
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    constructor(ngRedux: NgRedux<IAppState>) {
+    ngRedux.configureStore(rootReducer, INITIAL_STATE);
+  }
+
+ }

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgRedux, select} from '@angular-redux/store';
 import { ActivatedRoute } from '@angular/router';
+import { IAppState} from '../../store'
+import { ACTION1 } from '../actions'; 
 
 @Component({
   selector: 'app-details-page',
@@ -8,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailsPageComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private ngRedux: NgRedux<IAppState>) { }
 
   ngOnInit() {
   	  	this.route.paramMap
