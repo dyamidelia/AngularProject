@@ -43,11 +43,29 @@
 
 <mat-tab-group class="demo-tab-group">
   <mat-tab label="Tab 1">
+    <ng-template mat-tab-label>
+    <mat-icon svgIcon="ic-document"></mat-icon>
+    </ng-template>
     <div class="demo-tab-content">
       Column List
+      <form [formGroup] ="form">
+      <br>
+      <mat-checkbox formControlName="col1">Check me!</mat-checkbox>
+      <br>
+      <mat-checkbox formControlName="col2">Check me!</mat-checkbox>
+      <br>
+      <mat-checkbox>Check me!</mat-checkbox>
+      <br>
+      <mat-checkbox>Check me!</mat-checkbox>
+      <br>
+      <button mat-raised-button color="primary" (click)="saveColums()">Save</button>
+      </form>
     </div>
   </mat-tab>
   <mat-tab label="Tab 2">
+      <ng-template mat-tab-label>
+      <mat-icon svgIcon="ic-maintenance"></mat-icon>
+      </ng-template>
     <div class="demo-tab-content">
       Filters Component
     </div>  

@@ -18,6 +18,11 @@ import { SideNavigationModule } from './side-navigation/side-navigation.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material'
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatIconModule} from '@angular/material/icon';
+import {HttpClientModule} from '@angular/common/http';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatButtonModule} from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,6 +36,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     DetailsModule,
     TransactionsModule,
     SideNavigationModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
     {
       path: '', 
@@ -54,7 +60,11 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatPaginatorModule,
     MatSortModule,
     MatInputModule,
-    MatTabsModule
+    MatTabsModule,
+    MatIconModule,
+    HttpClientModule,
+    MatCheckboxModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
