@@ -1,0 +1,12 @@
+
+<div class="transaction-details-summary">
+  <p>Summary</p>
+  <!-- <ul *ngFor = "let item of transacationDetailsData">
+    <li *ngFor="let key of item | keys">{{key}}<br/>{{item[key]}}</li>
+
+  </ul> -->
+  <ul>
+    <li *ngFor = "let item of transacationColumnsData | keys:filterargs">
+      <span class="summary-key">{{item.display_name}}</span>:<br/>{{item.display_value}}
+  </li></ul>
+</div>

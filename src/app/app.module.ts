@@ -9,6 +9,13 @@ import { DetailsPageComponent } from './details-page/details-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SideNavigationComponent } from './side-navigation/side-navigation.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { TransactionDetailsPageComponent } from './transaction-details-page/transaction-details-page.component';
+import {TransactionDetailsService} from './services/transaction-details.service';
+import { TransactionDetailsSummaryComponent } from './transaction-details-summary/transaction-details-summary.component';
+import {HttpModule} from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { KeysPipe } from './common/keys.pipe';
+
 
 @NgModule({
   declarations: [
@@ -18,10 +25,15 @@ import { HomePageComponent } from './home-page/home-page.component';
     DetailsPageComponent,
     NotFoundComponent,
     SideNavigationComponent,
-    HomePageComponent
+    HomePageComponent,
+    TransactionDetailsPageComponent,
+    TransactionDetailsSummaryComponent,
+    KeysPipe
   ],
   imports: [
     BrowserModule,
+    HttpModule,
+    HttpClientModule,
     RouterModule.forRoot([
     {
       path: '', 
@@ -36,6 +48,10 @@ import { HomePageComponent } from './home-page/home-page.component';
       component: DetailsPageComponent
     },
     {
+      path: 'transactions/:transactionId/user-trans-id/:userId', 
+      component: TransactionDetailsPageComponent
+    },
+    {
       path: 'settings', 
       component: SettingsPageComponent
     },
@@ -45,7 +61,7 @@ import { HomePageComponent } from './home-page/home-page.component';
     },
     ])
   ],
-  providers: [],
+  providers: [TransactionDetailsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
