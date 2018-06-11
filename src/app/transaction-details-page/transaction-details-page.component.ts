@@ -30,7 +30,6 @@ export class TransactionDetailsPageComponent implements OnInit {
             item['display_value']=this.transacationDetailsData[0][item.col_name];
             return item;
           })
-          console.log(this.transacationColumnsData);
   		});
   }
 }

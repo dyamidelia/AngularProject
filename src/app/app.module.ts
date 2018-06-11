@@ -14,7 +14,7 @@ import {TransactionDetailsService} from './services/transaction-details.service'
 import { TransactionDetailsSummaryComponent } from './transaction-details-summary/transaction-details-summary.component';
 import {HttpModule} from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import { KeysPipe } from './common/keys.pipe';
+import { FilterDataPipe } from './common/filter-data.pipe';
 
 
 @NgModule({
@@ -28,7 +28,7 @@ import { KeysPipe } from './common/keys.pipe';
     HomePageComponent,
     TransactionDetailsPageComponent,
     TransactionDetailsSummaryComponent,
-    KeysPipe
+    FilterDataPipe
   ],
   imports: [
     BrowserModule,

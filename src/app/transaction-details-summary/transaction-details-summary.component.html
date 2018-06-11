@@ -6,7 +6,7 @@
 
   </ul> -->
   <ul>
-    <li *ngFor = "let item of transacationColumnsData | keys:filterargs">
+    <li *ngFor = "let item of transacationColumnsData | filterData:filterargs">
       <span class="summary-key">{{item.display_name}}</span>:<br/>{{item.display_value}}
   </li></ul>
 </div>
