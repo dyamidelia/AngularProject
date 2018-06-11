@@ -23,6 +23,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     TransactionsModule,
     SideNavigationModule,
     ReactiveFormsModule,
+    MatSelectModule,
     RouterModule.forRoot([
     {
       path: '', 

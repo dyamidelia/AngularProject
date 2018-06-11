@@ -3,15 +3,52 @@
 </mat-form-field>
 
 <div class="mat-elevation-z8">
+
+    <mat-tab-group class="demo-tab-group">
+        <mat-tab label="Tab 1">
+          <ng-template mat-tab-label>
+          <mat-icon svgIcon="ic-document"></mat-icon>
+          </ng-template>
+            <!-- Columns List Comp -->
+          <div class="demo-tab-content">
+            <form [formGroup] ="form">
+            <mat-checkbox 
+            class= "padding-5"
+            *ngFor="let column of displayedColumns" 
+            (change)="toggleColumn(column)" 
+            formControlName="{{ column }}">{{ column }}</mat-checkbox>
+            <button mat-raised-button color="primary" (click)="saveColumns()">Save</button>
+            </form>
+          </div>
+        </mat-tab>
+      
+          <!-- Filters Comp -->
+          <mat-tab label="Tab 2">
+              <ng-template mat-tab-label>
+              <mat-icon svgIcon="ic-maintenance"></mat-icon>
+              </ng-template>
+            <div class="demo-tab-content">
+              <mat-form-field  *ngFor="let column of intDisplayedColumns" >
+                  <mat-select placeholder="{{column}}">
+                    <mat-option *ngFor="let food of foods" [value]="food.value">
+                      {{ food.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="saveColumns()">Apply</button>
+            </div>  
+          </mat-tab>
+        </mat-tab-group>
+        
   <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
 
-    <!-- Id Column -->
+    <!-- Position Column -->
     <ng-container matColumnDef="position">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Position</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.position}}</mat-cell>
     </ng-container>
 
-    <!-- Id Column -->
+    <!-- weight Column -->
     <ng-container matColumnDef="weight">
       <mat-header-cell *matHeaderCellDef mat-sort-header>weight</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.weight}}</mat-cell>
@@ -23,14 +60,14 @@
       <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
+    <!-- symbol Column -->
     <ng-container matColumnDef="symbol">
       <mat-header-cell *matHeaderCellDef mat-sort-header>symbol</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.symbol}}</mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-header-row *matHeaderRowDef="intDisplayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: intDisplayedColumns;"></mat-row>
   </mat-table>
 
   <mat-paginator #paginator
@@ -39,35 +76,5 @@
     [pageSize]="5"
     [pageSizeOptions]="[5, 10, 50, 100]">
   </mat-paginator>
+      
 </div>
-
-<mat-tab-group class="demo-tab-group">
-  <mat-tab label="Tab 1">
-    <ng-template mat-tab-label>
-    <mat-icon svgIcon="ic-document"></mat-icon>
-    </ng-template>
-    <div class="demo-tab-content">
-      Column List
-      <form [formGroup] ="form">
-      <br>
-      <mat-checkbox formControlName="col1">Check me!</mat-checkbox>
-      <br>
-      <mat-checkbox formControlName="col2">Check me!</mat-checkbox>
-      <br>
-      <mat-checkbox>Check me!</mat-checkbox>
-      <br>
-      <mat-checkbox>Check me!</mat-checkbox>
-      <br>
-      <button mat-raised-button color="primary" (click)="saveColums()">Save</button>
-      </form>
-    </div>
-  </mat-tab>
-  <mat-tab label="Tab 2">
-      <ng-template mat-tab-label>
-      <mat-icon svgIcon="ic-maintenance"></mat-icon>
-      </ng-template>
-    <div class="demo-tab-content">
-      Filters Component
-    </div>  
-  </mat-tab>
-</mat-tab-group>
