@@ -14,12 +14,10 @@ export class SettingsPageComponent implements OnInit {
   //  isAddStateClick:boolean = true;
  
   }
-  let heroes = [
-    {id: 1, name:'Superman'},
-    {id: 2, name:'Batman'},
-    {id: 5, name:'BatGirl'},
-    {id: 3, name:'Robin'},
-    {id: 4, name:'Flash'}
+   States = [
+    {id: 1, name:'Start'},
+    {id: 2, name:'In Progress'},
+    {id: 5, name:'End'}
 ];
   
 

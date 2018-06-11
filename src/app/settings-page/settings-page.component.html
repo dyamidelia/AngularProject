@@ -1,5 +1,6 @@
 <div class="settings">
   <h2>Settings</h2>
+  
 <ngb-accordion >
   <ngb-panel class="panel">
     <!--  -->
@@ -19,15 +20,17 @@
        <div class="stateConfigList">
          <div class="listHeading">
          <p>List of States</p> 
+         <ul>
+        
+            <li *ngFor="let state of States">
+             {{state.name}}
+            </li>
+        </ul>
          <button class="btn btn-primary">Add State</button>
         <!--  <div *ngIf="isAddStateClick;" class="addStateText">
           <input type="text"  name="addStateTextFeild" class="form-control" />
         </div>-->
-        <ul>
-        <li *ngFor="let hero of heroes">
-         {{hero.name}}
-        </li>
-    </ul>
+       
         </div>
       </div>
       </ng-template>
