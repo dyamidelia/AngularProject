@@ -12,6 +12,8 @@ import {TransactionDetailsService} from '../services/transaction-details.service
 export class TransactionDetailsPageComponent implements OnInit {
   transacationDetailsData:any;
   transacationColumnsData:any;
+  transactionStatusData:any;
+  showFullStatus:boolean = false;
   constructor(
     private route: ActivatedRoute,
     private transactionDetailsService:TransactionDetailsService
@@ -25,6 +27,7 @@ export class TransactionDetailsPageComponent implements OnInit {
          if (transactionId && userId) 
          this.transacationDetailsData= this.transactionDetailsService.getTransactionDetails(transactionId,userId);
          this.transacationColumnsData= this.transactionDetailsService.getDisplayNamesForColumns();
+         this.transactionStatusData = this.transactionDetailsService.getTransactionStatusResponse();
          
          this.transacationColumnsData = this.transacationColumnsData.map((item,index) => {
             item['display_value']=this.transacationDetailsData[0][item.col_name];

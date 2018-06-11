@@ -1,0 +1,22 @@
+<div class="transaction-details-single-status">
+    <h2>Status of Transaction</h2>
+    <div class="transaction-state-diagram">
+      <div class="status-diagram-item" *ngFor="let item of transactionStatusData; first as isFirst; last as isLast">
+        <div class="triangle" *ngIf="selectedTransaction.state === item.state"></div>
+        <div *ngIf="!isFirst" class="left-connector"></div>
+        <div *ngIf="!isLast" class="right-connector"></div>
+        <div class="circle-default" [ngClass]="{'circle-highlighter' : selectedTransaction.state === item.state}">
+          <div class="circle" (click)="selectState(item)">
+          </div>
+        </div>
+        <div class="state-name">{{item.state}}</div>
+      </div>
+    </div>
+    <div class="transaction-status-items">
+      <div class="status-item time-stamp">State Name: {{selectedTransaction.state}}</div>
+      <div class="status-item state"><div class="status-title">Status:</div><div class="status-desc">{{selectedTransaction.status}}</div></div>
+      <div class="status-item status"><div class="status-title">Description:</div><div class="status-desc">{{selectedTransaction.description}}</div></div>
+      <div class="status-item description"><div class="status-title">Time Stamp:</div><div class="status-desc">{{selectedTransaction.timeStamp}}</div></div>
+    </div>
+   </div>
+   

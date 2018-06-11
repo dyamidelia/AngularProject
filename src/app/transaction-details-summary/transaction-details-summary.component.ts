@@ -15,9 +15,8 @@ export class TransactionDetailsSummaryComponent implements OnInit {
                                 "Status",
                                 "State",
                                 "Timestamp"]
-  filterargs = {displayName: this.preDefinedColumnNames};
+  filterArgs = {displayName: this.preDefinedColumnNames};
   ngOnInit() {
-    console.log(this.transacationColumnsData,"sumary");
   }
 
 }

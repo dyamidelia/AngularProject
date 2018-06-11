@@ -64,6 +64,27 @@ export class TransactionDetailsService {
       }
     ];
    
+    transactionStatusResponse = [
+      {
+        "status":"Completed",
+        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
+        "state":"Received_from_PP",
+        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction" 
+      },
+      {
+        "status":"Completed",
+        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
+        "state":"Request_from_PP",
+        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction" 
+      },
+      {
+        "status":"Inprogress",
+        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
+        "state":"Validation",
+        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction" 
+      }
+    ];
+
   constructor(
     private http: HttpClient) {
 
@@ -80,6 +101,9 @@ export class TransactionDetailsService {
     // this.http.get("http://10.102.17.21:8080/rest/columnConfigs/detialPage").toPromise()
     // .then(response => response)
     // .catch(this.handleError);
+  }
+  getTransactionStatusResponse(){
+    return this.transactionStatusResponse;
   }
 
   private handleError(error: any): Promise<any> {

@@ -1,0 +1,91 @@
+.transaction-details-single-status{
+    display:block;
+    float: left;
+    width:100%;
+    padding: 25px;
+    box-sizing: border-box;
+}
+.transaction-details-single-status .transaction-state-diagram {
+    border-bottom: 10px solid #ccc;
+    padding-bottom: 40px;
+}
+.transaction-details-single-status .transaction-state-diagram::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.transaction-details-single-status .transaction-state-diagram .status-diagram-item{
+    float: left;
+    min-width: 100px;
+    text-align: center;
+    position: relative;
+    padding: 0 40px;
+}
+.transaction-details-single-status .transaction-state-diagram .status-diagram-item .left-connector {
+    width: 50%;
+    height: 10px;
+    background: #b9e88b;
+    border: 1px solid #a7a7a7;
+    border-right: 0;
+    border-left: 0;
+    position: absolute;
+    right: 50%;
+    top: 47px;
+    z-index: 1;
+}
+.transaction-details-single-status .transaction-state-diagram .status-diagram-item .right-connector {
+    width: 50%;
+    height: 10px;
+    background: #b9e88b;
+    border: 1px solid #a7a7a7;
+    border-right: 0;
+    border-left: 0;
+    position: absolute;
+    left: 50%;
+    top: 47px;
+    z-index: 1;
+}
+.transaction-details-single-status .transaction-state-diagram .status-diagram-item .triangle {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid #ccc;
+    position: absolute;
+    left: 50%;
+    margin-left: -20px;
+    top: 144px;
+}
+.transaction-details-single-status .transaction-state-diagram .status-diagram-item .circle-default{
+    width: 84px;
+    height: 84px;
+    background: transparent;
+    border-radius: 80px;
+    margin: 10px auto;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+.transaction-details-single-status .transaction-state-diagram .status-diagram-item .circle-highlighter{
+    background: rgba(185,232,139,0.5);
+    border: 1px solid rgba(167,167,167,0.3);
+}
+.transaction-details-single-status .transaction-state-diagram .status-diagram-item .circle {
+    width: 70px;
+    height: 70px;
+    background: #b9e88b;
+    border: 1px solid #a7a7a7;
+    border-radius: 70px;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 2;
+    cursor: pointer;
+    top: 6px;
+    left: 6px;
+}
+.transaction-details-single-status .time-stamp{
+    font-weight: bold;
+    font-size: 18px;
+}

@@ -1,0 +1,36 @@
+.transaction-details-status{
+    display:block;
+    float: left;
+    width:100%;
+    padding: 25px;
+    box-sizing: border-box;
+}
+.transaction-status-items::after{
+    content:"";
+    display: block;
+    clear: both;
+}
+.transaction-status-items .status-item{
+    float: left;
+    padding: 10px 25px 10px 0;
+    box-sizing: border-box;
+    line-height: 20px;
+}
+.transaction-status-items .time-stamp{
+    width: 35%;
+}
+.transaction-status-items .state{
+    width: 35%;
+}
+.transaction-status-items .status{
+    width: 30%;
+}
+.transaction-status-items .description{
+    width: 100%;
+    clear: both;
+    padding-right: 40%;
+    border-bottom: 1px solid #ccc;
+}
+.transaction-status-items .status-title{
+    color:gray;
+}

@@ -1,0 +1,32 @@
+.transaction-details-page{
+    display: table;
+    width: 100%;
+}
+.transaction-details-page h3{
+    display: table-row;
+}
+
+.transaction-details-content{
+    display: table-row;
+    position: relative;
+}
+
+app-transaction-details-summary{
+    display: table-cell;
+    width: 30%;
+    vertical-align: top;
+    background-color: #eeeeee;
+}
+.transaction-status-wrapper{
+    display: table-cell;
+    width: 70%;
+    vertical-align: top;
+    background-color: #ffffff;
+    position: relative;
+}
+.transaction-status-wrapper .change-view{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+}

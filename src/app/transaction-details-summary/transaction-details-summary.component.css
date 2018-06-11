@@ -1,9 +1,9 @@
 
 .transaction-details-summary{
-    background-color: #eeeeee;
-    width:340px;
-    height: 100%;
+    width:100%;
     font-size:16px;
+    display: block;
+    float: left;
 }
 .transaction-details-summary ul{
     list-style: none;
