@@ -1,3 +1,45 @@
-<p>
-  settings-page works!
-</p>
+<div class="settings">
+  <h2>Settings</h2>
+<ngb-accordion >
+  <ngb-panel class="panel">
+    <!--  -->
+    <ng-template ngbPanelTitle>
+      <span class="title">General Settings</span>
+    </ng-template>
+    <ng-template ngbPanelContent>
+     BlockChain Feature
+    </ng-template>
+  </ngb-panel>
+  <ngb-panel>
+      <!--  -->
+      <ng-template ngbPanelTitle>
+        <span>State Configuration</span>
+      </ng-template>
+      <ng-template ngbPanelContent>
+       <div class="stateConfigList">
+         <div class="listHeading">
+         <p>List of States</p> 
+         <button class="btn btn-primary">Add State</button>
+        <!--  <div *ngIf="isAddStateClick;" class="addStateText">
+          <input type="text"  name="addStateTextFeild" class="form-control" />
+        </div>-->
+        <ul>
+        <li *ngFor="let hero of heroes">
+         {{hero.name}}
+        </li>
+    </ul>
+        </div>
+      </div>
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel>
+        <!--  -->
+        <ng-template ngbPanelTitle>
+          <span>Status Configuration</span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+         BlockChain Feature
+        </ng-template>
+      </ngb-panel>
+</ngb-accordion>
+</div>

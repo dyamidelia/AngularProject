@@ -9,6 +9,7 @@ import { DetailsPageComponent } from './details-page/details-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SideNavigationComponent } from './side-navigation/side-navigation.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { HomePageComponent } from './home-page/home-page.component';
   ],
   imports: [
     BrowserModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot([
     {
       path: '', 
