@@ -1,0 +1,15 @@
+<div class="transaction-details-page">
+<h3>
+  Transaction Details
+</h3>
+<div class="transaction-details-content">
+<app-transaction-details-summary [transacationColumnsData] = transacationColumnsData></app-transaction-details-summary>
+<div class="transaction-status-wrapper">
+<button class="change-view" (click)="showFullStatus = !showFullStatus">change view</button>
+<app-transaction-details-status *ngIf="!showFullStatus" [transactionStatusData] = transactionStatusData ></app-transaction-details-status>
+<app-transaction-details-single-status *ngIf="showFullStatus" [transactionStatusData] = transactionStatusData></app-transaction-details-single-status>
+</div>
+</div>
+</div>
+
+

@@ -1,54 +1,72 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
 
 import { AppComponent } from './app.component';
+import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { IAppState, rootReducer, INITIAL_STATE} from './store'
+import { TransactionsPageComponent } from './transactions-page/transactions-page.component';
+import { DetailsPageComponent } from './details-page/details-page.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { SideNavigationComponent } from './side-navigation/side-navigation.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { TransactionDetailsPageComponent } from './transaction-details-page/transaction-details-page.component';
+import {TransactionDetailsService} from './services/transaction-details.service';
+import { TransactionDetailsSummaryComponent } from './transaction-details-summary/transaction-details-summary.component';
+import {HttpModule} from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { FilterDataPipe } from './common/filter-data.pipe';
+import { TransactionDetailsStatusComponent } from './transaction-details-status/transaction-details-status.component';
+import { TransactionDetailsSingleStatusComponent } from './transaction-details-single-status/transaction-details-single-status.component';
 
-import { TransactionsPageComponent } from './transactions/transactions-page/transactions-page.component';
-import { DetailsPageComponent } from './details/details-page/details-page.component';
-import { NavigationComponent } from './side-navigation/navigation/navigation.component';
-
-
-
-import { DetailsModule } from './details/details.module';
-import { TransactionsModule } from './transactions/transactions.module';
-import { SideNavigationModule } from './side-navigation/side-navigation.module'
 
 @NgModule({
   declarations: [
     AppComponent,
+    SettingsPageComponent,
+    TransactionsPageComponent,
+    DetailsPageComponent,
+    NotFoundComponent,
+    SideNavigationComponent,
+    HomePageComponent,
+    TransactionDetailsPageComponent,
+    TransactionDetailsSummaryComponent,
+    FilterDataPipe,
+    TransactionDetailsStatusComponent,
+    TransactionDetailsSingleStatusComponent
   ],
   imports: [
     BrowserModule,
-    NgReduxModule,
     HttpModule,
-    DetailsModule,
-    TransactionsModule,
-    SideNavigationModule,
+    HttpClientModule,
     RouterModule.forRoot([
     {
       path: '', 
+      component: HomePageComponent
+    },
+     {
+      path: 'transactions', 
       component: TransactionsPageComponent
     },
     {
-      path: 'details', 
+      path: 'details/:transactionid', 
       component: DetailsPageComponent
     },
     {
-      path: 'transactions', 
-      component: TransactionsPageComponent
-    }
+      path: 'transactions/:transactionId/user-trans-id/:userId', 
+      component: TransactionDetailsPageComponent
+    },
+    {
+      path: 'settings', 
+      component: SettingsPageComponent
+    },
+    {
+      path: '**', 
+      component: NotFoundComponent
+    },
     ])
   ],
-  providers: [],
+  providers: [TransactionDetailsService],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-    constructor(ngRedux: NgRedux<IAppState>) {
-    ngRedux.configureStore(rootReducer, INITIAL_STATE);
-  }
-
- }
+export class AppModule { }
