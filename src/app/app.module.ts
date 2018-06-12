@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
-import { IAppState, rootReducer, INITIAL_STATE} from './store'
 import { TransactionsPageComponent } from './transactions-page/transactions-page.component';
 import { DetailsPageComponent } from './details-page/details-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -19,7 +18,6 @@ import { FilterDataPipe } from './common/filter-data.pipe';
 import { TransactionDetailsStatusComponent } from './transaction-details-status/transaction-details-status.component';
 import { TransactionDetailsSingleStatusComponent } from './transaction-details-single-status/transaction-details-single-status.component';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -40,7 +38,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     HttpModule,
     HttpClientModule,
-    NgbModule.forRoot(),
     RouterModule.forRoot([
     {
       path: '', 
