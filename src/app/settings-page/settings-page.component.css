@@ -1,0 +1,19 @@
+
+
+.accordion{
+    border-bottom: 1px solid #ccc;
+    text-decoration: none;
+    font-size:0.75em;
+   color:#000;
+}
+::ng-deep .card{
+    border-bottom:1px solid #ccc;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+::ng-deep .card-header a,::ng-deep .card-body{
+    text-decoration: none;
+    color:#706e6b;
+    font-size:0.75em;
+  }
