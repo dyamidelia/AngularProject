@@ -17,7 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FilterDataPipe } from './common/filter-data.pipe';
 import { TransactionDetailsStatusComponent } from './transaction-details-status/transaction-details-status.component';
 import { TransactionDetailsSingleStatusComponent } from './transaction-details-single-status/transaction-details-single-status.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -38,6 +38,7 @@ import { TransactionDetailsSingleStatusComponent } from './transaction-details-s
     BrowserModule,
     HttpModule,
     HttpClientModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot([
     {
       path: '', 
