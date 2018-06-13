@@ -9,7 +9,7 @@ export class SettingsHttpService {
   constructor(private http:Http) { }
 
   getStates(){
-    return this.http.get(`/api/states/${this.tsc_org_id}`)
+    return this.http.get(`http://10.102.17.21:8080/rest/states/${this.tsc_org_id}`)
     .pipe(
       map(response=>response.json())
     );

@@ -1,18 +1,16 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 //Services
 import {SettingsHttpService} from "../../services/settings-http.service";
-
 @Component({
   selector: 'app-settings-page',
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.css']
 })
-export class SettingsPageComponent implements OnInit,AfterViewInit {
+export class SettingsPageComponent implements OnInit,AfterViewChecked {
   states:object[];
   showAddState=false;
-
-  @ViewChild('addStateInput') stateInput:ElementRef;
+  @ViewChild('addState') private stateInput:ElementRef;
   constructor(private service:SettingsHttpService) {
 
     this.service.getStates()
@@ -26,19 +24,17 @@ export class SettingsPageComponent implements OnInit,AfterViewInit {
   //  isAddStateClick:boolean = true;
 
   }
-  ngAfterViewInit(){
-
+  ngAfterViewChecked(){
+    if(this.showAddState){
+      this.stateInput.nativeElement.focus();
+    }
   }
-
   // form=this.fb.group({
   //   addState:['',Validators.required]
   // });
 
   toggleAddState(input){
     this.showAddState=true;
-    // this.stateInput.focus();
-    console.log(this.stateInput);
   }
-
 
 }
