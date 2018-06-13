@@ -1,6 +1,10 @@
 <div class="settings">
   <h2>Settings</h2>
+<<<<<<< Updated upstream
   
+=======
+
+>>>>>>> Stashed changes
 <ngb-accordion >
   <ngb-panel class="panel">
     <!--  -->
@@ -19,6 +23,7 @@
       <ng-template ngbPanelContent>
        <div class="stateConfigList">
          <div class="listHeading">
+<<<<<<< Updated upstream
          <p>List of States</p> 
          <ul>
         
@@ -32,6 +37,38 @@
         </div>-->
        
         </div>
+=======
+         <p>List of States
+            <button name="addStateBtn" class="btn btn-primary" (click)="toggleAddState()">Add State</button>
+         </p>
+        </div>
+         <ul>
+           <li id="addStateBlock" *ngIf="showAddState">
+             <form [style.display]="'flex'" >
+               <input type="text" name="addState" placeholder="Enter New State Name" #addStateInput>
+               <button type="button" name="editState">
+                 <i class="fa fa-floppy-o" aria-hidden="true" [style.font-size]="'30px'"></i>
+               </button>
+               <button type="button" name="deleteState">
+                 <i class="fa fa-times" aria-hidden="true" [style.font-size]="'30px'" (click)="showAddState=false"></i>
+               </button>
+             </form>
+           </li>
+            <li *ngFor="let state of states"
+            (mouseenter)="state.showOptions=true"
+            (mouseleave)="state.showOptions=false">
+             {{state.state_name}}
+             <span class="stateOptions" *ngIf="state.showOptions">
+               <button type="button" name="editState">
+                 <i class="fa fa-pencil" aria-hidden="true" [style.font-size]="'30px'"></i>
+               </button>
+               <button type="button" name="deleteState">
+                 <i class="fa fa-trash" aria-hidden="true" [style.font-size]="'30px'"></i>
+               </button>
+             </span>
+            </li>
+        </ul>
+>>>>>>> Stashed changes
       </div>
       </ng-template>
     </ngb-panel>
@@ -45,4 +82,8 @@
         </ng-template>
       </ngb-panel>
 </ngb-accordion>
+<<<<<<< Updated upstream
 </div>
+=======
+</div>
+>>>>>>> Stashed changes

@@ -1,5 +1,8 @@
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 .accordion{
     border-bottom: 1px solid #ccc;
     text-decoration: none;
@@ -7,13 +10,74 @@
    color:#000;
 }
 ::ng-deep .card{
+<<<<<<< Updated upstream
     border-bottom:1px solid #ccc;
     padding-top:10px;
     padding-bottom:10px;
+=======
+    border:none;
+    /* border-bottom:1px solid #ccc;
+    padding-top:10px;
+    padding-bottom:10px; */
+>>>>>>> Stashed changes
 }
 
 ::ng-deep .card-header a,::ng-deep .card-body{
     text-decoration: none;
     color:#706e6b;
     font-size:0.75em;
+<<<<<<< Updated upstream
   }
+=======
+  }
+
+.stateConfigList{
+  padding-right:50px;
+}
+.stateConfigList >ul{
+  list-style-type: none;
+}
+
+.stateConfigList li{
+  padding: 8px;
+  border-bottom:1px solid #e6e6e6;
+}
+/* Add State Button */
+button[name="addStateBtn"]{
+  float: right;
+  background: #1d426f;
+  border: none;
+}
+button[name="addStateBtn"]:hover{
+      box-shadow: 1px 1px 4px black;
+}
+.stateOptions{
+  float:right;
+}
+
+.stateOptions button{
+  background:inherit;
+  border:none;
+  padding:0;
+  cursor:pointer;
+  margin:0px 10px;
+}
+/* #addStateBlock{
+  display:flex;
+} */
+#addStateBlock input{
+  width:90%;
+  padding:10px;
+  font-style:italic;
+  background:#f7f7f7;
+  border-radius:5px;
+  border: 1px solid #e6e6e6;
+}
+#addStateBlock button{
+  background:inherit;
+  border:none;
+  padding:0;
+  cursor:pointer;
+  margin:0px 10px;
+}
+>>>>>>> Stashed changes
