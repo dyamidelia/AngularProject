@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { TableDataSource } from './table-datasource';
 import {MatIconRegistry} from '@angular/material';
@@ -19,18 +19,13 @@ export class TableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: TableDataSource;
-  intDisplayedColumns = ['position', 'name', 'weight', 'symbol'];
-  // @select(s => {
-  //    console.log(s);
-  //     this.intDisplayedColumns = s.table.todos;
-  //    return s.table.todos;
-  //   }
-  // ) todos;
+  @select((s:IAppState) => s.table.todos) todos;
+
 
    /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-   
+   searchString = "Please select a column to search by from the select on the left" ;
    //intDisplayedColumns = [];
-  
+   intDisplayedColumns = ['position', 'name', 'weight', 'symbol'];
    displayedColumns = ['position', 'name', 'weight', 'symbol'];
    form;
    foods = [
@@ -77,10 +72,7 @@ export class TableComponent implements OnInit {
   }
 
   toggleColumn(column){
-
     console.log(this.form.get(column).value);
-    
-
     if (this.form.get(column).value && !this.intDisplayedColumns.includes(column)){
       //Change to redux dispatch Event
        //Add the columnName from ColDisplayList
@@ -96,7 +88,13 @@ export class TableComponent implements OnInit {
         }
       }
     }
+  }
 
+  changeSearchText( event, myNewString ){
+    console.log(event, myNewString);
+    if (event.isUserInput){
+      this.searchString = "Please type the name of a(n) " + myNewString;
+    }
   }
 
   ngOnInit() {

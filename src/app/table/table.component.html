@@ -1,11 +1,14 @@
 Transactions
 <mat-select class="primary-search-select" placeholder="Transactions">
-    <mat-option *ngFor="let food of foods" [value]="food.value">
-      {{ food.viewValue }}
+    <mat-option 
+    *ngFor="let a of todos | async"
+    [value]="a.display_name"
+    (onSelectionChange)= "changeSearchText( $event, a.display_name )">
+      {{ a.display_name }}
     </mat-option>
 </mat-select>
 <mat-form-field class="primary-search">
-  <input class="primary-search-input" matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  <input class="primary-search-input" matInput (keyup)="applyFilter($event.target.value)" placeholder="{{searchString}}">
 </mat-form-field>
 <button mat-button color="primary" (click)="saveColumns()"> + </button>
 <button mat-raised-button color="primary" (click)="saveColumns()">Search <mat-icon svgIcon="ic-maintenance"></mat-icon></button>
@@ -92,4 +95,4 @@ Transactions
       <td [class.completed]="t.isCompleted">{{ t.display_name }}</td> 
     </tr>
 
-<div class="full-width red"> ITEM</div>
+
