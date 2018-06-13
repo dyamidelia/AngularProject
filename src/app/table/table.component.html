@@ -1,10 +1,18 @@
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+Transactions
+<mat-select class="primary-search-select" placeholder="Transactions">
+    <mat-option *ngFor="let food of foods" [value]="food.value">
+      {{ food.viewValue }}
+    </mat-option>
+</mat-select>
+<mat-form-field class="primary-search">
+  <input class="primary-search-input" matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
 </mat-form-field>
+<button mat-button color="primary" (click)="saveColumns()"> + </button>
+<button mat-raised-button color="primary" (click)="saveColumns()">Search <mat-icon svgIcon="ic-maintenance"></mat-icon></button>
+<br><br>
 
 <div class="mat-elevation-z8">
-
-    <mat-tab-group class="demo-tab-group">
+    <mat-tab-group class="demo-tab-group full-width">
         <mat-tab label="Tab 1">
           <ng-template mat-tab-label>
           <mat-icon svgIcon="ic-document"></mat-icon>
@@ -40,7 +48,7 @@
           </mat-tab>
         </mat-tab-group>
         
-  <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+  <mat-table class="full-width" #table [dataSource]="dataSource" matSort aria-label="Elements">
 
     <!-- Position Column -->
     <ng-container matColumnDef="position">
@@ -78,3 +86,10 @@
   </mat-paginator>
       
 </div>
+
+  <!-- Get Table Rows -->
+  <tr *ngFor="let t of todos | async">
+      <td [class.completed]="t.isCompleted">{{ t.display_name }}</td> 
+    </tr>
+
+<div class="full-width red"> ITEM</div>

@@ -6,7 +6,8 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {FormGroup, FormControl, FormArray, FormBuilder} from '@angular/forms';
 import { NgRedux, select} from '@angular-redux/store';
-import { IAppState} from '../store'
+import { IAppState} from '../store';
+import { TableService } from './services/table.service';
 
 
 @Component({
@@ -18,9 +19,18 @@ export class TableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: TableDataSource;
+  intDisplayedColumns = ['position', 'name', 'weight', 'symbol'];
+  // @select(s => {
+  //    console.log(s);
+  //     this.intDisplayedColumns = s.table.todos;
+  //    return s.table.todos;
+  //   }
+  // ) todos;
 
    /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-   intDisplayedColumns = ['position', 'name', 'weight', 'symbol'];
+   
+   //intDisplayedColumns = [];
+  
    displayedColumns = ['position', 'name', 'weight', 'symbol'];
    form;
    foods = [
@@ -29,7 +39,19 @@ export class TableComponent implements OnInit {
     {value: 'tacos-2', viewValue: 'Tacos'}
   ];
 
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, fb: FormBuilder, private ngRedux: NgRedux<IAppState>) {
+  constructor(private service: TableService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, fb: FormBuilder, private ngRedux: NgRedux<IAppState>) {
+    /*
+    ngRedux.subscribe(()=>{
+      let s = ngRedux.getState();
+      this.intDisplayedColumns = s.table.todos.map((el)=>{
+        
+        console.log(el);
+        return el.display_name
+      });
+      debugger;
+      console.log(this.intDisplayedColumns);
+    }); */
+    
     //svg icons
     iconRegistry.addSvgIcon(
         'ic-maintenance',
@@ -47,6 +69,7 @@ export class TableComponent implements OnInit {
       'weight': [],
       'symbol': []
     })
+
   }
 
   saveColumns(){
@@ -56,6 +79,7 @@ export class TableComponent implements OnInit {
   toggleColumn(column){
 
     console.log(this.form.get(column).value);
+    
 
     if (this.form.get(column).value && !this.intDisplayedColumns.includes(column)){
       //Change to redux dispatch Event
@@ -77,7 +101,9 @@ export class TableComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource = new TableDataSource(this.paginator, this.sort);
+    this.service.loadTransactions();
 
+    //this.todos.subscribe(todos => this.intDisplayedColumns = todos.map(todo => todo.col_name));
     //Get Data from Backend via Service
 
     //Set To checked
