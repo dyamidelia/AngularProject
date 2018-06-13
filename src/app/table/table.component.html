@@ -1,5 +1,5 @@
-Transactions
-<mat-select class="primary-search-select" placeholder="Transactions">
+<span class="header-text">Transactions</span>
+<mat-select  #colNames class="primary-search-select" placeholder="Transactions">
     <mat-option 
     *ngFor="let a of todos | async"
     [value]="a.display_name"
@@ -7,15 +7,82 @@ Transactions
       {{ a.display_name }}
     </mat-option>
 </mat-select>
+
 <mat-form-field class="primary-search">
-  <input class="primary-search-input" matInput (keyup)="applyFilter($event.target.value)" placeholder="{{searchString}}">
+  <input class="primary-search-input" 
+  matInput
+  #topic
+  placeholder="{{searchString}}">
 </mat-form-field>
-<button mat-button color="primary" (click)="saveColumns()"> + </button>
-<button mat-raised-button color="primary" (click)="saveColumns()">Search <mat-icon svgIcon="ic-maintenance"></mat-icon></button>
+
+<button mat-button color="primary" (click)="addSearch(topic, colNames)"> + </button>
+<button mat-raised-button color="primary" (click)="saveColumns()">Search   <mat-icon class="padding-5" svgIcon="search"></mat-icon></button>
+
 <br><br>
 
-<div class="mat-elevation-z8">
-    <mat-tab-group class="demo-tab-group full-width">
+<div style="width: 100%; display: table;">
+    <div style="display: table-row">
+        <div style="width: 600px; display: table-cell;"> 
+            <div class="grey-box" *ngFor="let searches of form.get('searches').controls"> {{ searches.value }}</div>
+          </div>
+        <div style="display: table-cell;">
+                <div *ngFor="let topic of form.get('topics').controls">
+                    {{ topic.value }}
+                </div>
+             </div>
+    </div>
+</div>
+
+<div>
+  <mat-table class="full-width" #table [dataSource]="dataSource" matSort aria-label="Elements">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Position</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.position}}</mat-cell>
+    </ng-container>
+
+    <!-- weight Column -->
+    <ng-container matColumnDef="weight">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>weight</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.weight}}</mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+    </ng-container>
+
+    <!-- symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>symbol </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.symbol}}</mat-cell>
+    </ng-container>
+    
+    <!-- Buttons in the Header
+    <ng-container matColumnDef="filters">
+        <mat-header-cell *matHeaderCellDef> <button mat-raised-button ><mat-icon svgIcon="ic-maintenance"></mat-icon></button></mat-header-cell>
+    </ng-container> 
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> <button mat-raised-button ><mat-icon svgIcon="ic-document"></mat-icon></button></mat-header-cell>
+    </ng-container> -->
+
+    <mat-header-row *matHeaderRowDef="intDisplayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: intDisplayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+    [length]="dataSource.data.length"
+    [pageIndex]="0"
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 50, 100]">
+  </mat-paginator>
+      
+</div>
+
+    <mat-tab-group class="">
         <mat-tab label="Tab 1">
           <ng-template mat-tab-label>
           <mat-icon svgIcon="ic-document"></mat-icon>
@@ -50,49 +117,3 @@ Transactions
             </div>  
           </mat-tab>
         </mat-tab-group>
-        
-  <mat-table class="full-width" #table [dataSource]="dataSource" matSort aria-label="Elements">
-
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Position</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.position}}</mat-cell>
-    </ng-container>
-
-    <!-- weight Column -->
-    <ng-container matColumnDef="weight">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>weight</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.weight}}</mat-cell>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
-    </ng-container>
-
-    <!-- symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>symbol</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.symbol}}</mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="intDisplayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: intDisplayedColumns;"></mat-row>
-  </mat-table>
-
-  <mat-paginator #paginator
-    [length]="dataSource.data.length"
-    [pageIndex]="0"
-    [pageSize]="5"
-    [pageSizeOptions]="[5, 10, 50, 100]">
-  </mat-paginator>
-      
-</div>
-
-  <!-- Get Table Rows -->
-  <tr *ngFor="let t of todos | async">
-      <td [class.completed]="t.isCompleted">{{ t.display_name }}</td> 
-    </tr>
-
-

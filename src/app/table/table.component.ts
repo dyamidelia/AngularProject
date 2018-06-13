@@ -24,6 +24,7 @@ export class TableComponent implements OnInit {
 
    /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
    searchString = "Please select a column to search by from the select on the left" ;
+   colSelection = "";
    //intDisplayedColumns = [];
    intDisplayedColumns = ['position', 'name', 'weight', 'symbol'];
    displayedColumns = ['position', 'name', 'weight', 'symbol'];
@@ -53,6 +54,10 @@ export class TableComponent implements OnInit {
         sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-maintenance.svg')
       );
     iconRegistry.addSvgIcon(
+        'search',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/images/search.svg')
+      );
+    iconRegistry.addSvgIcon(
         'ic-document',
         sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-document.svg')
       );
@@ -62,13 +67,30 @@ export class TableComponent implements OnInit {
       'position': [],
       'name': [],
       'weight': [],
-      'symbol': []
+      'symbol': [],
+      'actions': [],
+      'filters': [],
+      topics: fb.array([]),
+      searches: fb.array([])
     })
 
   }
 
   saveColumns(){
     //Call Backend with Service and send it our variable.
+    console.log("2");
+    (this.form.get('topics') as FormArray).reset();
+    (this.form.get('searches') as FormArray).reset();
+  }
+
+  addSearch(topic, colNames){
+    (this.form.get('topics') as FormArray).push(new FormControl(topic.value));
+    topic.value = '';
+
+    (this.form.get('searches') as FormArray).push(new FormControl(this.colSelection));
+    colNames.value = '';
+    this.colSelection ='';
+
   }
 
   toggleColumn(column){
@@ -91,9 +113,9 @@ export class TableComponent implements OnInit {
   }
 
   changeSearchText( event, myNewString ){
-    console.log(event, myNewString);
     if (event.isUserInput){
       this.searchString = "Please type the name of a(n) " + myNewString;
+      this.colSelection = myNewString;
     }
   }
 

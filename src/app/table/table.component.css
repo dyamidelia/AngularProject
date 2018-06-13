@@ -17,10 +17,14 @@
 }
 
 .primary-search-select{
-    width: 200px;
+    width: 100px;
     background-color: #d4d4d4;
-    height: 30px;
+    height: 25px;
+    padding-top: 3px;
+    border-radius: 4px;
     color: black;
+    padding-right: 25px;
+    padding-left: 25px;
 }
 
 .full-width{
@@ -30,3 +34,20 @@
 .red{
     background-color: red;
 }
+
+.grey-box{
+    background-color: #d4d4d4;
+}
+
+.header-text{
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.mat-select-trigger {
+    margin-right: 25px !important;
+}
+
+mat-header-cell {
+    background-color:#d4d4d4;
+  }
