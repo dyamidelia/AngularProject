@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {HttpModule} from '@angular/http';
+import { HttpModule } from '@angular/http';
+import { ReactiveFormsModule } from "@angular/forms";
 
+//Components
 import { AppComponent } from './app.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { TransactionsPageComponent } from './transactions-page/transactions-page.component';
@@ -11,6 +13,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { SideNavigationComponent } from './side-navigation/side-navigation.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 //Services
 import {SettingsHttpService} from "../services/settings-http.service";
 
@@ -28,6 +31,7 @@ import {SettingsHttpService} from "../services/settings-http.service";
   imports: [
     BrowserModule,
     HttpModule,
+    ReactiveFormsModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
     {
