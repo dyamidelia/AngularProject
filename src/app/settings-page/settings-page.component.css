@@ -1,8 +1,3 @@
-<<<<<<< Updated upstream
-
-
-=======
->>>>>>> Stashed changes
 .accordion{
     border-bottom: 1px solid #ccc;
     text-decoration: none;
@@ -10,25 +5,16 @@
    color:#000;
 }
 ::ng-deep .card{
-<<<<<<< Updated upstream
-    border-bottom:1px solid #ccc;
-    padding-top:10px;
-    padding-bottom:10px;
-=======
     border:none;
     /* border-bottom:1px solid #ccc;
     padding-top:10px;
     padding-bottom:10px; */
->>>>>>> Stashed changes
 }
 
 ::ng-deep .card-header a,::ng-deep .card-body{
     text-decoration: none;
     color:#706e6b;
     font-size:0.75em;
-<<<<<<< Updated upstream
-  }
-=======
   }
 
 .stateConfigList{
@@ -80,4 +66,3 @@ button[name="addStateBtn"]:hover{
   cursor:pointer;
   margin:0px 10px;
 }
->>>>>>> Stashed changes
