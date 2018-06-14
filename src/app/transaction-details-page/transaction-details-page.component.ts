@@ -13,6 +13,7 @@ export class TransactionDetailsPageComponent implements OnInit {
   transacationDetailsData:any;
   transacationColumnsData:any;
   transactionStatusData:any;
+  currentTransaction:any;
   showFullStatus:boolean = false;
   constructor(
     private route: ActivatedRoute,
@@ -34,5 +35,9 @@ export class TransactionDetailsPageComponent implements OnInit {
             return item;
           })
   		});
+  }
+
+  onTransactionStateChange(currentTransaction){
+    this.currentTransaction = currentTransaction;
   }
 }

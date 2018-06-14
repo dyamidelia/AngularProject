@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FilterDataPipe } from './common/filter-data.pipe';
 import { TransactionDetailsStatusComponent } from './transaction-details-status/transaction-details-status.component';
 import { TransactionDetailsSingleStatusComponent } from './transaction-details-single-status/transaction-details-single-status.component';
+import { TransactionStatusDiagramComponent } from './transaction-status-diagram/transaction-status-diagram.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { TransactionDetailsSingleStatusComponent } from './transaction-details-s
     TransactionDetailsSummaryComponent,
     FilterDataPipe,
     TransactionDetailsStatusComponent,
-    TransactionDetailsSingleStatusComponent
+    TransactionDetailsSingleStatusComponent,
+    TransactionStatusDiagramComponent
   ],
   imports: [
     BrowserModule,
