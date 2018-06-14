@@ -9,6 +9,8 @@ import { DetailsPageComponent } from './details-page/details-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SideNavigationComponent } from './side-navigation/side-navigation.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { HeaderComponent } from './header/header.component'
+
 import { TransactionDetailsPageComponent } from './transaction-details-page/transaction-details-page.component';
 import {TransactionDetailsService} from './services/transaction-details.service';
 import { TransactionDetailsSummaryComponent } from './transaction-details-summary/transaction-details-summary.component';
@@ -34,6 +36,7 @@ import { TransactionStatusDiagramComponent } from './transaction-status-diagram/
     TransactionDetailsPageComponent,
     TransactionDetailsSummaryComponent,
     FilterDataPipe,
+    HeaderComponent,
     TransactionDetailsStatusComponent,
     TransactionDetailsSingleStatusComponent,
     TransactionStatusDiagramComponent

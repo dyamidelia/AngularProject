@@ -9,15 +9,21 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #062E79;
+    background-color: #0E123C;
     overflow-x: hidden;
-    padding-top: 20px;
+    padding-top: 60px;
+}
+.side-navagation ul{
+    padding-left:10px;
+}
+.side-navagation li{
+    list-style: none;
 }
 
 .side-navagation a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 1em;
     color: #ffffff;
     display: block;
 }
