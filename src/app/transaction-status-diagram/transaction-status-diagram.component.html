@@ -1,0 +1,16 @@
+<div class="transaction-details-status-diagram">
+    <h2>Status of Transaction</h2>
+    <div class="transaction-state-diagram">
+      <div class="transaction-diagram-container">
+      <div class="status-diagram-item" *ngFor="let item of transactionStatusData; first as isFirst; last as isLast">
+        <div class="triangle" *ngIf="selectedTransaction.state === item.state"></div>
+        <div *ngIf="!isFirst" class="left-connector"></div>
+        <div *ngIf="!isLast" class="right-connector"></div>
+        <div class="circle-default" [ngClass]="{'circle-highlighter' : selectedTransaction.state === item.state}">
+          <div class="circle" (click)="selectState(item)">
+          </div>
+        </div>
+        <div class="state-name">{{item.state}}</div>
+      </div>
+    </div>
+    </div>

@@ -7,6 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TransactionDetailsStatusComponent implements OnInit {
   @Input('transactionStatusData') transactionStatusData : any;
+  
+  
   constructor() { }
 
   ngOnInit() {

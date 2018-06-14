@@ -84,6 +84,62 @@ export class TransactionDetailsService {
         "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction: Request_for_validation" 
       }
     ];
+    transactionStatusMultipleResponse = [
+      {
+        "status":"Completed",
+        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
+        "state":"Received_from_PP",
+        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction : Received_from_PP" 
+      },
+      {
+        "status":"Completed",
+        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
+        "state":"Request_from_PP",
+        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction : Request_from_PP" 
+      },
+      {
+        "status":"Inprogress",
+        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
+        "state":"Validation",
+        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction: Request_for_validation" 
+      },
+      {
+        "status":"Completed",
+        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
+        "state":"Received_from_PP 1",
+        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction : Received_from_PP" 
+      },
+      {
+        "status":"Completed",
+        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
+        "state":"Request_from_PP 1",
+        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction : Request_from_PP" 
+      },
+      {
+        "status":"Inprogress",
+        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
+        "state":"Validation 1",
+        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction: Request_for_validation" 
+      },
+      {
+        "status":"Completed",
+        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
+        "state":"Received_from_PP 2",
+        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction : Received_from_PP" 
+      },
+      {
+        "status":"Completed",
+        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
+        "state":"Request_from_PP 2",
+        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction : Request_from_PP" 
+      },
+      {
+        "status":"Inprogress",
+        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
+        "state":"Validation 2",
+        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction: Request_for_validation" 
+      }
+    ];
 
   constructor(
     private http: HttpClient) {
@@ -103,7 +159,7 @@ export class TransactionDetailsService {
     // .catch(this.handleError);
   }
   getTransactionStatusResponse(){
-    return this.transactionStatusResponse;
+    return this.transactionStatusMultipleResponse;
   }
 
   private handleError(error: any): Promise<any> {
