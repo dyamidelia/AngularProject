@@ -44,8 +44,8 @@
     text-align: center;
 }
 
-.primary-search-input-filtered{
-
+.primary-search-input-filtered, .primary-search-select-filtered{
+    margin-top: 3px;
 }
 
 .full-width{

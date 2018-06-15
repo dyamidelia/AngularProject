@@ -18,7 +18,7 @@ export const TABLE_INITIAL_STATE: ITableState = {
 function getColumns(state, action){
 
   return tassign(state, {
-    users: action.users
+    todos: action.todos
   });
 }
 
@@ -40,8 +40,8 @@ function addTodo(state, action) {
 
 export function tableReducer(state: ITableState = TABLE_INITIAL_STATE, action): ITableState {
   switch (action.type) {
-    case GET_TRANSACTIONS_SUCCESS: return getTodo(state, action);
-    case GET_COLUMNS_SUCCESS: return getTransactions(state, action);
+    case GET_TRANSACTIONS_SUCCESS: return getTransactions(state, action);
+    case GET_COLUMNS_SUCCESS: return getColumns(state, action);
   }
 
   return state; 

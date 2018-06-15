@@ -9,7 +9,7 @@ import { GET_TRANSACTIONS_SUCCESS, GET_COLUMNS_SUCCESS } from '../actions'
 })
 export class TableService {
 
-  //private readonly url = 'https://my-json-server.typicode.com/dyamidelia/demo/cols';
+  private readonly url = 'http://10.102.17.21:8080/rest/columnConfigs/3aa41148-e1ab-4b35-a9aa-abf70ba69a17';
   private readonly swaggerUrl = 'http://10.102.17.21:8080/rest/transactions/org_1/user-trans-id/123';
   //private readonly url = ' https://jsonplaceholder.typicode.com/todos';
 
@@ -29,7 +29,7 @@ export class TableService {
   loadColumnHeaders(){
     //this.ngRedux.dispatch({ type: "GET_TRANSACTIONS_REQUEST" });
 
-    this.http.get(this.swaggerUrl).subscribe(todos => {
+    this.http.get(this.url).subscribe(todos => {
       this.ngRedux.dispatch({ type: GET_COLUMNS_SUCCESS, todos: todos.json() });
     }, err => {
       //this.ngRedux.dispatch({ type: "GET_TRANSACTIONS_FAILURE" });

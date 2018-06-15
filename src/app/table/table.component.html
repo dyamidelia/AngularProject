@@ -22,9 +22,9 @@
 <button mat-raised-button color="primary" (click)="saveColumns()">Search   <mat-icon class="padding-5" svgIcon="search"></mat-icon></button>
 
 <br><br>
-<div *ngIf="!isOn" style="line-height: 25px; display: table;">
+<div *ngIf="!isOn" style="line-height: 25px; display: table; margin-left: 105px;">
 <!-- <div *ngIf="!isOn" style="width: 100%; display: table;"> -->
-    <div style="display: flex">
+    <div style="display: flex; margin-bottom: 5px;">
         <div style="display: table-cell;"> 
             <div class="primary-search-select-filtered" *ngFor="let searches of form.get('searches').controls"> {{ searches.value }}</div>
           </div>
@@ -134,4 +134,4 @@
           </mat-tab>
         </mat-tab-group>
 
-        <div  *ngFor="let g of transactions | async"> {{ g.trans_id }} </div>
+        <!-- <div  *ngFor="let g of transactions | async"> {{ g.trans_id }} </div> -->

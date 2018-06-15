@@ -83,6 +83,7 @@ export class TableComponent implements OnInit {
     //Remove Result from formArray
     let index = this.form.get('topics').controls.indexOf(removeTopic);
     this.form.get('topics').removeAt(index);
+    this.form.get('searches').removeAt(index);
     //Recall Backend
 
     //IF empty??
