@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 //Angular Material Modules
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
 //Components
 import { AppComponent } from './app.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
@@ -39,6 +40,7 @@ import { DeleteDialogComponent } from './settings-page/delete-dialog/delete-dial
     BrowserAnimationsModule,
     MatExpansionModule,
     MatDialogModule,
+    MatInputModule,
     RouterModule.forRoot([
     {
       path: '',

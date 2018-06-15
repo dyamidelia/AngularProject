@@ -5,7 +5,9 @@
   background-color: #f4f4f4;
   border-bottom: 1px solid #bbb;
 }
-
+.mat-form-field{
+  width:85%;
+}
 .accordion{
     border-bottom: 1px solid #ccc;
     text-decoration: none;
