@@ -2,7 +2,17 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
-body { margin: 0; font-family: 'Source Sans Pro', sans-serif; background-color: #f9f9f9;}
+body { margin: 0; font-family: 'Source Sans Pro', sans-serif; padding:10px;
+    background:rgb(244,244,244);}
 
 
 
+
+
+/*@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~font-awesome/css/font-awesome.min.css";*/
+
+body {
+  padding:10px;
+  background:rgb(244,244,244);
+}

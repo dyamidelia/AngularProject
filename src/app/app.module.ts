@@ -1,14 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
-
+import { HttpModule } from '@angular/http';
+//Angular Material Modules
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDialogModule} from '@angular/material/dialog';
+//Components
 import { AppComponent } from './app.component';
-import { IAppState, rootReducer, INITIAL_STATE} from './store'
+import { SettingsPageComponent } from './settings-page/settings-page.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { SideNavigationComponent } from './side-navigation/side-navigation.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
-import { TransactionsPageComponent } from './transactions/transactions-page/transactions-page.component';
-import { DetailsPageComponent } from './details/details-page/details-page.component';
+
+import { HeaderComponent } from './header/header.component'
 import { NavigationComponent } from './side-navigation/navigation/navigation.component';
 import { TableComponent } from './table/table.component';
 
@@ -19,42 +24,92 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material'
 import { MatTabsModule } from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
-import {HttpClientModule} from '@angular/common/http';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
+import { TransactionDetailsPageComponent } from './transaction-details-page/transaction-details-page.component';
+import {TransactionDetailsService} from './services/transaction-details.service';
+import { TransactionDetailsSummaryComponent } from './transaction-details-summary/transaction-details-summary.component';
+
+import { HttpClientModule } from '@angular/common/http';
+import { FilterDataPipe } from './common/filter-data.pipe';
+import { TransactionDetailsStatusComponent } from './transaction-details-status/transaction-details-status.component';
+import { TransactionDetailsSingleStatusComponent } from './transaction-details-single-status/transaction-details-single-status.component';
+
+import { TransactionStatusDiagramComponent } from './transaction-status-diagram/transaction-status-diagram.component';
+import { NgReduxModule, NgRedux } from '@angular-redux/store';
+import { IAppState, INITIAL_STATE, rootReducer} from '../app/store';
+//Services
+import {SettingsHttpService} from "../services/settings-http.service";
+import { DeleteDialogComponent } from './settings-page/delete-dialog/delete-dialog.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
+    SettingsPageComponent,
+    NotFoundComponent,
+    SideNavigationComponent,
+    HomePageComponent,
+    TransactionDetailsPageComponent,
+    TransactionDetailsSummaryComponent,
+    FilterDataPipe,
+    HeaderComponent,
+    TransactionDetailsStatusComponent,
+    TransactionDetailsSingleStatusComponent,
+    TransactionStatusDiagramComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
-    NgReduxModule,
     HttpModule,
     DetailsModule,
     TransactionsModule,
     SideNavigationModule,
     ReactiveFormsModule,
     MatSelectModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatExpansionModule,
+    MatDialogModule,
+    MatInputModule,
     RouterModule.forRoot([
     {
-      path: '', 
-      component: TransactionsPageComponent
+      path: 'home',
+      component: HomePageComponent
+    },
+     {
+      path: 'transactions',
+      component: TableComponent
     },
     {
-      path: 'details', 
-      component: DetailsPageComponent
-    },
-    {
-      path: 'transactions', 
-      component: TransactionsPageComponent
+      path: 'transactionsDetails',
+      component: TransactionDetailsPageComponent
     },
     {
       path: 'table', 
       component: TableComponent
+    },
+    {
+      path: 'transactions/:transactionId/user-trans-id/:userId',
+      component: TransactionDetailsPageComponent
+    },
+    {
+      path: 'settings',
+      component: SettingsPageComponent
+    },
+      {
+        path: '',
+        redirectTo: '/home',
+        pathMatch:"full"
+      },
+    {
+      path: '**',
+      component: NotFoundComponent
     }
     ]),
     BrowserAnimationsModule,
@@ -68,12 +123,12 @@ import {MatSelectModule} from '@angular/material/select';
     MatCheckboxModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [TransactionDetailsService,SettingsHttpService],
+  entryComponents: [DeleteDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-    constructor(ngRedux: NgRedux<IAppState>) {
+  constructor(ngRedux: NgRedux<IAppState>) {
     ngRedux.configureStore(rootReducer, INITIAL_STATE);
   }
-
  }

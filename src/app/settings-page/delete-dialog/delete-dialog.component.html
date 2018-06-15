@@ -1,0 +1,21 @@
+<mat-dialog-content>
+
+  <div class="content-warning">
+    <i  class="fa fa-exclamation-triangle fa-3x danger" aria-hidden="true"></i>
+  </div>
+  <div class="content-middle">
+    <h6 class="danger bold">Are you sure, you want to delete below {{data.confType}} from the list of {{data.confPluralForm}}?</h6><br>
+    <p class="bold">{{data.confType | titlecase}}: {{data.delState | titlecase}}</p>
+    <p [style.color]="'#bbb'">All transactions with this state will be reset to the respective earlier {{data.confPluralForm}}.</p>
+  </div>
+  <div [style.padding]="'0px'">
+    <button mat-button mat-dialog-close class="close">
+      <i  class="fa fa-times fa-2x " aria-hidden="true"></i>
+    </button>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+<button class="cancel" mat-button mat-dialog-close>Cancel</button>
+  <button class="delete" mat-button [mat-dialog-close]="true" cdkFocusInitial>Yes, Delete</button>
+</mat-dialog-actions>

@@ -1,0 +1,24 @@
+
+.transaction-details-summary{
+    width:100%;
+    font-size:16px;
+    display: block;
+    float: left;
+}
+.transaction-details-summary ul{
+    list-style: none;
+    padding-left:20px;
+}
+.transaction-details-summary li{
+    padding-top:25px;
+}
+
+.transaction-details-summary .summary-key{
+    color:darkgrey;
+}
+.transaction-details-summary p{
+    padding-left:20px;
+    padding-top:20px;
+    font-weight: bold;
+    font-size: 18px;
+}
