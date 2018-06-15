@@ -1,9 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from "@angular/forms";
-
+//Angular Material Modules
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDialogModule} from '@angular/material/dialog';
 //Components
 import { AppComponent } from './app.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
@@ -12,6 +15,7 @@ import { DetailsPageComponent } from './details-page/details-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SideNavigationComponent } from './side-navigation/side-navigation.component';
 import { HomePageComponent } from './home-page/home-page.component';
+
 
 import { HeaderComponent } from './header/header.component'
 
@@ -26,10 +30,9 @@ import { TransactionDetailsSingleStatusComponent } from './transaction-details-s
 
 import { TransactionStatusDiagramComponent } from './transaction-status-diagram/transaction-status-diagram.component';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 //Services
 import {SettingsHttpService} from "../services/settings-http.service";
+import { DeleteDialogComponent } from './settings-page/delete-dialog/delete-dialog.component';
 
 
 
@@ -48,7 +51,8 @@ import {SettingsHttpService} from "../services/settings-http.service";
     HeaderComponent,
     TransactionDetailsStatusComponent,
     TransactionDetailsSingleStatusComponent,
-    TransactionStatusDiagramComponent
+    TransactionStatusDiagramComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,9 @@ import {SettingsHttpService} from "../services/settings-http.service";
     HttpClientModule,
 
     ReactiveFormsModule,
-    NgbModule.forRoot(),
+    BrowserAnimationsModule,
+    MatExpansionModule,
+    MatDialogModule,
     RouterModule.forRoot([
     {
       path: '',
@@ -86,9 +92,8 @@ import {SettingsHttpService} from "../services/settings-http.service";
     },
     ])
   ],
-
   providers: [TransactionDetailsService,SettingsHttpService],
-
+  entryComponents: [DeleteDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

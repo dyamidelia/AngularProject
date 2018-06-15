@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@angular-redux/store": "^9.0.0",
     "@angular/animations": "^6.0.2",
     "@angular/common": "^6.0.2",
@@ -29,6 +30,24 @@
     "tassign": "^1.0.0",
     "zone.js": "^0.8.26",
     "font-awesome": "^4.7.0"
+=======
+    "@angular/animations": "^6.0.4",
+    "@angular/cdk": "^6.2.1",
+    "@angular/common": "^6.0.4",
+    "@angular/compiler": "^6.0.4",
+    "@angular/core": "^6.0.4",
+    "@angular/forms": "^6.0.4",
+    "@angular/http": "^6.0.4",
+    "@angular/material": "^6.2.1",
+    "@angular/platform-browser": "^6.0.4",
+    "@angular/platform-browser-dynamic": "^6.0.4",
+    "@angular/router": "^6.0.4",
+    "bootstrap": "^4.1.1",
+    "core-js": "^2.5.4",
+    "font-awesome": "^4.7.0",
+    "rxjs": "^6.0.0",
+    "zone.js": "^0.8.26"
+>>>>>>> abhi
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.6.8",

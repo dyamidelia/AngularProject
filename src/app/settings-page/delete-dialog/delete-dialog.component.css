@@ -1,0 +1,41 @@
+.mat-dialog-content{
+  display: inline-flex;
+}
+.content-warning{
+  padding: 25px 0px 20px 20px;
+}
+.content-middle{
+  padding: 30px 25px 10px 20px;
+}
+.mat-dialog-actions {
+  float:right;
+}
+.mat-dialog-actions button{
+  padding: 10px 30px;
+  margin: 10px 15px;
+  text-transform: uppercase;
+  border-radius: 2px;
+  cursor:pointer;
+}
+.cancel{
+  background:#ffffff;
+  border:1px solid #9fc4f0;
+  color:#9fc4f0;
+}
+.delete{
+  color:white;
+  background:#d0021b;
+  border: none;
+}
+.danger{
+  color:#d0021b;
+}
+.close{
+  margin: -20px -30px;
+  position: absolute;
+  color: #bbb;
+  background:inherit;
+}
+.bold{
+  font-weight:600;
+}

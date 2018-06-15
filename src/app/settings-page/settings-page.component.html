@@ -1,67 +1,107 @@
 
 <div class="settings">
   <h2>Settings</h2>
+  <mat-accordion>
 
-<ngb-accordion >
-  <ngb-panel class="panel">
-    <!--  -->
-    <ng-template ngbPanelTitle>
-      <span class="title">General Settings</span>
-    </ng-template>
-    <ng-template ngbPanelContent>
-     BlockChain Feature
-    </ng-template>
-  </ngb-panel>
-  <ngb-panel>
-      <!--  -->
-      <ng-template ngbPanelTitle>
-        <span>State Configuration</span>
-      </ng-template>
-      <ng-template ngbPanelContent>
-       <div class="stateConfigList">
-         <div class="listHeading">
-         <p>List of States
-            <button name="addStateBtn" class="btn btn-primary" (click)="showAddState=true">Add State</button>
-         </p>
-        </div>
-         <ul>
-           <li id="addStateBlock" *ngIf="showAddState">
-             <form [style.display]="'flex'" [formGroup]="form">
-               <input #addState type="text" name="addState" placeholder="Enter New State Name" #addStateInput
-               formControlName="state">
-               <button type="submit" name="editState" (click)="addStateSubmit()" [disabled]="state.errors?.required">
-                 <i class="fa fa-floppy-o" aria-hidden="true" [style.font-size]="'30px'"></i>
-               </button>
-               <button type="button" name="deleteState">
-                 <i class="fa fa-times" aria-hidden="true" [style.font-size]="'30px'" (click)="showAddState=false"></i>
-               </button>
-             </form>
+    <!-- General Settings -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          General Settings
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!--Content goes here  -->
+    </mat-expansion-panel>
+
+    <!-- state -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          State Configuration
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!--Content goes here  -->
+      <div class="stateConfigList">
+        <div class="listHeading">
+        <p [style.font-size]="'16px'">List of States
+           <button name="addStateBtn" class="btn btn-primary" (click)="showAddState=true">Add State</button>
+        </p>
+       </div>
+        <ul>
+          <li id="addStateBlock" *ngIf="showAddState">
+            <form [style.display]="'flex'" [formGroup]="form">
+              <input #addState type="text" name="addState" placeholder="Enter New State Name" #addStateInput
+              formControlName="state">
+              <button type="submit" name="editState" (click)="addStateSubmit()" [disabled]="state.errors?.required">
+                <i class="fa fa-floppy-o" aria-hidden="true" [style.font-size]="'30px'"></i>
+              </button>
+              <button type="button" name="deleteState">
+                <i class="fa fa-times" aria-hidden="true" [style.font-size]="'30px'" (click)="showAddState=false"></i>
+              </button>
+            </form>
+          </li>
+           <li *ngFor="let state of states"
+           (mouseenter)="state.showOptions=true"
+           (mouseleave)="state.showOptions=false">
+            {{state.state_name}}
+            <span class="stateOptions" *ngIf="state.showOptions">
+              <button type="button" name="editState">
+                <i class="fa fa-pencil" aria-hidden="true" [style.font-size]="'30px'"></i>
+              </button>
+              <button type="button" name="deleteState"
+              (click)="openDelStateDialog(state.state_id,state.state_name)">
+                <i class="fa fa-trash" aria-hidden="true" [style.font-size]="'30px'"></i>
+              </button>
+            </span>
            </li>
-            <li *ngFor="let state of states"
-            (mouseenter)="state.showOptions=true"
-            (mouseleave)="state.showOptions=false">
-             {{state.state_name}}
-             <span class="stateOptions" *ngIf="state.showOptions">
-               <button type="button" name="editState">
-                 <i class="fa fa-pencil" aria-hidden="true" [style.font-size]="'30px'"></i>
-               </button>
-               <button type="button" name="deleteState">
-                 <i class="fa fa-trash" aria-hidden="true" [style.font-size]="'30px'"></i>
-               </button>
-             </span>
-            </li>
-        </ul>
-      </div>
-      </ng-template>
-    </ngb-panel>
-    <ngb-panel>
-        <!--  -->
-        <ng-template ngbPanelTitle>
-          <span>Status Configuration</span>
-        </ng-template>
-        <ng-template ngbPanelContent>
-         BlockChain Feature
-        </ng-template>
-      </ngb-panel>
-</ngb-accordion>
+       </ul>
+     </div>
+    </mat-expansion-panel>
+
+    <!-- status  -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Status Configuration
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!--Content goes here  -->
+      <!--Content goes here  -->
+      <div class="stateConfigList">
+        <div class="listHeading">
+        <p [style.font-size]="'16px'">List of Status
+           <button name="addStateBtn" class="btn btn-primary" (click)="showAddStatus=true">Add Status</button>
+        </p>
+       </div>
+        <ul>
+          <li id="addStateBlock" *ngIf="showAddStatus">
+            <form [style.display]="'flex'" [formGroup]="form">
+              <input #addStatus type="text" name="addState" placeholder="Enter New Status Name" #addStateInput
+              formControlName="state">
+              <button type="submit" name="editState" (click)="addStateSubmit()" [disabled]="state.errors?.required">
+                <i class="fa fa-floppy-o" aria-hidden="true" [style.font-size]="'30px'"></i>
+              </button>
+              <button type="button" name="deleteState">
+                <i class="fa fa-times" aria-hidden="true" [style.font-size]="'30px'" (click)="showAddStatus=false"></i>
+              </button>
+            </form>
+          </li>
+           <li *ngFor="let state of states"
+           (mouseenter)="state.showOptions=true"
+           (mouseleave)="state.showOptions=false">
+            {{state.state_name}}
+            <span class="stateOptions" *ngIf="state.showOptions">
+              <button type="button" name="editState">
+                <i class="fa fa-pencil" aria-hidden="true" [style.font-size]="'30px'"></i>
+              </button>
+              <button type="button" name="deleteState"
+              (click)="openDelStateDialog(state.state_id,state.state_name)">
+                <i class="fa fa-trash" aria-hidden="true" [style.font-size]="'30px'"></i>
+              </button>
+            </span>
+           </li>
+       </ul>
+     </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

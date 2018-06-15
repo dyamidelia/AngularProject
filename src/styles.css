@@ -3,6 +3,7 @@
 
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~font-awesome/css/font-awesome.min.css";
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
 body {
   padding:10px;
   background:rgb(244,244,244);
