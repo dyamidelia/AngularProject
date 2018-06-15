@@ -83,17 +83,22 @@ import { DeleteDialogComponent } from './settings-page/delete-dialog/delete-dial
     },
     {
 
-      path: 'transactions/:transactionId/user-trans-id/:userId', 
+      path: 'transactions/:transactionId/user-trans-id/:userId',
       component: TransactionDetailsPageComponent
     },
     {
-      path: 'settings', 
+      path: 'settings',
       component: SettingsPageComponent
     },
+      {
+        path: '',
+        redirectTo: '/home',
+        pathMatch:"full"
+      },
     {
       path: '**',
       component: NotFoundComponent
-    },
+    }
     ])
   ],
   providers: [TransactionDetailsService,SettingsHttpService],

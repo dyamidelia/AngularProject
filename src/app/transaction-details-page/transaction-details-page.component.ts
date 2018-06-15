@@ -25,11 +25,11 @@ export class TransactionDetailsPageComponent implements OnInit {
   		.subscribe(params => {
          let transactionId=params.get('transactionId');
          let userId = params.get('userId');
-         if (transactionId && userId) 
+         // if (transactionId && userId)
          this.transacationDetailsData= this.transactionDetailsService.getTransactionDetails(transactionId,userId);
          this.transacationColumnsData= this.transactionDetailsService.getDisplayNamesForColumns();
          this.transactionStatusData = this.transactionDetailsService.getTransactionStatusResponse();
-         
+
          this.transacationColumnsData = this.transacationColumnsData.map((item,index) => {
             item['display_value']=this.transacationDetailsData[0][item.col_name];
             return item;
