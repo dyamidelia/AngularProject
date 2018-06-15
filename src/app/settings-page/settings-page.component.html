@@ -13,7 +13,7 @@
       <!--Content goes here  -->
     </mat-expansion-panel>
 
-    <!-- state -->
+    <!-- State Configuration-->
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -33,15 +33,17 @@
             <form [style.display]="'flex'" [formGroup]="form">
               <input #addState type="text" name="addState" placeholder="Enter New State Name" #addStateInput
               formControlName="state">
+              <!-- save button -->
               <button type="submit" name="editState" (click)="addStateSubmit()" [disabled]="state.errors?.required">
                 <i class="fa fa-floppy-o" aria-hidden="true" [style.font-size]="'30px'"></i>
               </button>
+              <!-- delete button -->
               <button type="button" name="deleteState">
                 <i class="fa fa-times" aria-hidden="true" [style.font-size]="'30px'" (click)="showAddState=false"></i>
               </button>
             </form>
           </li>
-          <!-- states -->
+          <!-- list of states -->
            <li *ngFor="let state of states"
            (mouseenter)="state.showOptions=true"
            (mouseleave)="state.showOptions=false">
@@ -63,10 +65,10 @@
               <div *ngIf="state.editState">
                 <form [formGroup]="editForm">
                   <mat-form-field class="example-full-width">
-                    <input matInput value="{{state.state_name}}" formControlName="state" #editState>
+                    <input matInput value="{{state.state_name}}" formControlName="state" >
                     <mat-hint align="start"><strong>Previous State: {{state.state_name}}</strong> </mat-hint>
                   </mat-form-field>
-                  <span class="stateOptions" *ngIf="state.showOptions">
+                  <span class="stateOptions">
                     <!-- save button -->
                     <button type="submit" name="editState" (click)="editStateSubmit(state)" [disabled]="state.errors?.required">
                       <i class="fa fa-floppy-o" aria-hidden="true" [style.font-size]="'30px'"></i>
@@ -84,7 +86,7 @@
      </div>
     </mat-expansion-panel>
 
-    <!-- status  -->
+    <!-- Status Configuration  -->
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -92,40 +94,67 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <!--Content goes here  -->
-      <!--Content goes here  -->
       <div class="stateConfigList">
         <div class="listHeading">
         <p [style.font-size]="'16px'">List of Status
-           <button name="addStateBtn" class="btn btn-primary" (click)="showAddStatus=true">Add Status</button>
+           <button name="addStatusBtn" class="btn btn-primary" (click)="showAddStatus=true">Add Status</button>
         </p>
        </div>
         <ul>
-          <li id="addStateBlock" *ngIf="showAddStatus">
-            <form [style.display]="'flex'" [formGroup]="form">
-              <input #addStatus type="text" name="addState" placeholder="Enter New Status Name" #addStateInput
-              formControlName="state">
-              <button type="submit" name="editState" (click)="addStateSubmit()" [disabled]="state.errors?.required">
+          <!-- Add Status Block -->
+          <li id="addStatusBlock" *ngIf="showAddStatus">
+            <form [style.display]="'flex'" [formGroup]="statusForm">
+              <input #addStatus type="text" name="addState" placeholder="Enter New Status Name" #addStatusInput
+              formControlName="status">
+              <!-- save button -->
+              <button type="submit" name="editStatus" (click)="addStatusSubmit()" [disabled]="status.errors?.required">
                 <i class="fa fa-floppy-o" aria-hidden="true" [style.font-size]="'30px'"></i>
               </button>
-              <button type="button" name="deleteState">
+              <!-- close button -->
+              <button type="button" name="deleteStatus">
                 <i class="fa fa-times" aria-hidden="true" [style.font-size]="'30px'" (click)="showAddStatus=false"></i>
               </button>
             </form>
           </li>
-           <li *ngFor="let state of states"
-           (mouseenter)="state.showOptions=true"
-           (mouseleave)="state.showOptions=false">
-            {{state.state_name}}
-            <span class="stateOptions" *ngIf="state.showOptions">
-              <button type="button" name="editState">
-                <i class="fa fa-pencil" aria-hidden="true" [style.font-size]="'30px'"></i>
-              </button>
-              <button type="button" name="deleteState"
-              (click)="openDelStateDialog(state.state_id,state.state_name)">
-                <i class="fa fa-trash" aria-hidden="true" [style.font-size]="'30px'"></i>
-              </button>
-            </span>
-           </li>
+          <!-- list of statuses -->
+           <li *ngFor="let status of statuses"
+           (mouseenter)="status.showOptions=true"
+           (mouseleave)="status.showOptions=false">
+           <div *ngIf="!status.editStatus">
+             {{status.status_name}}
+             <span class="stateOptions" *ngIf="status.showOptions">
+               <!-- edit button -->
+               <button type="button" name="editStatus"
+               (click)="status.editStatus=true">
+                  <i class="fa fa-pencil" aria-hidden="true" [style.font-size]="'30px'"></i>
+               </button>
+               <!-- delete button -->
+               <button type="button" name="deleteStatus"
+               (click)="openDelStatusDialog(status.status_id,status.status_name)">
+                  <i class="fa fa-trash" aria-hidden="true" [style.font-size]="'30px'"></i>
+               </button>
+             </span>
+           </div>
+           <!-- edit status block-->
+           <div *ngIf="status.editStatus">
+             <form [formGroup]="editStatusForm">
+               <mat-form-field class="example-full-width">
+                 <input matInput value="{{status.status_name}}" formControlName="status" >
+                 <mat-hint align="start"><strong>Previous Status: {{status.status_name}}</strong> </mat-hint>
+               </mat-form-field>
+               <span class="statusOptions">
+                 <!-- save button -->
+                 <button type="submit" name="editStatus" (click)="editStatusSubmit(status)" [disabled]="status.errors?.required">
+                   <i class="fa fa-floppy-o" aria-hidden="true" [style.font-size]="'30px'"></i>
+                 </button>
+                 <!-- close button -->
+                 <button type="button" name="deleteStatus" (click)="status.editstatus=false">
+                   <i class="fa fa-times" aria-hidden="true" [style.font-size]="'30px'" (click)="showAddStatus=false"></i>
+                 </button>
+               </span>
+             </form>
+           </div>
+         </li>
        </ul>
      </div>
     </mat-expansion-panel>
