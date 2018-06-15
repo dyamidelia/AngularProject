@@ -12,7 +12,7 @@
       <!--Content goes here  -->
     </mat-expansion-panel>
 
-    <!-- state -->
+    <!-- State Configuration-->
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -40,7 +40,7 @@
               </button>
             </form>
           </li>
-          <!-- states -->
+          <!-- list of states -->
            <li *ngFor="let state of states"
            (mouseenter)="state.showOptions=true"
            (mouseleave)="state.showOptions=false">
@@ -83,7 +83,7 @@
      </div>
     </mat-expansion-panel>
 
-    <!-- status  -->
+    <!-- Status Configuration  -->
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -91,36 +91,39 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <!--Content goes here  -->
-      <!--Content goes here  -->
       <div class="stateConfigList">
         <div class="listHeading">
         <p [style.font-size]="'16px'">List of Status
-           <button name="addStateBtn" class="btn btn-primary" (click)="showAddStatus=true">Add Status</button>
+           <button name="addStatusBtn" class="btn btn-primary" (click)="showAddStatus=true">Add Status</button>
         </p>
        </div>
         <ul>
-          <li id="addStateBlock" *ngIf="showAddStatus">
-            <form [style.display]="'flex'" [formGroup]="form">
+          <!-- Add Status Block -->
+          <li id="addStatusBlock" *ngIf="showAddStatus">
+            <form [style.display]="'flex'" [formGroup]="statusForm">
               <input #addStatus type="text" name="addState" placeholder="Enter New Status Name" #addStateInput
-              formControlName="state">
-              <button type="submit" name="editState" (click)="addStateSubmit()" [disabled]="state.errors?.required">
+              formControlName="status">
+              <!-- save button -->
+              <button type="submit" name="editStatus" (click)="addStatusSubmit()" [disabled]="status.errors?.required">
                 <i class="fa fa-floppy-o" aria-hidden="true" [style.font-size]="'30px'"></i>
               </button>
-              <button type="button" name="deleteState">
+              <!-- close button -->
+              <button type="button" name="deleteStatus">
                 <i class="fa fa-times" aria-hidden="true" [style.font-size]="'30px'" (click)="showAddStatus=false"></i>
               </button>
             </form>
           </li>
-           <li *ngFor="let state of states"
-           (mouseenter)="state.showOptions=true"
-           (mouseleave)="state.showOptions=false">
-            {{state.state_name}}
-            <span class="stateOptions" *ngIf="state.showOptions">
+          <!-- list of statuses -->
+           <li *ngFor="let status of statuses"
+           (mouseenter)="status.showOptions=true"
+           (mouseleave)="status.showOptions=false">
+            {{status.status_name}}
+            <span class="stateOptions" *ngIf="status.showOptions">
               <button type="button" name="editState">
                 <i class="fa fa-pencil" aria-hidden="true" [style.font-size]="'30px'"></i>
               </button>
               <button type="button" name="deleteState"
-              (click)="openDelStateDialog(state.state_id,state.state_name)">
+              (click)="openDelStatusDialog(status.status_id,status.status_name)">
                 <i class="fa fa-trash" aria-hidden="true" [style.font-size]="'30px'"></i>
               </button>
             </span>

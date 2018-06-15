@@ -5,7 +5,7 @@
   </div>
   <div class="content-middle">
     <h6 class="danger bold">Are you sure, you want to delete below state from the list of states?</h6><br>
-    <p class="bold">State: {{data.delState}}</p>
+    <p class="bold">{{data.confType}}: {{data.delState | titlecase}}</p>
     <p [style.color]="'#bbb'">All transactions with this state will be reset to the respective earlier states.</p>
   </div>
   <div [style.padding]="'0px'">

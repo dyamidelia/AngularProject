@@ -11,32 +11,46 @@ import {SettingsHttpService} from "../../services/settings-http.service";
 })
 export class SettingsPageComponent implements OnInit, AfterViewChecked {
   states:object[];
+  statuses:object[];
   showAddState=false;
-
   showAddStatus=false;
+
   //Add State Input Element
   @ViewChild('addState') private stateInput:ElementRef;
   //Add Status Input Element
   @ViewChild('addStatus') private statusInput:ElementRef;
 
-  // Form state
+  //AddState Form
   form=this.fb.group({
     state:['',Validators.required]
-  });
-  //Edit Form State
-  editForm=this.fb.group({
-    state:['',Validators.required],
-    id:['']
   });
   get state(){
     return this.form.get('state');
   }
-  //Form state ends...
+  //EditState Form
+  editForm=this.fb.group({
+    state:['',Validators.required],
+    id:['']
+  });
+
+  //AddStatus Form
+  statusForm=this.fb.group({
+    status:['',Validators.required]
+  });
+  get status(){
+    return this.statusForm.get('status');
+  }
 
   constructor(private service:SettingsHttpService,private fb:FormBuilder,private dialog:MatDialog) {
+    // getting the states
     this.service.getStates()
     .subscribe(states=>{
       this.states=states;
+    });
+    //getting the statuses
+    this.service.getStatuses()
+    .subscribe(statuses=>{
+      this.statuses=statuses;
     });
   }
   ngOnInit() {
@@ -50,7 +64,7 @@ export class SettingsPageComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  //Form Logic
+  //Add State Form Logic
   addStateSubmit(){
     let {state}=this.form.value;
     this.states.unshift({state_name:state,state_desp:'desc',tsc_org_id:'org_1'});
@@ -59,7 +73,7 @@ export class SettingsPageComponent implements OnInit, AfterViewChecked {
     this.service.setState(state)
     .subscribe(response=>{});
   }
-  // Edit Form Logic
+  // Edit State Form Logic
   editStateSubmit(stateObj){
     stateObj.editState=false;
     if (this.editForm.value.state!==stateObj.state_name && this.editForm.value.state!='') {
@@ -73,11 +87,21 @@ export class SettingsPageComponent implements OnInit, AfterViewChecked {
     }
 
   }
-  //Dialog logic
+  //Add Status Form Logic
+  addStatusSubmit(){
+    let {status}=this.statusForm.value;
+    this.statuses.unshift({status_name:status,state_desp:'desc',tsc_org_id:'org_1'});
+    this.statusInput.nativeElement.value='';
+    //hitting the Backend API with newStatus
+    this.service.setStatus(status)
+    .subscribe(response=>console.log("add status:response from server",response));
+  }
+  // Delete State Dialog logic
   openDelStateDialog(delStateId,delStateName){
     let dialogRef= this.dialog.open(DeleteDialogComponent,{
       width:'45%',
       data:{
+          confType:'State',
           delState:delStateName
       }
     });
@@ -88,6 +112,27 @@ export class SettingsPageComponent implements OnInit, AfterViewChecked {
         this.service.delState(delStateId)
         .subscribe(response=>{
           console.log("Delete State: response from server",response);
+        });
+      }
+    });
+
+  }
+  // Delete Status Dialog logic
+  openDelStatusDialog(delStatusId,delStatusName){
+    let dialogRef= this.dialog.open(DeleteDialogComponent,{
+      width:'45%',
+      data:{
+          confType:'Status',
+          delState:delStatusName
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.statuses=[...this.statuses.filter((status:any)=>status.status_id!=delStatusId)];
+        // hitting the Backend API with delete state ID
+        this.service.delStatus(delStatusId)
+        .subscribe(response=>{
+          console.log("Delete Status: response from server",response);
         });
       }
     });
