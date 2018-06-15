@@ -14,7 +14,8 @@
     padding-top: 60px;
 }
 .side-navagation ul{
-    padding-left:10px;
+    padding-left:0px;
+    padding-top:40px;
 }
 .side-navagation li{
     list-style: none;
