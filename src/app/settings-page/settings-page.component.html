@@ -28,6 +28,7 @@
         </p>
        </div>
         <ul>
+          <!-- Add State Block -->
           <li id="addStateBlock" *ngIf="showAddState">
             <form [style.display]="'flex'" [formGroup]="form">
               <input #addState type="text" name="addState" placeholder="Enter New State Name" #addStateInput
@@ -40,20 +41,45 @@
               </button>
             </form>
           </li>
+          <!-- states -->
            <li *ngFor="let state of states"
            (mouseenter)="state.showOptions=true"
            (mouseleave)="state.showOptions=false">
-            {{state.state_name}}
-            <span class="stateOptions" *ngIf="state.showOptions">
-              <button type="button" name="editState">
-                <i class="fa fa-pencil" aria-hidden="true" [style.font-size]="'30px'"></i>
-              </button>
-              <button type="button" name="deleteState"
-              (click)="openDelStateDialog(state.state_id,state.state_name)">
-                <i class="fa fa-trash" aria-hidden="true" [style.font-size]="'30px'"></i>
-              </button>
-            </span>
+              <div *ngIf="!state.editState">
+                {{state.state_name}}
+                <span class="stateOptions" *ngIf="state.showOptions">
+                  <!-- edit button -->
+                  <button type="button" name="editState" (click)="state.editState=true">
+                    <i class="fa fa-pencil" aria-hidden="true" [style.font-size]="'30px'"></i>
+                  </button>
+                  <!-- delete button -->
+                  <button type="button" name="deleteState"
+                  (click)="openDelStateDialog(state.state_id,state.state_name)">
+                    <i class="fa fa-trash" aria-hidden="true" [style.font-size]="'30px'"></i>
+                  </button>
+                </span>
+              </div>
+              <!-- edit state block-->
+              <div *ngIf="state.editState">
+                <form [formGroup]="editForm">
+                  <mat-form-field class="example-full-width">
+                    <input matInput value="{{state.state_name}}" formControlName="state" #editState>
+                    <mat-hint align="start"><strong>Previous State: {{state.state_name}}</strong> </mat-hint>
+                  </mat-form-field>
+                  <span class="stateOptions" *ngIf="state.showOptions">
+                    <!-- save button -->
+                    <button type="submit" name="editState" (click)="editStateSubmit(state)" [disabled]="state.errors?.required">
+                      <i class="fa fa-floppy-o" aria-hidden="true" [style.font-size]="'30px'"></i>
+                    </button>
+                    <!-- close button -->
+                    <button type="button" name="deleteState" (click)="state.editState=false">
+                      <i class="fa fa-times" aria-hidden="true" [style.font-size]="'30px'" (click)="showAddState=false"></i>
+                    </button>
+                  </span>
+                </form>
+              </div>
            </li>
+
        </ul>
      </div>
     </mat-expansion-panel>

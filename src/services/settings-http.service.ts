@@ -15,7 +15,24 @@ export class SettingsHttpService {
       map(response=>response.json())
     );
   }
+  editState(stateObj){
+    //Model Schema
+    // {
+    //   "state_desp": "string",
+    //   "state_name": "string",
+    //   "tsc_org_id": "string"
+    // }
+    return this.http.put(`${this.hitURL}/states/${stateObj.id}`,
+      {
+          "state_desp": "desc",
+          "state_name": stateObj.state,
+          "tsc_org_id": this.tsc_org_id
 
+      })
+      .pipe(map(response=>{
+        return {...response.json(),status:response.status};
+      }));
+  }
   setState(newState){
     //Model Schema
     // {
@@ -23,7 +40,6 @@ export class SettingsHttpService {
     //   "state_name": "string",
     //   "tsc_org_id": "string"
     // }
-
     return this.http.post(`${this.hitURL}/states/`,
       {
           "state_desp": "desc",
