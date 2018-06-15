@@ -20,11 +20,13 @@ export class TableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   dataSource: TableDataSource;
   @select((s:IAppState) => s.table.todos) todos;
+  @select((s:IAppState) => s.table.transactions) transactions;
 
 
    /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
    searchString = "Please select a column to search by from the select on the left" ;
    colSelection = "";
+   isOn = false;
    //intDisplayedColumns = [];
    intDisplayedColumns = ['position', 'name', 'weight', 'symbol'];
    displayedColumns = ['position', 'name', 'weight', 'symbol'];
@@ -71,18 +73,40 @@ export class TableComponent implements OnInit {
       'actions': [],
       'filters': [],
       topics: fb.array([]),
-      searches: fb.array([])
+      searches: fb.array([]),
+      searchResults: fb.array([]),
     })
 
   }
 
+  removeResult(removeTopic: FormControl){
+    //Remove Result from formArray
+    let index = this.form.get('topics').controls.indexOf(removeTopic);
+    this.form.get('topics').removeAt(index);
+    //Recall Backend
+
+    //IF empty??
+    if ( this.form.get('topics').length == 0 ){
+      //this.clear();
+      this.isOn = false;
+      console.log('4');
+    }
+  
+  }
+
   saveColumns(){
     //Call Backend with Service and send it our variable.
-    console.log("2");
+    this.isOn = true;
+    
+    //(this.form.get('searchResults') as FormArray).push(this.form.get('topics'));
+    //console.log(this.form.get('searchResults') as FormArray);
+    //this.clear();
+  }
+
+  clear(){
     (this.form.get('topics') as FormArray).reset();
     (this.form.get('searches') as FormArray).reset();
   }
-
   addSearch(topic, colNames){
     (this.form.get('topics') as FormArray).push(new FormControl(topic.value));
     topic.value = '';
@@ -122,6 +146,7 @@ export class TableComponent implements OnInit {
   ngOnInit() {
     this.dataSource = new TableDataSource(this.paginator, this.sort);
     this.service.loadTransactions();
+    this.service.loadColumnHeaders();
 
     //this.todos.subscribe(todos => this.intDisplayedColumns = todos.map(todo => todo.col_name));
     //Get Data from Backend via Service

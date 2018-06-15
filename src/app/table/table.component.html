@@ -1,4 +1,6 @@
 <span class="header-text">Transactions</span>
+
+<span style="line-height: 25px">
 <mat-select  #colNames class="primary-search-select" placeholder="Transactions">
     <mat-option 
     *ngFor="let a of todos | async"
@@ -8,29 +10,43 @@
     </mat-option>
 </mat-select>
 
-<mat-form-field class="primary-search">
+<span>
   <input class="primary-search-input" 
-  matInput
   #topic
   placeholder="{{searchString}}">
-</mat-form-field>
+</span>
+
+</span>
 
 <button mat-button color="primary" (click)="addSearch(topic, colNames)"> + </button>
 <button mat-raised-button color="primary" (click)="saveColumns()">Search   <mat-icon class="padding-5" svgIcon="search"></mat-icon></button>
 
 <br><br>
-
-<div style="width: 100%; display: table;">
-    <div style="display: table-row">
-        <div style="width: 600px; display: table-cell;"> 
-            <div class="grey-box" *ngFor="let searches of form.get('searches').controls"> {{ searches.value }}</div>
+<div *ngIf="!isOn" style="line-height: 25px; display: table;">
+<!-- <div *ngIf="!isOn" style="width: 100%; display: table;"> -->
+    <div style="display: flex">
+        <div style="display: table-cell;"> 
+            <div class="primary-search-select-filtered" *ngFor="let searches of form.get('searches').controls"> {{ searches.value }}</div>
           </div>
         <div style="display: table-cell;">
-                <div *ngFor="let topic of form.get('topics').controls">
+                <div   style="vertical-align: top;" class="primary-search-input-filtered" *ngFor="let topic of form.get('topics').controls">
                     {{ topic.value }}
                 </div>
              </div>
     </div>
+<!-- </div> -->
+  </div>
+
+<br><br>
+
+<div *ngIf="isOn" style="width: 100%; margin-bottom: 12px;">
+              <span> Search Results of </span>
+              <span 
+              class="grey-pillbox"
+              *ngFor="let topic2 of form.get('topics').controls"
+              (click)="removeResult( topic2 )" >
+                  {{ topic2.value }} X
+              </span>
 </div>
 
 <div>
@@ -117,3 +133,5 @@
             </div>  
           </mat-tab>
         </mat-tab-group>
+
+        <div  *ngFor="let g of transactions | async"> {{ g.trans_id }} </div>
