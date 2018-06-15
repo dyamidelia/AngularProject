@@ -1,8 +1,19 @@
+.mat-expansion-panel{
+  box-shadow:none !important;
+}
+.mat-expansion-panel-header{
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #bbb;
+}
+
 .accordion{
     border-bottom: 1px solid #ccc;
     text-decoration: none;
     font-size:0.75em;
    color:#000;
+}
+.settings{
+  padding:12px;
 }
 ::ng-deep .card{
     border:none;
@@ -18,6 +29,7 @@
   }
 
 .stateConfigList{
+  padding-top: 25px;
   padding-right:50px;
 }
 .stateConfigList >ul{
@@ -25,7 +37,8 @@
 }
 
 .stateConfigList li{
-  padding: 8px;
+  text-transform: capitalize;
+  padding: 12PX 8px;
   border-bottom:1px solid #e6e6e6;
 }
 /* Add State Button */
