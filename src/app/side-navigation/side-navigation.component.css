@@ -1,5 +1,8 @@
 .active {
-	color: blue;
+	background-color: #fff;
+}
+.side-navagation .active a{
+    color: #6296E8;
 }
 
 .side-navagation {

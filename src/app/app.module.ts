@@ -66,12 +66,16 @@ import { DeleteDialogComponent } from './settings-page/delete-dialog/delete-dial
     MatDialogModule,
     RouterModule.forRoot([
     {
-      path: '',
+      path: 'home',
       component: HomePageComponent
     },
      {
       path: 'transactions',
       component: TransactionsPageComponent
+    },
+    {
+      path: 'transactionsDetails',
+      component: TransactionDetailsPageComponent
     },
     {
       path: 'details/:transactionid',
