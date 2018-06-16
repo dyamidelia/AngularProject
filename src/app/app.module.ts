@@ -91,7 +91,7 @@ import { DeleteDialogComponent } from './settings-page/delete-dialog/delete-dial
       component: TransactionDetailsPageComponent
     },
     {
-      path: 'table', 
+      path: 'table',
       component: TableComponent
     },
     {

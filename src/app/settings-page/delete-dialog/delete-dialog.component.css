@@ -31,10 +31,16 @@
   color:#d0021b;
 }
 .close{
+  font-size:20px;
   margin: -20px -30px;
   position: absolute;
   color: #bbb;
   background:inherit;
+  border:none;
+  cursor: pointer;
+}
+.close:hover{
+  color: #cacaca;
 }
 .bold{
   font-weight:600;

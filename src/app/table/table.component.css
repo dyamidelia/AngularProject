@@ -1,5 +1,5 @@
 
-:host { width: 80%; margin-top: 50px; }
+:host { margin-top: 50px; }
 
 .icon-color{
     color: red;
@@ -26,7 +26,7 @@
     border-left: 0;
     padding-left: 4px;
     padding-right: 6px;
-   
+
 }
 
 .primary-search-select, .primary-search-select-filtered{
