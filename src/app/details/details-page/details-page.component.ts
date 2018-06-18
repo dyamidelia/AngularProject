@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgRedux, select} from '@angular-redux/store';
 import { ActivatedRoute } from '@angular/router';
-import { IAppState} from '../../store'
+import { IAppState} from '../../reducer'
 import { ACTION1 } from '../actions'; 
 
 @Component({

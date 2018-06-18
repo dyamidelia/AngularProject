@@ -1,6 +1,9 @@
-
-:host { margin-top: 50px; }
-
+table {
+    border-collapse: collapse;
+}
+.ColumnsRow{
+    background-color:grey;
+}
 .icon-color{
     color: red;
 }
@@ -49,7 +52,7 @@
 }
 
 .full-width{
-    width: 100%
+    width: 95%
 }
 
 .red{
@@ -69,8 +72,8 @@
     margin-right: 25px !important;
 }
 
-mat-header-cell {
-    background-color:#d4d4d4;
+.header-row {
+    background-color:#e6e6e6;
   }
 
 .grey-pillbox{

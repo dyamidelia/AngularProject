@@ -11,14 +11,13 @@ import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SideNavigationComponent } from './side-navigation/side-navigation.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import {TransactionsPageComponent} from './transactions/transactions-page.component'
 
 
 import { HeaderComponent } from './header/header.component'
 import { NavigationComponent } from './side-navigation/navigation/navigation.component';
-import { TableComponent } from './table/table.component';
 
 import { DetailsModule } from './details/details.module';
-import { TransactionsModule } from './transactions/transactions.module';
 import { SideNavigationModule } from './side-navigation/side-navigation.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material'
@@ -39,7 +38,7 @@ import { TransactionDetailsSingleStatusComponent } from './transaction-details-s
 
 import { TransactionStatusDiagramComponent } from './transaction-status-diagram/transaction-status-diagram.component';
 import { NgReduxModule, NgRedux } from '@angular-redux/store';
-import { IAppState, INITIAL_STATE, rootReducer} from '../app/store';
+import { IAppState, INITIAL_STATE, rootReducer} from '../app/reducer';
 //Services
 import {SettingsHttpService} from "../services/settings-http.service";
 import { DeleteDialogComponent } from './settings-page/delete-dialog/delete-dialog.component';
@@ -49,7 +48,6 @@ import { DeleteDialogComponent } from './settings-page/delete-dialog/delete-dial
 @NgModule({
   declarations: [
     AppComponent,
-    TableComponent,
     SettingsPageComponent,
     NotFoundComponent,
     SideNavigationComponent,
@@ -61,13 +59,13 @@ import { DeleteDialogComponent } from './settings-page/delete-dialog/delete-dial
     TransactionDetailsStatusComponent,
     TransactionDetailsSingleStatusComponent,
     TransactionStatusDiagramComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    TransactionsPageComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     DetailsModule,
-    TransactionsModule,
     SideNavigationModule,
     ReactiveFormsModule,
     MatSelectModule,
@@ -84,15 +82,11 @@ import { DeleteDialogComponent } from './settings-page/delete-dialog/delete-dial
     },
      {
       path: 'transactions',
-      component: TableComponent
+      component: TransactionsPageComponent
     },
     {
       path: 'transactionsDetails',
       component: TransactionDetailsPageComponent
-    },
-    {
-      path: 'table',
-      component: TableComponent
     },
     {
       path: 'transactions/:transactionId/user-trans-id/:userId',
