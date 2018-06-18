@@ -5,6 +5,9 @@ import { HttpModule } from '@angular/http';
 //Angular Material Modules
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
 //Components
 import { AppComponent } from './app.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
@@ -14,7 +17,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 
 
 import { HeaderComponent } from './header/header.component'
-import { NavigationComponent } from './side-navigation/navigation/navigation.component';
+
 import { TableComponent } from './table/table.component';
 
 import { DetailsModule } from './details/details.module';
@@ -77,6 +80,9 @@ import { DeleteDialogComponent } from './settings-page/delete-dialog/delete-dial
     MatExpansionModule,
     MatDialogModule,
     MatInputModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
     RouterModule.forRoot([
     {
       path: 'home',
