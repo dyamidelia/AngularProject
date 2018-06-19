@@ -43,7 +43,7 @@
             </form>
           </li>
           <!-- list of states -->
-           <li *ngFor="let state of states"
+           <li  *ngFor="let state of (states | async)"
            (mouseenter)="state.showOptions=true"
            (mouseleave)="state.showOptions=false">
               <div *ngIf="!state.editState">
@@ -116,7 +116,7 @@
             </form>
           </li>
           <!-- list of statuses -->
-           <li *ngFor="let status of statuses"
+           <li *ngFor="let status of (statuses | async)"
            (mouseenter)="status.showOptions=true"
            (mouseleave)="status.showOptions=false">
            <div *ngIf="!status.editStatus">

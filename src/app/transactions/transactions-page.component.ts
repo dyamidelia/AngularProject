@@ -16,7 +16,7 @@ import { startGetTransactions, startGetColumns } from './transactions-page.actio
   templateUrl: './transactions-page.component.html',
   styleUrls: ['./transactions-page.component.css']
 })
-export class TransactionsPageComponent implements OnInit { 
+export class TransactionsPageComponent implements OnInit {
 
   @select(s => s.transactions.columns) columns;
   @select(s => s.transactions.transactions) transactions;
@@ -36,7 +36,7 @@ export class TransactionsPageComponent implements OnInit {
   intDisplayedColumns = [];
 
 
-  constructor(private NgRedux: NgRedux<IAppState>, private service: TransactionsService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, fb: FormBuilder, private ngRedux: NgRedux<IAppState>) { 
+  constructor(private NgRedux: NgRedux<IAppState>, private service: TransactionsService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, fb: FormBuilder, private ngRedux: NgRedux<IAppState>) {
 
     //svg icons
     iconRegistry.addSvgIcon(
@@ -66,7 +66,7 @@ export class TransactionsPageComponent implements OnInit {
       searchResults: fb.array([]),
     })
 
-      
+
   }
 
   removeResult(removeTopic: FormControl){
@@ -82,13 +82,13 @@ export class TransactionsPageComponent implements OnInit {
       this.isOn = false;
       console.log('4');
     }
-  
+
   }
 
   saveColumns(){
     //Call Backend with Service and send it our variable.
     this.isOn = true;
-    
+
     //(this.form.get('searchResults') as FormArray).push(this.form.get('topics'));
     //console.log(this.form.get('searchResults') as FormArray);
     //this.clear();
@@ -139,12 +139,12 @@ export class TransactionsPageComponent implements OnInit {
     this.getColumns();
     this.getTransactions();
   }
-  
+
   getTransactions(){
     startGetTransactions(this.service)
     .subscribe(action => this.ngRedux.dispatch(action));
   }
-  
+
   getColumns(){
     startGetColumns(this.service)
     .subscribe(action => {
@@ -155,9 +155,9 @@ export class TransactionsPageComponent implements OnInit {
 
   loadFilters(){
     this.ifShowFiltersRow = !this.ifShowFiltersRow;
-  
+
   }
-  
+
   loadColumnSelection(){
     this.ifShowColumnsRow = !this.ifShowColumnsRow;
   }
