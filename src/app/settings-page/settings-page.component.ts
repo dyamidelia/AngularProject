@@ -87,7 +87,7 @@ export class SettingsPageComponent implements OnInit, AfterViewChecked {
 
     //hitting the Backend API with newState
     this.service.setState(state)
-    .subscribe(response=>{});
+    .subscribe(response=>console.log(response));
   }
   // Edit State Form
   editStateSubmit(stateObj){
