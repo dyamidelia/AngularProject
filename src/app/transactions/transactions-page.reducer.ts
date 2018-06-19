@@ -1,31 +1,25 @@
 import { tassign } from 'tassign'; 
-import { GET_TRANSACTIONS_SUCCESS, POST_TRANSACTIONS_SUCCESS, GET_COlUMNS_SUCCESS } from './actions'; 
+import { GET_TRANSACTIONS_SUCCESS, POST_TRANSACTIONS_SUCCESS, GET_COlUMNS_SUCCESS } from './transactions-page.actions'; 
 
 export interface ITransactionsState {
-  todos: any[];
-  users: any[];
-  newMessages: number;
+  transactions: any[];
+  columns: any[];
+  
 }
 
 export const TRANSACTIONS_INITIAL_STATE: ITransactionsState = { 
-  todos: [],
-  users: [],
-  newMessages: 0
+  transactions: [],
+  columns: []
 }
 
-function getColumns(state, action){
-
-  return tassign(state, {
-    users: action.users
-  });
+function getColumns(state, action) {
+  return tassign(state, { columns: action.columns });
 }
 
-function getTodo(state, action) {
-
-  return tassign(state, {
-    todos: action.todos
-  });
+function getTransactions(state, action) {
+  return tassign(state, { transactions: action.transactions });
 }
+
 
 function addTodo(state, action) {
   var newTodo = { id: state.todos.length + 1, title: action.title };
@@ -38,7 +32,7 @@ function addTodo(state, action) {
 
 export function transactionsReducer(state: ITransactionsState = TRANSACTIONS_INITIAL_STATE, action): ITransactionsState {
   switch (action.type) {
-    case GET_TRANSACTIONS_SUCCESS: return getTodo(state, action);
+    case GET_TRANSACTIONS_SUCCESS: return getTransactions(state, action);
     case POST_TRANSACTIONS_SUCCESS: return addTodo(state, action);
     case GET_COlUMNS_SUCCESS: return getColumns(state, action);
   }

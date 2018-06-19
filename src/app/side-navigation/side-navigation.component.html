@@ -13,7 +13,7 @@
   <mat-sidenav-container class="nav-container">
     <mat-sidenav #sidenav mode="side" opened="true" class="sidenav" [fixedInViewport]="true" [fixedTopGap]="60" [fixedBottomGap]="0">
 				<mat-nav-list>
-				        <a mat-list-item [disableRipple]="true" routerLinkActive="active" [routerLink]="navItem.path" *ngFor="let navItem of navList">{{navItem.name}}</a>
+				        <a mat-list-item  routerLinkActive="active" [routerLink]="navItem.path" *ngFor="let navItem of navList">{{navItem.name}}</a>
 				</mat-nav-list>
     </mat-sidenav>
 
