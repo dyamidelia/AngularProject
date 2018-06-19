@@ -6,7 +6,8 @@ import {DeleteDialogComponent} from './delete-dialog/delete-dialog.component';
 // Redux Block
 import {NgRedux, select} from '@angular-redux/store';
 import {ISettingsState} from './settings-page.reducer';
-import {INIT_STATE, INIT_STATUS} from './settings-page.actions';
+import {INIT_STATE, ADD_STATE, EDIT_STATE, DELETE_STATE,
+        INIT_STATUS, ADD_STATUS, EDIT_STATUS, DELETE_STATUS} from './settings-page.actions';
 
 // Services
 import {SettingsHttpService} from '../../app/services/settings-http.service';
@@ -93,12 +94,19 @@ export class SettingsPageComponent implements OnInit, AfterViewChecked {
   // Add State Form
   addStateSubmit() {
     const {state} = this.form.value;
-    this.states.unshift({state_name: state, state_desp: 'desc', tsc_org_id: 'org_1'});
     this.form.controls['state'].setValue('');
 
-    // hitting the Backend API with newState
+    // hitting the Backend API with newState & updating the states in store with new state
     this.service.setState(state)
-    .subscribe(response => {});
+    .subscribe(response => {
+        console.log('add state:response from server', response);
+        this.redux.dispatch({
+          type: ADD_STATE,
+          newState: {state_name: state, state_desp: 'desc', tsc_org_id: 'org_1', state_id: response.state_id}
+        }); // dispatch ends
+    }, (error) => {
+      console.log('server is not responding!', error);
+    });
   }
   // Edit State Form
   editStateSubmit(stateObj) {
@@ -106,25 +114,38 @@ export class SettingsPageComponent implements OnInit, AfterViewChecked {
     stateObj.editState = false;
 
     if (Fdata.state !== stateObj.state_name && Fdata.state !== '') {
-      this.states = this.states.map((state: any) => {
-        return (state.state_id === stateObj.state_id) ? {...state, state_name: Fdata.state} : state;
-      });
 
       // hitting the Backend API with newState
       this.service.editState({...Fdata, id: stateObj.state_id})
-      .subscribe(response => console.log('edit state: response from server', response));
+      .subscribe(response => {
+        console.log('edit state: response from server', response);
+        this.redux.dispatch({
+            type: EDIT_STATE,
+            newStateName: Fdata.state,
+            currentState: stateObj
+        }); // dispatch ends
+    }, (error) => {
+      console.log('server is not responding!', error);
+    });
     }
 
   }
   // Add Status Form
   addStatusSubmit() {
     const {status} = this.statusForm.value;
-    this.statuses.unshift({status_name: status, state_desp: 'desc', tsc_org_id: 'org_1'});
     this.statusForm.controls['status'].setValue('');
 
     // hitting the Backend API with newStatus
     this.service.setStatus(status)
-    .subscribe(response => console.log('add status:response from server', response));
+    .subscribe(response => {
+        console.log('add status:response from server', response);
+        this.redux.dispatch({
+          type: ADD_STATUS,
+          newStatus: {status_name: status, status_desp: 'desc', tsc_org_id: 'org_1', status_id: response.status_id}
+        }); // dispatch ends
+    }, (error) => {
+      console.log('server is not responding!', error);
+    });
   }
   // Edit State Form
   editStatusSubmit(statusObj) {
@@ -132,12 +153,19 @@ export class SettingsPageComponent implements OnInit, AfterViewChecked {
     statusObj.editStatus = false;
 
     if (Fdata.status !== statusObj.status_name && Fdata.status !== '') {
-      this.statuses = this.statuses.map((status: any) => {
-        return (status.status_id === statusObj.status_id) ? ({...status, status_name: Fdata.status}) : status;
-      });
+
       // hitting the Backend API with newState
       this.service.editStatus({...Fdata, id: statusObj.status_id})
-      .subscribe(response => console.log('edit status: response from server', response));
+      .subscribe(response => {
+        console.log('edit status: response from server', response);
+        this.redux.dispatch({
+            type: EDIT_STATUS,
+            newStatusName: Fdata.status,
+            currentStatus: statusObj
+        }); // dispatch ends
+    }, (error) => {
+      console.log('server is not responding!', error);
+    });
     }
 
   }
@@ -153,10 +181,17 @@ export class SettingsPageComponent implements OnInit, AfterViewChecked {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.states = [...this.states.filter((state: any) => state.state_id !== delStateId)];
         // hitting the Backend API with delete state ID
         this.service.delState(delStateId)
-        .subscribe(response => console.log('Delete State: response from server', response));
+        .subscribe(response => {
+          console.log('Delete State: response from server', response);
+          this.redux.dispatch({
+            type: DELETE_STATE,
+            delStateId
+          }); // dispatch ends
+        }, (error) => {
+          console.log('Delete State: server is not responding!', error);
+        });
       }
     });
 
@@ -173,10 +208,17 @@ export class SettingsPageComponent implements OnInit, AfterViewChecked {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.statuses = [...this.statuses.filter((status: any) => status.status_id !== delStatusId)];
         // hitting the Backend API with delete status ID
         this.service.delStatus(delStatusId)
-        .subscribe(response => console.log('Delete Status: response from server', response));
+        .subscribe(response => {
+          console.log('Delete Status: response from server', response);
+          this.redux.dispatch({
+            type: DELETE_STATUS,
+            delStatusId
+          }); // dispatch ends
+        }, (error) => {
+          console.log('Delete Status: server is not responding!', error);
+        });
       }
     });
 
