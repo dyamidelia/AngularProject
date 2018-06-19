@@ -27,7 +27,7 @@ import { SideNavigationComponent } from './side-navigation/side-navigation.compo
 import { HomePageComponent } from './home-page/home-page.component';
 import { TransactionsPageComponent } from './transactions/transactions-page.component'
 import { HeaderComponent } from './header/header.component'
-import { TableComponent } from './table/table.component';
+// import { TableComponent } from './table/table.component';
 import { DetailsModule } from './details/details.module';
 import { SideNavigationModule } from './side-navigation/side-navigation.module';
 import { TransactionDetailsPageComponent } from './transaction-details-page/transaction-details-page.component';

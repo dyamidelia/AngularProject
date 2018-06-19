@@ -17,7 +17,6 @@ import {SettingsHttpService} from '../../app/services/settings-http.service';
 })
 
 export class SettingsPageComponent implements OnInit, AfterViewChecked {
-  @select() settings;
   @select(s => s.settings.states) states;
   @select(s => s.settings.statuses) statuses;
 
@@ -59,7 +58,6 @@ export class SettingsPageComponent implements OnInit, AfterViewChecked {
               private fb: FormBuilder,
               private dialog: MatDialog) {
     // getting the states & initiallizing the store
-    console.log(this.settings);
     this.service.getStates()
     .subscribe(states => {
       this.redux.dispatch({type: INIT_STATE, states});
