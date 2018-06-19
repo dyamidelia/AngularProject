@@ -3,7 +3,7 @@ import {FormBuilder,Validators} from '@angular/forms';
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteDialogComponent} from "./delete-dialog/delete-dialog.component";
 //Services
-import {SettingsHttpService} from "../../services/settings-http.service";
+import {SettingsHttpService} from "../../app/services/settings-http.service";
 @Component({
   selector: 'app-settings-page',
   templateUrl: './settings-page.component.html',
