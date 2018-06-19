@@ -22,7 +22,7 @@ function getTransactions(state, action) {
 
 
 function addTodo(state, action) {
-  var newTodo = { id: state.todos.length + 1, title: action.title };
+  let newTodo = { id: state.todos.length + 1, title: action.title };
 
   return tassign(state, {
     todos: state.todos.concat(newTodo),

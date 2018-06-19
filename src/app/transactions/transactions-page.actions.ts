@@ -15,6 +15,11 @@ export const getTransactions = (transactions:any[])=>({
     transactions
 });
 
+export const addColumn = (columns:any[])=>({
+    type: GET_TRANSACTIONS_SUCCESS,
+    columns
+});
+
 export const startGetColumns = (service:TransactionsService)=>{
     return service.getColumns()
     .pipe(map(columns => getColumns(columns)));

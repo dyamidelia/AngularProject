@@ -34,6 +34,9 @@ export class TransactionsPageComponent implements OnInit {
    {value: 'tacos-2', viewValue: 'Tacos'}
   ];
   intDisplayedColumns = [];
+  isValidAddForm = false;
+  canAddFitlers = true;
+  canSearchFitlers = false;
 
 
   constructor(private NgRedux: NgRedux<IAppState>, private service: TransactionsService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, fb: FormBuilder, private ngRedux: NgRedux<IAppState>) { 
@@ -69,18 +72,32 @@ export class TransactionsPageComponent implements OnInit {
       
   }
 
+  canAddSearchs()
+  {
+    return this.canAddFitlers;
+  }
+
+  isValidForm() {
+    return this.isValidAddForm;
+  }
+
+  canSearch() {
+    return this.canSearchFitlers;
+  }
+
   removeResult(removeTopic: FormControl){
     //Remove Result from formArray
-    let index = this.form.get('topics').controls.indexOf(removeTopic);
-    this.form.get('topics').removeAt(index);
-    this.form.get('searches').removeAt(index);
+    console.log('2');
+    let index = this.form.get('searchResults').controls.indexOf(removeTopic);
+    this.form.get('searchResults').removeAt(index);
+    //this.form.get('searches').removeAt(index);
     //Recall Backend
 
     //IF empty??
-    if ( this.form.get('topics').length == 0 ){
+    if ( this.form.get('searchResults').length == 0 ){
       //this.clear();
       this.isOn = false;
-      console.log('4');
+      this.canAddFitlers = true;
     }
   
   }
@@ -88,9 +105,21 @@ export class TransactionsPageComponent implements OnInit {
   saveColumns(){
     //Call Backend with Service and send it our variable.
     this.isOn = true;
+    this.canSearchFitlers = false;
+    //this.form.patchValue({searchResults:[...this.form.get('searchResults'), ...this.form.get('topics')]});
+    //this.form.set('searchResults',);
+    let len = this.form.get('searches').length;
+
+    for(let i=0;i<len;i++){
+      (this.form.get('searchResults') as FormArray).push(this.form.get('searches').at(i));
+    }
     
-    //(this.form.get('searchResults') as FormArray).push(this.form.get('topics'));
-    //console.log(this.form.get('searchResults') as FormArray);
+
+    while (this.form.get('searches').length !== 0) {
+      this.form.get('searches').removeAt(0);
+      this.form.get('topics').removeAt(0);
+    }
+    
     //this.clear();
   }
 
@@ -107,6 +136,10 @@ export class TransactionsPageComponent implements OnInit {
     colNames.value = '';
     this.colSelection ='';
 
+    this.isValidAddForm = false;
+    this.canSearchFitlers = true;
+
+    //this.getTransactions(); have an array to send to filters.
   }
 
   toggleColumn(column){
@@ -132,6 +165,7 @@ export class TransactionsPageComponent implements OnInit {
     if (event.isUserInput){
       this.searchString = "Please type the name of a(n) " + myNewString;
       this.colSelection = myNewString;
+      this.isValidAddForm = true;
     }
   }
 
