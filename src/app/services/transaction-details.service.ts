@@ -5,129 +5,134 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TransactionDetailsService {
-   response =[{
-    "trans_id": "string",
-    "user_id": "string",
-    "tsc_org_id": "string",
-    "user_trans_id": "org_1",
-    "trans_source": "string",
-    "trans_destination": "string",
-    "service_name": "string",
-    "trans_ts": "2018-06-07T04:54:42.817Z",
-    "trans_status": "string",
-    "trans_state": "string",
-    "parent_id": "string",
-    "trans_desp": "string",
-    "extra_props": "string",
-    "bc_trans_hash": "string",
-    "bc_trans_id": "string",
-    "create_ts": "2018-06-07T04:54:42.817Z",
-    "payload_id": "string"
+  response = [{
+    'trans_id': 'string',
+    'user_id': 'string',
+    'tsc_org_id': 'string',
+    'user_trans_id': 'org_1',
+    'trans_source': 'string',
+    'trans_destination': 'string',
+    'service_name': 'string',
+    'trans_ts': '2018-06-07T04:54:42.817Z',
+    'trans_status': 'string',
+    'trans_state': 'string',
+    'parent_id': 'string',
+    'trans_desp': 'string',
+    'extra_props': 'string',
+    'bc_trans_hash': 'string',
+    'bc_trans_id': 'string',
+    'create_ts': '2018-06-07T04:54:42.817Z',
+    'payload_id': 'string'
   }];
 
   columnDetailsResponse = [
-      {
-      "col_name": "user_trans_id",
-      "display_name": "Transaction ID"
-      },
-      {
-        "col_name": "trans_source",
-        "display_name": "Source"
-      },
-      {
-        "col_name": "trans_destination",
-        "display_name": "Destination"
-      },
-      {
-        "col_name": "service_name",
-        "display_name": "Service Name"
-      },
-      {
-        "col_name": "trans_status",
-        "display_name": "Status"
-      },
-      {
-        "col_name": "trans_state",
-        "display_name": "State"
-      },
-      {
-        "col_name": "trans_ts",
-        "display_name": "Timestamp"
-      },
-      {
-        "col_name": "trans_desp",
-        "display_name": "Description"
-      },
-      {
-        "col_name": "extra_props",
-        "display_name": "Extra Information"
-      }
-    ];
-   
-    transactionStatusResponse = [
-      {
-        "status":"Completed",
-        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
-        "state":"Received_from_PP",
-        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction : Received_from_PP" 
-      },
-      {
-        "status":"Completed",
-        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
-        "state":"Request_from_PP",
-        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction : Request_from_PP" 
-      },
-      {
-        "status":"Inprogress",
-        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
-        "state":"Validation",
-        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction: Request_for_validation" 
-      }
-    ];
-    transactionStatusMultipleResponse = [
-      {
-        "status":"Completed",
-        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
-        "state":"Received_from_PP",
-        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction : Received_from_PP" 
-      },
-      {
-        "status":"Completed",
-        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
-        "state":"Request_from_PP",
-        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction : Request_from_PP" 
-      },
-      {
-        "status":"Inprogress",
-        "timeStamp":"Jan-17-2018 | 02:18:37 PM",
-        "state":"Validation",
-        "description":"Received a cash response message from SOAP protocol,Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction: Request_for_validation" 
-      },
-      
-    ];
+    {
+      'col_name': 'user_trans_id',
+      'display_name': 'Transaction ID'
+    },
+    {
+      'col_name': 'trans_source',
+      'display_name': 'Source'
+    },
+    {
+      'col_name': 'trans_destination',
+      'display_name': 'Destination'
+    },
+    {
+      'col_name': 'service_name',
+      'display_name': 'Service Name'
+    },
+    {
+      'col_name': 'trans_status',
+      'display_name': 'Status'
+    },
+    {
+      'col_name': 'trans_state',
+      'display_name': 'State'
+    },
+    {
+      'col_name': 'trans_ts',
+      'display_name': 'Timestamp'
+    },
+    {
+      'col_name': 'trans_desp',
+      'display_name': 'Description'
+    },
+    {
+      'col_name': 'extra_props',
+      'display_name': 'Extra Information'
+    }
+  ];
+
+  transactionStatusResponse = [
+    {
+      'status': 'Completed',
+      'timeStamp': 'Jan-17-2018 | 02:18:37 PM',
+      'state': 'Received_from_PP',
+      'description': 'Received a cash response message from SOAP protocol,' +
+      'Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction : Received_from_PP'
+    },
+    {
+      'status': 'Completed',
+      'timeStamp': 'Jan-17-2018 | 02:18:37 PM',
+      'state': 'Request_from_PP',
+      'description': 'Received a cash response message from SOAP protocol,' +
+      'Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction : Received_from_PP'
+    },
+    {
+      'status': 'Inprogress',
+      'timeStamp': 'Jan-17-2018 | 02:18:37 PM',
+      'state': 'Validation',
+      'description': 'Received a cash response message from SOAP protocol,' +
+      'Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction : Received_from_PP'
+    }
+  ];
+  transactionStatusMultipleResponse = [
+    {
+      'status': 'Completed',
+      'timeStamp': 'Jan-17-2018 | 02:18:37 PM',
+      'state': 'Received_from_PP',
+      'description': 'Received a cash response message from SOAP protocol,' +
+      'Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction : Received_from_PP'
+    },
+    {
+      'status': 'Completed',
+      'timeStamp': 'Jan-17-2018 | 02:18:37 PM',
+      'state': 'Request_from_PP',
+      'description': 'Received a cash response message from SOAP protocol,' +
+      'Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction : Received_from_PP'
+    },
+    {
+      'status': 'Inprogress',
+      'timeStamp': 'Jan-17-2018 | 02:18:37 PM',
+      'state': 'Validation',
+      'description': 'Received a cash response message from SOAP protocol,' +
+      'Soap protocol ID is CAQH/2.2.0Back submitAckRetrieval Transaction : Received_from_PP'
+    },
+
+  ];
 
   constructor(
     private http: HttpClient) {
 
-     }
-  getTransactionDetails(transactionId,userId){
+  }
+  getTransactionDetails(transactionId, userId) {
     return this.response;
-    // this.http.get("http://10.102.17.21:8080/rest/transactions/transactionId/user-trans-id/userId").toPromise()
-    // .then(response => response)
-    // .catch(this.handleError);
-    
+    //  this.http.get('http:// 10.102.17.21:8080/rest/transactions/transactionId/user-trans-id/userId').toPromise()
+    //  .then(response => response)
+    //  .catch(this.handleError);
   }
-  getDisplayNamesForColumns(){
+  getDisplayNamesForColumns() {
     return this.columnDetailsResponse;
-    // this.http.get("http://10.102.17.21:8080/rest/columnConfigs/detialPage").toPromise()
-    // .then(response => response)
-    // .catch(this.handleError);
+    //  this.http.get('http:// 10.102.17.21:8080/rest/columnConfigs/detialPage').toPromise()
+    //  .then(response => response)
+    //  .catch(this.handleError);
   }
-  getTransactionStatusResponse(){
+  getTransactionStatusResponse() {
     return this.transactionStatusMultipleResponse;
   }
 
   private handleError(error: any): Promise<any> {
     return Promise.reject(error.message || error);
-    }
+  }
 }

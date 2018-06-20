@@ -6,9 +6,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./transaction-details-status.component.css']
 })
 export class TransactionDetailsStatusComponent implements OnInit {
-  @Input('transactionStatusData') transactionStatusData : any;
-  
-  
+  @Input('transactionStatusData') transactionStatusData: any;
+
+
   constructor() { }
 
   ngOnInit() {
