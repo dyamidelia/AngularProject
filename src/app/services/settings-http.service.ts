@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsHttpService {
   tsc_org_id = 'org_1';
-  hitURL = 'http:// 10.102.17.21:8080/rest';
-  constructor(private http: Http) { }
+  hitURL = 'http://10.102.17.21:8080/rest';
+  constructor(private http: HttpClient) { }
   //  <======================== Services for State Configuration ============================================>
   getStates() {
-    return this.http.get(`${this.hitURL}/states/${this.tsc_org_id}`)
-      .pipe(
-        map(response => response.json())
-      );
+    return this.http.get(`${this.hitURL}/states/${this.tsc_org_id}`);
   }
   editState(stateObj) {
     // Model Schema
@@ -28,10 +25,7 @@ export class SettingsHttpService {
         'state_name': stateObj.state,
         'tsc_org_id': this.tsc_org_id
 
-      })
-      .pipe(map(response => {
-        return { ...response.json(), status: response.status };
-      }));
+      });
   }
   setState(newState) {
     // Model Schema
@@ -46,20 +40,14 @@ export class SettingsHttpService {
         'state_name': newState,
         'tsc_org_id': this.tsc_org_id
 
-      })
-      .pipe(map(response => {
-        return { ...response.json(), status: response.status };
-      }));
+      });
   }
   delState(stateId) {
     return this.http.delete(`${this.hitURL}/states/${stateId}`);
   }
   //  <======================== Services for Status Configuration ============================================>
   getStatuses() {
-    return this.http.get(`${this.hitURL}/statuses/${this.tsc_org_id}`)
-      .pipe(
-        map(response => response.json())
-      );
+    return this.http.get(`${this.hitURL}/statuses/${this.tsc_org_id}`);
   }
   editStatus(statusObj) {
     // Model Schema
@@ -74,10 +62,7 @@ export class SettingsHttpService {
         'status_name': statusObj.status,
         'tsc_org_id': this.tsc_org_id
 
-      })
-      .pipe(map(response => {
-        return { ...response.json(), status: response.status };
-      }));
+      });
   }
   setStatus(newState) {
     // Model Schema
@@ -92,10 +77,7 @@ export class SettingsHttpService {
         'status_name': newState,
         'tsc_org_id': this.tsc_org_id
 
-      })
-      .pipe(map(response => {
-        return { ...response.json(), status: response.status };
-      }));
+      });
   }
   delStatus(statusId) {
     return this.http.delete(`${this.hitURL}/statuses/${statusId}`);

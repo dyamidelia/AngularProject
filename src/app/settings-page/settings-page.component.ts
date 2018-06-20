@@ -98,7 +98,7 @@ export class SettingsPageComponent implements OnInit, AfterViewChecked {
 
     // hitting the Backend API with newState & updating the states in store with new state
     this.service.setState(state)
-    .subscribe(response => {
+    .subscribe((response: any) => {
         console.log('add state:response from server', response);
         this.redux.dispatch({
           type: ADD_STATE,
@@ -137,7 +137,7 @@ export class SettingsPageComponent implements OnInit, AfterViewChecked {
 
     // hitting the Backend API with newStatus
     this.service.setStatus(status)
-    .subscribe(response => {
+    .subscribe((response: any) => {
         console.log('add status:response from server', response);
         this.redux.dispatch({
           type: ADD_STATUS,

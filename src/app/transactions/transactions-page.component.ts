@@ -36,8 +36,7 @@ export class TransactionsPageComponent implements OnInit {
   intDisplayedColumns = [];
 
 
-  constructor(private NgRedux: NgRedux<IAppState>,
-    private service: TransactionsService, iconRegistry: MatIconRegistry,
+  constructor(private service: TransactionsService, iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer, fb: FormBuilder, private ngRedux: NgRedux<IAppState>) {
 
     //  svg icons
