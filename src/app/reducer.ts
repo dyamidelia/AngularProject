@@ -16,7 +16,7 @@ export const INITIAL_STATE: IAppState = {
    settings: SETTINGS_INITIAL_STATE
 };
 
-export const rootReducer = combineReducers({
+export const rootReducer = combineReducers<IAppState> ({
   transactions: transactionsReducer,
   details: detailsReducer,
   settings: settingsReducer
