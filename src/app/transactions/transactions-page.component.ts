@@ -6,7 +6,7 @@ import { TransactionsService } from '../services/transactions.service';
 import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {FormGroup, FormControl, FormArray, FormBuilder} from '@angular/forms';
-import { startGetTransactions, startGetColumns } from './transactions-page.actions';
+import { startGetTransactions, startGetColumns, addColumn } from './transactions-page.actions';
 
 
 
@@ -33,7 +33,6 @@ export class TransactionsPageComponent implements OnInit {
    {value: 'pizza-1', viewValue: 'Pizza'},
    {value: 'tacos-2', viewValue: 'Tacos'}
   ];
-  intDisplayedColumns = [];
   isValidAddForm = false;
   canAddFitlers = true;
   canSearchFitlers = false;
@@ -143,22 +142,20 @@ export class TransactionsPageComponent implements OnInit {
   }
 
   toggleColumn(column){
-    if (this.form.get(column).value && !this.intDisplayedColumns.includes(column)){
-      //Change to redux dispatch Event
+    if ( this.form.get(column).value ){
        //Add the columnName from ColDisplayList
-       this.intDisplayedColumns.push( column );
+       //this.intDisplayedColumns.push( column );
+       this.ngRedux.dispatch(addColumn({ display_name: "Source", is_visible: "true" }));
     }
     else{
       //Change to redux dispatch Event
       //Remove the columnName from ColDisplayList
-      for (let i=this.intDisplayedColumns.length-1; i>=0; i--) {
-        if (this.intDisplayedColumns[i] === column) {
-          this.intDisplayedColumns.splice(i, 1);
+      //for (let i=this.intDisplayedColumns.length-1; i>=0; i--) {
+      //  if (this.intDisplayedColumns[i] === column) {
+      //    this.intDisplayedColumns.splice(i, 1);
             // break;       //<-- Uncomment  if only the first term has to be removed
-        }
+       // }
       }
-    }
-    console.log( this.intDisplayedColumns );
   }
 
   changeSearchText( event, myNewString ){
@@ -174,6 +171,10 @@ export class TransactionsPageComponent implements OnInit {
     this.getTransactions();
   }
   
+  addColumnDispatch(){
+    addColumn({ display_name: "ROGER", is_visible: "true" });
+  }
+
   getTransactions(){
     startGetTransactions(this.service)
     .subscribe(action => this.ngRedux.dispatch(action));
