@@ -9,6 +9,6 @@ import { NavigationComponent } from './navigation/navigation.component';
     RouterModule
   ],
   declarations: [NavigationComponent],
-  exports:[NavigationComponent]
+  exports: [NavigationComponent]
 })
 export class SideNavigationModule { }

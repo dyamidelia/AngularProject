@@ -1,16 +1,16 @@
-import { tassign } from 'tassign'; 
-import { GET_TRANSACTIONS_SUCCESS, POST_TRANSACTIONS_SUCCESS, GET_COlUMNS_SUCCESS } from './transactions-page.actions'; 
+import { tassign } from 'tassign';
+import { GET_TRANSACTIONS_SUCCESS, POST_TRANSACTIONS_SUCCESS, GET_COlUMNS_SUCCESS } from './transactions-page.actions';
 
 export interface ITransactionsState {
   transactions: any[];
   columns: any[];
-  
+
 }
 
-export const TRANSACTIONS_INITIAL_STATE: ITransactionsState = { 
+export const TRANSACTIONS_INITIAL_STATE: ITransactionsState = {
   transactions: [],
   columns: []
-}
+};
 
 function getColumns(state, action) {
   return tassign(state, { columns: action.columns });
@@ -22,7 +22,7 @@ function getTransactions(state, action) {
 
 
 function addTodo(state, action) {
-  var newTodo = { id: state.todos.length + 1, title: action.title };
+  const newTodo = { id: state.todos.length + 1, title: action.title };
 
   return tassign(state, {
     todos: state.todos.concat(newTodo),
@@ -37,5 +37,5 @@ export function transactionsReducer(state: ITransactionsState = TRANSACTIONS_INI
     case GET_COlUMNS_SUCCESS: return getColumns(state, action);
   }
 
-  return state; 
+  return state;
 }
