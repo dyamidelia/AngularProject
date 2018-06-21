@@ -10,41 +10,41 @@ import { TransactionDetailsService } from '../services/transaction-details.servi
   providers: [TransactionDetailsService]
 })
 export class TransactionDetailsPageComponent implements OnInit {
-  transacationDetailsData:any;
-  transacationColumnsData:any;
-  currentTransaction:any = {};
-  showFullStatus:boolean = false;
+  transacationDetailsData: any;
+  transacationColumnsData: any;
+  currentTransaction: any = {};
+  showFullStatus = false;
   constructor(
     private route: ActivatedRoute,
-    private service:TransactionDetailsService
+    private service: TransactionDetailsService
   ) { }
 
   ngOnInit() {
-  	  	this.route.paramMap
-  		.subscribe(params => {
-         let transactionId=params.get('transactionId');
-         let userId = params.get('userId');
-         // if (transactionId && userId) 
-         //Mapping the column names to transaction response         
-         this.service.getDisplayNamesForColumns().subscribe(response => {
-          this.transacationColumnsData= response;
-          this.service.getTransactionDetails(transactionId,userId).subscribe(response => {
-            this.transacationDetailsData = response;
-             this.transacationColumnsData = this.transacationColumnsData.map((item,index) => {
-              item['display_value']=this.transacationDetailsData[0][item.col_name];
+    this.route.paramMap
+      .subscribe(params => {
+        const transactionId = params.get('transactionId');
+        const userId = params.get('userId');
+        //   if (transactionId && userId)
+        //  Mapping the column names to transaction response
+        this.service.getDisplayNamesForColumns().subscribe(response => {
+          this.transacationColumnsData = response;
+          this.service.getTransactionDetails(transactionId, userId).subscribe(res => {
+            this.transacationDetailsData = res;
+            this.transacationColumnsData = this.transacationColumnsData.map((item, index) => {
+              item['display_value'] = this.transacationDetailsData[0][item.col_name];
               return item;
-            })
-           });
-         });
-  		});
+            });
+          });
+        });
+      });
   }
 
-  // Mapping the transaction and column names on transaction state change  
-  onTransactionStateChange(currentTransaction){
+  // Mapping the transaction and column names on transaction state change
+  onTransactionStateChange(currentTransaction) {
     this.currentTransaction = currentTransaction;
-    this.transacationColumnsData = this.transacationColumnsData.map((item,index) => {
-      item['display_value']=this.currentTransaction[item.col_name];
+    this.transacationColumnsData = this.transacationColumnsData.map((item, index) => {
+      item['display_value'] = this.currentTransaction[item.col_name];
       return item;
-    })
+    });
   }
 }
