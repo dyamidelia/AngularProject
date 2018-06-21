@@ -4,9 +4,9 @@
 <app-transaction-details-summary [transacationColumnsData] = transacationColumnsData ></app-transaction-details-summary>
 <div class="transaction-status-wrapper">
 <button class="change-view" [ngClass]="{'chart':showFullStatus,'grid':!showFullStatus}" (click)="showFullStatus = !showFullStatus"></button>
-<app-transaction-details-status *ngIf="showFullStatus" [transactionStatusData] = transactionStatusData ></app-transaction-details-status>
-<app-transaction-status-diagram *ngIf="!showFullStatus" (onSelectedTransactionChange) = onTransactionStateChange($event) [transactionStatusData] = transactionStatusData></app-transaction-status-diagram>
-<app-transaction-details-single-status *ngIf="!showFullStatus" [transactionStatusData] = transactionStatusData [selectedTransaction] = currentTransaction></app-transaction-details-single-status>
+<app-transaction-details-status *ngIf="showFullStatus"  [transacationDetailsData] = transacationDetailsData ></app-transaction-details-status>
+<app-transaction-status-diagram *ngIf="!showFullStatus" (onSelectedTransactionChange) = onTransactionStateChange($event)  [transacationDetailsData] = transacationDetailsData></app-transaction-status-diagram>
+<app-transaction-details-single-status *ngIf="!showFullStatus" [selectedTransaction] = currentTransaction [transacationDetailsData] = transacationDetailsData></app-transaction-details-single-status>
 </div>
 </div>
 </div>
