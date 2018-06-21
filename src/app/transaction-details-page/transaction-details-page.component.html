@@ -1,12 +1,12 @@
 <h3>Transaction Details</h3>
 <div class="transaction-details-page">
 <div class="transaction-details-content">
-<app-transaction-details-summary [transacationColumnsData] = transacationColumnsData ></app-transaction-details-summary>
+<app-transaction-details-summary></app-transaction-details-summary>
 <div class="transaction-status-wrapper">
 <button class="change-view" [ngClass]="{'chart':showFullStatus,'grid':!showFullStatus}" (click)="showFullStatus = !showFullStatus"></button>
-<app-transaction-details-status *ngIf="showFullStatus"  [transacationDetailsData] = transacationDetailsData ></app-transaction-details-status>
-<app-transaction-status-diagram *ngIf="!showFullStatus" (selectedTransactionChange) = onTransactionStateChange($event)  [transacationDetailsData] = transacationDetailsData></app-transaction-status-diagram>
-<app-transaction-details-single-status *ngIf="!showFullStatus" [selectedTransaction] = currentTransaction [transacationDetailsData] = transacationDetailsData></app-transaction-details-single-status>
+<app-transaction-details-status *ngIf="showFullStatus"></app-transaction-details-status>
+<app-transaction-status-diagram *ngIf="!showFullStatus" ></app-transaction-status-diagram>
+<app-transaction-details-single-status *ngIf="!showFullStatus"></app-transaction-details-single-status>
 </div>
 </div>
 </div>

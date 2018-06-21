@@ -1,6 +1,12 @@
+import { NgRedux ,select} from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TransactionDetailsService } from '../services/transaction-details.service';
+import {ITransacationDetailsStates}  from './transaction-details-page.reducer';
+import {TRANSACTIONS_COLUMN_DATA, TRANSACTIONS_DETAILS_DATA, ON_TRANSACTION_CHANGE}    from './transaction-details-page.actions';
+
+
+
 
 
 @Component({
@@ -10,13 +16,15 @@ import { TransactionDetailsService } from '../services/transaction-details.servi
   providers: [TransactionDetailsService]
 })
 export class TransactionDetailsPageComponent implements OnInit {
-  transacationDetailsData: any;
-  transacationColumnsData: any;
   currentTransaction: any = {};
   showFullStatus = false;
+  @select(s => s.transaction_detail.transacationDetailsData) transacationDetailsData;
+  @select(s => s.settings.transacationColumnsData) transacationColumnsData;
   constructor(
     private route: ActivatedRoute,
-    private service: TransactionDetailsService
+    private service: TransactionDetailsService,
+    private redux: NgRedux <ITransacationDetailsStates>
+
   ) { }
 
   ngOnInit() {
@@ -27,24 +35,24 @@ export class TransactionDetailsPageComponent implements OnInit {
         //   if (transactionId && userId)
         //  Mapping the column names to transaction response
         this.service.getDisplayNamesForColumns().subscribe(response => {
-          this.transacationColumnsData = response;
+          // this.transacationColumnsData = response;
+          this.redux.dispatch({
+            type: TRANSACTIONS_COLUMN_DATA,
+            columnData:response
+          });
           this.service.getTransactionDetails(transactionId, userId).subscribe(res => {
-            this.transacationDetailsData = res;
-            this.transacationColumnsData = this.transacationColumnsData.map((item, index) => {
-              item['display_value'] = this.transacationDetailsData[0][item.col_name];
-              return item;
+            // this.transacationDetailsData = res;
+            console.log(res);
+            this.redux.dispatch({
+              type: TRANSACTIONS_DETAILS_DATA,
+              detailData:res
+            });
+            this.redux.dispatch({
+              type: ON_TRANSACTION_CHANGE,
+              currentTransaction:res[0]
             });
           });
         });
       });
-  }
-
-  // Mapping the transaction and column names on transaction state change
-  onTransactionStateChange(currentTransaction) {
-    this.currentTransaction = currentTransaction;
-    this.transacationColumnsData = this.transacationColumnsData.map((item, index) => {
-      item['display_value'] = this.currentTransaction[item.col_name];
-      return item;
-    });
   }
 }
