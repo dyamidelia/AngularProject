@@ -1,23 +1,7 @@
-.main {
-    margin-left: 160px; /* Same as the width of the sidenav */
-    font-size: 12px; /* Increased text to enable scrolling */
-    padding: 0px 10px;
-    margin-top: 50px;
-    /* width: 100%; */
-}
-.full-screen{
-    width: 100%;
-    float: left;
-    margin-top: 20px;
-    margin-left: 20px;
-    width:85%;
-}
+
 app-side-navigation{
   float:left;
   height:auto;
   min-height:200px;
   width:150px;
-}
-header{
-    height: 50px;
 }

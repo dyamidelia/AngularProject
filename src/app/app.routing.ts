@@ -6,36 +6,36 @@ import { TransactionDetailsPageComponent } from './transaction-details-page/tran
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
-export const routes: Routes =[
-    {
-      path: 'home',
-      component: HomePageComponent
-    },
-     {
-      path: 'transactions',
-      component: TransactionsPageComponent
-    },
-    {
-      path: 'transactionsDetails',
-      component: TransactionDetailsPageComponent
-    },
-    {
-      path: 'transactions/:transactionId/user-trans-id/:userId',
-      component: TransactionDetailsPageComponent
-    },
-    {
-      path: 'settings',
-      component: SettingsPageComponent
-    },
-      {
-        path: '',
-        redirectTo: '/home',
-        pathMatch:"full"
-      },
-    {
-      path: '**',
-      component: NotFoundComponent
-    }
+export const routes: Routes = [
+  {
+    path: 'home',
+    component: HomePageComponent
+  },
+  {
+    path: 'transactions',
+    component: TransactionsPageComponent
+  },
+  {
+    path: 'transactionsDetails',
+    component: TransactionDetailsPageComponent
+  },
+  {
+    path: 'transactions/:transactionId/user-trans-id/:userId',
+    component: TransactionDetailsPageComponent
+  },
+  {
+    path: 'settings',
+    component: SettingsPageComponent
+  },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
+  }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

@@ -1,4 +1,12 @@
-
+.mat-toolbar {
+  background-color: #062e79;
+}
+.mat-toolbar-multiple-rows {
+    min-height: 54px;
+}
+.mat-toolbar-row, .mat-toolbar-single-row {
+    height: 60px;
+}
 .tc-global-header .header-logo{
     padding-left: 24px;
     float: left;
@@ -8,11 +16,10 @@
     height: 100%;
     width: 30%;
     position: relative;
-    top: -4px;
-    
+
 }
 .tc-global-header {
-    height: 55px;
+    height: 30px;
     padding-top: 15px;
     background-color: #062e79;
     top: 0;
@@ -22,14 +29,7 @@
     left: 0px;
 }
 .tc-icon-tray{
-    right: 0;
-    width: 394px;
-    min-width: 20%;
-    height: 40px;
-    top: 0;
     float: right;
-    z-index: -9999;
-    background-color: #062e79;
 }
 .tc-header-nav-item.picker img,.tc-header-nav-item.help img{
     height: 39px;
@@ -39,7 +39,7 @@
 }
 
 .tc-global-header a span{
-    font-size:1.5em;
+    font-size:1em;
     color:#fff;
 }
 .tc-icon-tray .tc-global-header-nav {
@@ -92,7 +92,7 @@
     display: table-cell;
     background-repeat: no-repeat;
     height: 2em;
-    width: 2em;
+    width: 1em;
     padding: 0.8em 3.2em 0 0;
     background-position: left 0.5em;
     opacity: 0.75;

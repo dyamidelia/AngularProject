@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgRedux, select} from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store';
 import { ActivatedRoute } from '@angular/router';
-import { IAppState} from '../reducer';
+import { IAppState } from '../reducer';
 import { TransactionsService } from '../services/transactions.service';
 import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -17,13 +17,13 @@ import { map } from 'rxjs/operators';
   templateUrl: './transactions-page.component.html',
   styleUrls: ['./transactions-page.component.css']
 })
-export class TransactionsPageComponent implements OnInit { 
+export class TransactionsPageComponent implements OnInit {
 
   @select(s => s.transactions.columns) columns;
   @select(s => s.transactions.transactions) transactions;
 
-  searchString = "Please select a column to search by from the select on the left" ;
-  colSelection = "";
+  searchString = 'Please select a column to search by from the select on the left';
+  colSelection = '';
   isOn = false;
   ifShowFiltersRow = false;
   ifShowColumnsRow = false;
@@ -35,33 +35,34 @@ export class TransactionsPageComponent implements OnInit {
   transactionsData = [];
   totalPages: number = 0; 
 
-  //Sorting Vars
+  // Sorting Vars
   order = 'trans_status';
   order2 = 'display_name';
   ascending = true;
 
 
-  constructor(private NgRedux: NgRedux<IAppState>, private service: TransactionsService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, fb: FormBuilder, private ngRedux: NgRedux<IAppState>) { 
+  constructor(private service: TransactionsService, iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer, fb: FormBuilder, private ngRedux: NgRedux<IAppState>) {
 
-    //svg icons
+    //   svg icons
     iconRegistry.addSvgIcon(
-          'ic-maintenance',
-          sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-maintenance.svg')
+      'ic-maintenance',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-maintenance.svg')
     );
     iconRegistry.addSvgIcon(
-          'search',
-          sanitizer.bypassSecurityTrustResourceUrl('assets/images/search.svg')
+      'search',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/images/search.svg')
     );
     iconRegistry.addSvgIcon(
-          'ic-document',
-          sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-document.svg')
+      'ic-document',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-document.svg')
     );
     iconRegistry.addSvgIcon(
       'ic-sort',
       sanitizer.bypassSecurityTrustResourceUrl('assets/images/icon-wi-input-output.svg')
 );
 
-    //form builder
+    //   form builder
     this.form = fb.group({
       'Transaction ID': [],
       'Source': [],
@@ -73,13 +74,12 @@ export class TransactionsPageComponent implements OnInit {
       topics: fb.array([]),
       searches: fb.array([]),
       searchResults: fb.array([]),
-    })
+    });
 
-      
+
   }
 
-  canAddSearchs()
-  {
+  canAddSearchs() {
     return this.canAddFitlers;
   }
 
@@ -91,54 +91,54 @@ export class TransactionsPageComponent implements OnInit {
     return this.canSearchFitlers;
   }
 
-  removeResult(removeTopic: FormControl){
-    //Remove Result from formArray
-    let index = this.form.get('searchResults').controls.indexOf(removeTopic);
+  removeResult(removeTopic: FormControl) {
+    // Remove Result from formArray
+    const index = this.form.get('searchResults').controls.indexOf(removeTopic);
     this.form.get('searchResults').removeAt(index);
-    //this.form.get('searches').removeAt(index);
-    //Recall Backend
+    // this.form.get('searches').removeAt(index);
+    // Recall Backend
 
-    //IF empty??
-    if ( this.form.get('searchResults').length == 0 ){
-      //this.clear();
+    // IF empty??
+    if (this.form.get('searchResults').length === 0) {
+      // this.clear();
       this.isOn = false;
       this.canAddFitlers = true;
     }
-  
+
   }
 
-  saveColumns(){
-    //Call Backend with Service and send it our variable.
+  saveColumns() {
+    //   Call Backend with Service and send it our variable.
     this.isOn = true;
     this.canSearchFitlers = false;
-    //this.form.patchValue({searchResults:[...this.form.get('searchResults'), ...this.form.get('topics')]});
-    //this.form.set('searchResults',);
-    let len = this.form.get('searches').length;
+    // this.form.patchValue({searchResults:[...this.form.get('searchResults'), ...this.form.get('topics')]});
+    // this.form.set('searchResults',);
+    const len = this.form.get('searches').length;
 
-    for(let i=0;i<len;i++){
+    for (let i = 0; i < len; i++) {
       (this.form.get('searchResults') as FormArray).push(this.form.get('searches').at(i));
     }
-    
+
     while (this.form.get('searches').length !== 0) {
       this.form.get('searches').removeAt(0);
       this.form.get('topics').removeAt(0);
     }
-    
-    //this.clear();
+
+    // this.clear();
   }
 
-  clear(){
+  clear() {
     (this.form.get('topics') as FormArray).reset();
     (this.form.get('searches') as FormArray).reset();
   }
 
-  addSearch(topic, colNames){
+  addSearch(topic, colNames) {
     (this.form.get('topics') as FormArray).push(new FormControl(topic.value));
     topic.value = '';
 
     (this.form.get('searches') as FormArray).push(new FormControl(this.colSelection));
     colNames.value = '';
-    this.colSelection ='';
+    this.colSelection = '';
 
     this.isValidAddForm = false;
     this.canSearchFitlers = true;
@@ -157,9 +157,9 @@ export class TransactionsPageComponent implements OnInit {
       }
   }
 
-  changeSearchText( event, myNewString ){
-    if (event.isUserInput){
-      this.searchString = "Please type the name of a(n) " + myNewString;
+  changeSearchText(event, myNewString) {
+    if (event.isUserInput) {
+      this.searchString = 'Please type the name of a(n) ' + myNewString;
       this.colSelection = myNewString;
       this.isValidAddForm = true;
     }
@@ -172,18 +172,18 @@ export class TransactionsPageComponent implements OnInit {
   
   getTransactions(){
     startGetTransactions(this.service)
-    .subscribe(action => {
-      this.ngRedux.dispatch(action);
-      this.transactionsData = action.transactions;
-    });
+      .subscribe(action => {
+        this.ngRedux.dispatch(action);
+        this.transactionsData = action.transactions;
+      });
   }
-  
-  getColumns(){
+
+  getColumns() {
     startGetColumns(this.service)
-    .subscribe(action => {
-      this.ngRedux.dispatch(action);
-      this.columnsData = action.columns;
-    });
+      .subscribe(action => {
+        this.ngRedux.dispatch(action);
+        this.columnsData = action.columns;
+      });
   }
 
   //Can combine these two functions that toggle the states of the header buttons into one.

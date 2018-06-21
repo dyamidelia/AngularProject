@@ -17,7 +17,7 @@ export const getTransactions = (transactions:any[])=>({
     transactions
 });
 
-export const addColumn = (column:any)=>({
+export const addColumn = (column: any) => ({
     type: SHOW_HIDDEN_COLUMN,
     column
 });
@@ -36,6 +36,8 @@ export const getColumns = (columns:any[])=>({
     type: GET_COlUMNS_SUCCESS,
     columns
 });
+
+
 
 
 

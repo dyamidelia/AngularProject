@@ -6,7 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./side-navigation.component.css']
 })
 export class SideNavigationComponent implements OnInit {
-
+  navList = [{ name: 'Home', path: 'home' },
+  { name: 'Transactions', path: 'transactions' },
+  { name: 'Transactions Details', path: 'transactionsDetails' },
+  { name: 'Settings', path: 'settings' }
+  ];
   constructor() { }
 
   ngOnInit() {
