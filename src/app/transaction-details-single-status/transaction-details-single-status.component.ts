@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-transaction-details-single-status',
@@ -6,11 +6,11 @@ import { Component, OnInit, Input} from '@angular/core';
   styleUrls: ['./transaction-details-single-status.component.css']
 })
 export class TransactionDetailsSingleStatusComponent implements OnInit {
-  @Input('transactionStatusData') transactionStatusData : any;
-  @Input('selectedTransaction') selectedTransaction : any;
-  
+  @Input('transactionStatusData') transactionStatusData: any;
+  @Input('selectedTransaction') selectedTransaction: any;
+
   constructor() { }
-  
+
   ngOnInit() {
     this.selectedTransaction = this.transactionStatusData[0];
   }

@@ -1,5 +1,5 @@
-import { Component,Inject } from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material";
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material';
 @Component({
   selector: 'app-delete-dialog',
   templateUrl: './delete-dialog.component.html',
@@ -7,6 +7,6 @@ import {MAT_DIALOG_DATA} from "@angular/material";
 })
 export class DeleteDialogComponent {
 
-  constructor( @Inject(MAT_DIALOG_DATA) public data:any ) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
 }
