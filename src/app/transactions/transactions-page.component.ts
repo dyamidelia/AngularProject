@@ -7,6 +7,7 @@ import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {FormGroup, FormControl, FormArray, FormBuilder} from '@angular/forms';
 import { startGetTransactions, startGetColumns, addColumn } from './transactions-page.actions';
+import { map } from 'rxjs/operators';
 
 
 
@@ -28,14 +29,16 @@ export class TransactionsPageComponent implements OnInit {
   ifShowColumnsRow = false;
   form;
   columnsData = [];
-  foods = [
-   {value: 'steak-0', viewValue: 'Steak'},
-   {value: 'pizza-1', viewValue: 'Pizza'},
-   {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
   isValidAddForm = false;
   canAddFitlers = true;
   canSearchFitlers = false;
+  transactionsData = [];
+  maxPages: number = 0; 
+
+  //Sorting Vars
+  order = 'trans_status';
+  order2 = 'display_name';
+  ascending = true;
 
 
   constructor(private NgRedux: NgRedux<IAppState>, private service: TransactionsService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, fb: FormBuilder, private ngRedux: NgRedux<IAppState>) { 
@@ -86,7 +89,6 @@ export class TransactionsPageComponent implements OnInit {
 
   removeResult(removeTopic: FormControl){
     //Remove Result from formArray
-    console.log('2');
     let index = this.form.get('searchResults').controls.indexOf(removeTopic);
     this.form.get('searchResults').removeAt(index);
     //this.form.get('searches').removeAt(index);
@@ -113,7 +115,6 @@ export class TransactionsPageComponent implements OnInit {
       (this.form.get('searchResults') as FormArray).push(this.form.get('searches').at(i));
     }
     
-
     while (this.form.get('searches').length !== 0) {
       this.form.get('searches').removeAt(0);
       this.form.get('topics').removeAt(0);
@@ -177,7 +178,10 @@ export class TransactionsPageComponent implements OnInit {
 
   getTransactions(){
     startGetTransactions(this.service)
-    .subscribe(action => this.ngRedux.dispatch(action));
+    .subscribe(action => {
+      this.ngRedux.dispatch(action);
+      this.transactionsData = action.transactions;
+    });
   }
   
   getColumns(){
@@ -195,6 +199,21 @@ export class TransactionsPageComponent implements OnInit {
   
   loadColumnSelection(){
     this.ifShowColumnsRow = !this.ifShowColumnsRow;
+  }
+
+  keyIsInDisplayObjects( columnName ){
+    for(let i=0;i<this.columnsData.length;i++){
+      //console.log(this.columnsData[i].col_name + "=" + columnName)
+    if (this.columnsData[i].col_name == columnName){
+      //console.log(this.columnsData[i]);
+      if (this.columnsData[i].is_visible == true){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+  }
   }
 
 }

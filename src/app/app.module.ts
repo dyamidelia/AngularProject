@@ -34,10 +34,14 @@ import { TransactionStatusDiagramComponent } from './transaction-status-diagram/
 import { IAppState, INITIAL_STATE, rootReducer} from '../app/reducer';
 //Pipes
 import { FilterDataPipe } from './common/filter-data.pipe';
+import { KeysPipe } from './common/keys.pipe';
 //Services
 import {SettingsHttpService} from "../app/services/settings-http.service";
 import { DeleteDialogComponent } from './settings-page/delete-dialog/delete-dialog.component';
 import {TransactionDetailsService} from './services/transaction-details.service';
+import { OrderByPipe } from './common/order-by.pipe';
+
+
 
 @NgModule({
   declarations: [
@@ -54,7 +58,9 @@ import {TransactionDetailsService} from './services/transaction-details.service'
     TransactionDetailsSingleStatusComponent,
     TransactionStatusDiagramComponent,
     DeleteDialogComponent,
-    TransactionsPageComponent
+    TransactionsPageComponent,
+    KeysPipe,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,
