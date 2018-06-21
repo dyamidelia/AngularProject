@@ -32,13 +32,17 @@ table {
 
 }
 
+.primary-search-select-filtered{
+    background-color: #d4d4d4;
+}
+.primary-search-select{
+    background-color: #3f51b5;
+}
 .primary-search-select, .primary-search-select-filtered{
     width: 100px;
-    height: 31px;
-    background-color: #d4d4d4;
-    padding-top: 3px;
+    height: 29px;
+    padding-top: 5px;
     border-radius: 4px;
-    color: black;
     padding-right: 25px;
     padding-left: 25px;
     border-bottom-right-radius:0;
@@ -46,6 +50,7 @@ table {
     padding-left: 6px;
     text-align: center;
 }
+
 
 .primary-search-input-filtered, .primary-search-select-filtered{
     margin-top: 3px;

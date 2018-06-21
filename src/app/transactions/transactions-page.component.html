@@ -4,6 +4,7 @@
 <mat-select  #colNames class="primary-search-select" placeholder="Transactions">
     <mat-option 
     *ngFor="let a of columns | async"
+    [disabled]= "!canAddSearchs()"
     [value]="a.display_name"
     (onSelectionChange)= "changeSearchText( $event, a.display_name )">
       {{ a.display_name }}
@@ -18,11 +19,11 @@
 
 </span>
 
-<button mat-button color="primary" (click)="addSearch(topic, colNames)"> + </button>
-<button mat-raised-button color="primary" (click)="saveColumns()">Search   <mat-icon class="padding-5" svgIcon="search"></mat-icon></button>
+<button mat-button color="primary" (click)="addSearch(topic, colNames)" [disabled]= "!isValidForm()"> + </button>
+<button mat-raised-button color="primary" (click)="saveColumns()" [disabled]= "!canSearch()">Search   <mat-icon class="padding-5" svgIcon="search"></mat-icon></button>
 
 <br><br>
-<div *ngIf="!isOn" style="line-height: 25px; display: table; margin-left: 105px;">
+<div style="line-height: 25px; display: table; margin-left: 105px;">
 <!-- <div *ngIf="!isOn" style="width: 100%; display: table;"> -->
     <div style="display: flex; margin-bottom: 5px;">
         <div style="display: table-cell;"> 
@@ -43,7 +44,7 @@
               <span> Search Results of </span>
               <span 
               class="grey-pillbox"
-              *ngFor="let topic2 of form.get('topics').controls"
+              *ngFor="let topic2 of form.get('searchResults').controls"
               (click)="removeResult( topic2 )" >
                   {{ topic2.value }} X
               </span>
@@ -53,7 +54,7 @@
 
   <!-- Table Headers -->
   <tr class="header-row">
-    <ng-container *ngFor="let col of columns | async" [class.completed]="col.isCompleted">
+    <ng-container *ngFor="let col of columns | async | orderBy: 'col_name'" [class.completed]="col.isCompleted">
     <th *ngIf="col.is_visible">{{ col.display_name }}</th>
     </ng-container>
     <th><button (click)="loadFilters()" mat-raised-button ><mat-icon svgIcon="ic-document"></mat-icon></button></th>
@@ -80,19 +81,29 @@
     </tr>
 
    <!-- Table Data Rows Area -->
-   <tr *ngFor="let t of transactions | async" [class.completed]="t.isCompleted">
+   <tr *ngFor="let t of (transactions|async)?.data " [class.completed]="t.isCompleted"> 
+
+      <!--
       <td [class.completed]="t.isCompleted">{{ t.trans_id }}</td> 
       <td [class.completed]="t.isCompleted">{{ t.trans_source }}</td> 
       <td [class.completed]="t.isCompleted">{{ t.trans_destination }}</td> 
       <td [class.completed]="t.isCompleted">{{ t.service_name }}</td> 
       <td [class.completed]="t.isCompleted">{{ t.trans_status }}</td> 
       <td [class.completed]="t.isCompleted">{{ t.trans_state }}</td> 
-      <td [class.completed]="t.isCompleted">{{ t.create_ts }}</td> 
-   </tr>
+      <td [class.completed]="t.isCompleted">{{ t.trans_ts }}</td> -->
+      <ng-container *ngFor="let key of t | keys ">
+      <td *ngIf="keyIsInDisplayObjects(key.key)" [class.completed]="t.isCompleted">{{key.value}}</td>
+      </ng-container>
+      <!-- If key.key is in array "Displayable Objects" -->
+    </tr> 
+
 <tfoot>
   <hr>
-  Showing Search results: 1-15 of 90
+  <!-- Maybe Change in the future to a local variable-->
+  Showing Search results: {{(transactions|async)?.currentPage }} of local let that needs to be Total Results/MaxPerPage and then rounded up a whole number from the decemal
 <!-- Pagination-->
 </tfoot>
 
 </table>
+
+<pre>{{transactions|async|json}}</pre>
