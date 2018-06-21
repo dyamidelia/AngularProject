@@ -2,36 +2,63 @@ table {
     border-collapse: collapse;
 }
 .ColumnsRow{
-    background-color:grey;
+    background-color: #ABA9A9;
 }
 .icon-color{
     color: red;
 }
-
+.header-cell-text{
+    border-bottom: 1px solid #ACABAC;
+    padding-bottom: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+    color: #8A8A8A;
+}
+.header-cell{
+    padding-bottom: 15px;
+    padding-top: 5px;
+}
 .demo-tab-content{
     margin-left: 15px;
 }
-
+.header-cell-icon{
+    padding-left: 10px;
+    transform: rotate(90deg);
+    width: 18px;
+    height: 18px;
+}
 .padding-5{
     padding: 5px;
 }
 
 .primary-search-input, .primary-search-input-filtered {
     width: 500px;
-    border: 2px solid #e6e6e6;
+    border: 1px solid #e6e6e6;
     border-radius: 4px;
     color: #666;
-    height: 26px;
+    height: 27px;
     padding: 2px;
     background-color: #fff;
     border-bottom-left-radius:0;
     border-top-left-radius:0;
     border-left: 0;
+    padding-bottom: 0px;
     padding-left: 4px;
     padding-right: 6px;
 
 }
 
+.filters-select{
+    width: 90px;
+    height: 26px;
+    padding-top: 5px;
+    border-radius: 4px;
+    padding-right: 25px;
+    padding-left: 6px;
+    text-align: center;
+    background: white;
+    margin: 12px;
+}
 .primary-search-select-filtered{
     background-color: #d4d4d4;
 }
@@ -40,11 +67,10 @@ table {
 }
 .primary-search-select, .primary-search-select-filtered{
     width: 100px;
-    height: 29px;
+    height: 26px;
     padding-top: 5px;
     border-radius: 4px;
     padding-right: 25px;
-    padding-left: 25px;
     border-bottom-right-radius:0;
     border-top-right-radius:0;
     padding-left: 6px;
@@ -57,7 +83,8 @@ table {
 }
 
 .full-width{
-    width: 95%
+    width: 95%;
+    margin-top: 10px;
 }
 
 .red{
@@ -70,7 +97,7 @@ table {
 
 .header-text{
     font-size: 18px;
-    margin-right: 10px;
+    margin-right: 30px;
 }
 
 .mat-select-trigger {
@@ -78,7 +105,7 @@ table {
 }
 
 .header-row {
-    background-color:#e6e6e6;
+    background-color:#e8e7e7;
   }
 
 .grey-pillbox{
@@ -90,3 +117,26 @@ table {
     background-color: #d4d4d4;
     margin-bottom: 12px;
 }
+
+.header-cell-button{
+    background-color: #797979;
+}
+.active{
+    background-color: #ABA9A9
+}
+.table-row{
+    border-bottom: 1px solid #ABA9A9;
+}
+.td-styles{
+    padding: 11px;
+}
+.search-content-area{
+    line-height: 25px; 
+    display: table; 
+    margin-left: 125px;
+}
+
+/*Change the select text color with something *like this*
+.md-select-value-text{
+    color: white;
+}*/

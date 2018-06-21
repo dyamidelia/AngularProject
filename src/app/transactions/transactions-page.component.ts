@@ -6,7 +6,7 @@ import { TransactionsService } from '../services/transactions.service';
 import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {FormGroup, FormControl, FormArray, FormBuilder} from '@angular/forms';
-import { startGetTransactions, startGetColumns, addColumn } from './transactions-page.actions';
+import { startGetTransactions, startGetColumns, addColumn, hideColumn } from './transactions-page.actions';
 import { map } from 'rxjs/operators';
 
 
@@ -33,7 +33,7 @@ export class TransactionsPageComponent implements OnInit {
   canAddFitlers = true;
   canSearchFitlers = false;
   transactionsData = [];
-  maxPages: number = 0; 
+  totalPages: number = 0; 
 
   //Sorting Vars
   order = 'trans_status';
@@ -56,6 +56,10 @@ export class TransactionsPageComponent implements OnInit {
           'ic-document',
           sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-document.svg')
     );
+    iconRegistry.addSvgIcon(
+      'ic-sort',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/images/icon-wi-input-output.svg')
+);
 
     //form builder
     this.form = fb.group({
@@ -144,18 +148,12 @@ export class TransactionsPageComponent implements OnInit {
 
   toggleColumn(column){
     if ( this.form.get(column).value ){
-       //Add the columnName from ColDisplayList
-       //this.intDisplayedColumns.push( column );
-       this.ngRedux.dispatch(addColumn({ display_name: "Source", is_visible: "true" }));
+       //Make Column Data Real.
+       this.ngRedux.dispatch(addColumn({ col_name: "trans_source", display_name: "Source", is_visible: true }));
     }
     else{
-      //Change to redux dispatch Event
-      //Remove the columnName from ColDisplayList
-      //for (let i=this.intDisplayedColumns.length-1; i>=0; i--) {
-      //  if (this.intDisplayedColumns[i] === column) {
-      //    this.intDisplayedColumns.splice(i, 1);
-            // break;       //<-- Uncomment  if only the first term has to be removed
-       // }
+      //Make Column Data Real.
+      this.ngRedux.dispatch(hideColumn({ col_name: "service_name", display_name: "Service Name", is_visible: false }));
       }
   }
 
@@ -172,10 +170,6 @@ export class TransactionsPageComponent implements OnInit {
     this.getTransactions();
   }
   
-  addColumnDispatch(){
-    addColumn({ display_name: "ROGER", is_visible: "true" });
-  }
-
   getTransactions(){
     startGetTransactions(this.service)
     .subscribe(action => {
@@ -192,28 +186,22 @@ export class TransactionsPageComponent implements OnInit {
     });
   }
 
+  //Can combine these two functions that toggle the states of the header buttons into one.
   loadFilters(){
     this.ifShowFiltersRow = !this.ifShowFiltersRow;
-  
-  }
-  
-  loadColumnSelection(){
-    this.ifShowColumnsRow = !this.ifShowColumnsRow;
-  }
-
-  keyIsInDisplayObjects( columnName ){
-    for(let i=0;i<this.columnsData.length;i++){
-      //console.log(this.columnsData[i].col_name + "=" + columnName)
-    if (this.columnsData[i].col_name == columnName){
-      //console.log(this.columnsData[i]);
-      if (this.columnsData[i].is_visible == true){
-        return true;
-      }
-      else{
-        return false;
-      }
+    if ( this.ifShowColumnsRow ){
+      this.ifShowColumnsRow = !this.ifShowColumnsRow;
     }
   }
+  loadColumnSelection(){
+    this.ifShowColumnsRow = !this.ifShowColumnsRow;
+    if ( this.ifShowFiltersRow ){
+      this.ifShowFiltersRow = !this.ifShowFiltersRow;
+    }
   }
 
+  sortColumn(columnName){
+    //Change Icon State
+    //Sort Column with Dispatch Redux Action to Map/Filter the array state?
+  }
 }
