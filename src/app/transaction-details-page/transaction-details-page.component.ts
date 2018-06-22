@@ -1,9 +1,9 @@
-import { NgRedux ,select} from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TransactionDetailsService } from '../services/transaction-details.service';
-import {ITransacationDetailsStates}  from './transaction-details-page.reducer';
-import {TRANSACTIONS_COLUMN_DATA, TRANSACTIONS_DETAILS_DATA, ON_TRANSACTION_CHANGE}    from './transaction-details-page.actions';
+import { ITransacationDetailsStates } from './transaction-details-page.reducer';
+import { TRANSACTIONS_COLUMN_DATA, TRANSACTIONS_DETAILS_DATA, ON_TRANSACTION_CHANGE } from './transaction-details-page.actions';
 
 
 
@@ -23,7 +23,7 @@ export class TransactionDetailsPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: TransactionDetailsService,
-    private redux: NgRedux <ITransacationDetailsStates>
+    private redux: NgRedux<ITransacationDetailsStates>
 
   ) { }
 
@@ -32,24 +32,20 @@ export class TransactionDetailsPageComponent implements OnInit {
       .subscribe(params => {
         const transactionId = params.get('transactionId');
         const userId = params.get('userId');
-        //   if (transactionId && userId)
         //  Mapping the column names to transaction response
         this.service.getDisplayNamesForColumns().subscribe(response => {
-          // this.transacationColumnsData = response;
           this.redux.dispatch({
             type: TRANSACTIONS_COLUMN_DATA,
-            columnData:response
+            columnData: response
           });
           this.service.getTransactionDetails(transactionId, userId).subscribe(res => {
-            // this.transacationDetailsData = res;
-            console.log(res);
             this.redux.dispatch({
               type: TRANSACTIONS_DETAILS_DATA,
-              detailData:res
+              detailData: res
             });
             this.redux.dispatch({
               type: ON_TRANSACTION_CHANGE,
-              currentTransaction:res[0]
+              currentTransaction: res[0]
             });
           });
         });

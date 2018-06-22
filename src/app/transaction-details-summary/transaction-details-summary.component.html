@@ -1,8 +1,9 @@
-
 <div class="transaction-details-summary">
   <p>Summary</p>
   <ul>
-    <li *ngFor = "let item of (transacationColumnsData | async) | filterData:filterArgs ">
-      <span class="summary-key">{{item.display_name}}</span>:<br/>{{item.display_value}}
-  </li></ul>
+    <li *ngFor="let item of (transacationColumnsData | async) | filterData:filterArgs ">
+      <span class="summary-key">{{item.display_name}}</span>:
+      <br/>{{item.display_value}}
+    </li>
+  </ul>
 </div>

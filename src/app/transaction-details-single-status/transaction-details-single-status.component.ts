@@ -1,5 +1,5 @@
 import { select } from '@angular-redux/store';
-import { Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 @Component({
   selector: 'app-transaction-details-single-status',
   templateUrl: './transaction-details-single-status.component.html',
@@ -13,7 +13,7 @@ export class TransactionDetailsSingleStatusComponent implements OnInit, OnChange
   constructor() { }
 
   ngOnInit() {
-    this.selectedTransaction.subscribe((data)=>this.current = data) ;
+    this.selectedTransaction.subscribe((data) => this.current = data);
   }
 
   ngOnChanges(changes: SimpleChanges) {
