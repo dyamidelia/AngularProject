@@ -1,12 +1,12 @@
 import { select } from '@angular-redux/store';
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-transaction-details-single-status',
   templateUrl: './transaction-details-single-status.component.html',
   styleUrls: ['./transaction-details-single-status.component.css']
 })
-export class TransactionDetailsSingleStatusComponent implements OnInit, OnChanges {
-  @select(s => s.transaction_detail.transacationDetailsData) transacationDetailsData;
+export class TransactionDetailsSingleStatusComponent implements OnInit {
+  @select(s => s.transaction_detail.transactionDetailsData) transactionDetailsData;
   @select(s => s.transaction_detail.currentTransaction) selectedTransaction;
   current;
   changesDetected = false;
@@ -16,10 +16,4 @@ export class TransactionDetailsSingleStatusComponent implements OnInit, OnChange
     this.selectedTransaction.subscribe((data) => this.current = data);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (this.transacationDetailsData && this.transacationDetailsData.length && !this.changesDetected) {
-      // this.selectedTransaction = this.transacationDetailsData[0];
-      this.changesDetected = true;
-    }
-  }
 }

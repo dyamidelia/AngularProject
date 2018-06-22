@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./transaction-details-summary.component.css']
 })
 export class TransactionDetailsSummaryComponent implements OnInit {
-  @select(s => s.transaction_detail.transacationColumnsData) transacationColumnsData;
+  @select(s => s.transaction_detail.transactionColumnsData) transactionColumnsData;
   constructor() { }
   preDefinedColumnNames: any = ['Transaction ID',
     'Source',

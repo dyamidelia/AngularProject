@@ -1,6 +1,6 @@
 import { select, NgRedux } from '@angular-redux/store';
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { ITransacationDetailsStates } from '../transaction-details-page/transaction-details-page.reducer';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { ITransactionDetailsStates } from '../transaction-details-page/transaction-details-page.reducer';
 import { ON_TRANSACTION_CHANGE } from '../transaction-details-page/transaction-details-page.actions';
 
 
@@ -9,11 +9,13 @@ import { ON_TRANSACTION_CHANGE } from '../transaction-details-page/transaction-d
   templateUrl: './transaction-status-diagram.component.html',
   styleUrls: ['./transaction-status-diagram.component.css']
 })
-export class TransactionStatusDiagramComponent implements OnInit, OnChanges {
-  @select(s => s.transaction_detail.transacationDetailsData) transacationDetailsData;
+export class TransactionStatusDiagramComponent implements OnInit {
+  @select(s => s.transaction_detail.transactionDetailsData) transactionDetailsData;
+  @select(s => s.transaction_detail.currentTransaction) currentTransaction;
   selectedTransaction: any = {};
   changesDetected = false;
-  constructor(private redux: NgRedux<ITransacationDetailsStates>) { }
+
+  constructor(private redux: NgRedux<ITransactionDetailsStates>) { }
   selectState(currentState) {
     this.selectedTransaction = currentState;
     this.redux.dispatch({
@@ -22,18 +24,16 @@ export class TransactionStatusDiagramComponent implements OnInit, OnChanges {
     });
   }
   ngOnInit() {
-    this.transacationDetailsData.subscribe((data) => {
-      if (data && data.length) {
+
+    this.transactionDetailsData.subscribe((data) => {
+      if ((data && data.length) && !this.selectedTransaction) {
         this.selectedTransaction = data[0];
       }
     });
+    this.currentTransaction.subscribe((data) => {
+      if (data) {
+        this.selectedTransaction = data;
+      }
+    });
   }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (this.transacationDetailsData && this.transacationDetailsData.length && !this.changesDetected) {
-      this.selectState(this.transacationDetailsData[0]);
-      this.changesDetected = true;
-    }
-  }
-
 }

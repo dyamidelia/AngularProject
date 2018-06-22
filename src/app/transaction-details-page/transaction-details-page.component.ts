@@ -2,7 +2,7 @@ import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TransactionDetailsService } from '../services/transaction-details.service';
-import { ITransacationDetailsStates } from './transaction-details-page.reducer';
+import { ITransactionDetailsStates } from './transaction-details-page.reducer';
 import { TRANSACTIONS_COLUMN_DATA, TRANSACTIONS_DETAILS_DATA, ON_TRANSACTION_CHANGE } from './transaction-details-page.actions';
 
 
@@ -18,12 +18,12 @@ import { TRANSACTIONS_COLUMN_DATA, TRANSACTIONS_DETAILS_DATA, ON_TRANSACTION_CHA
 export class TransactionDetailsPageComponent implements OnInit {
   currentTransaction: any = {};
   showFullStatus = false;
-  @select(s => s.transaction_detail.transacationDetailsData) transacationDetailsData;
+  @select(s => s.transaction_detail.transactionDetailsData) transactionDetailsData;
   @select(s => s.settings.transacationColumnsData) transacationColumnsData;
   constructor(
     private route: ActivatedRoute,
     private service: TransactionDetailsService,
-    private redux: NgRedux<ITransacationDetailsStates>
+    private redux: NgRedux<ITransactionDetailsStates>
 
   ) { }
 

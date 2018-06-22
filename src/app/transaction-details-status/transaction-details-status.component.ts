@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./transaction-details-status.component.css']
 })
 export class TransactionDetailsStatusComponent implements OnInit {
-  @select(s => s.transaction_detail.transacationDetailsData) transacationDetailsData;
+  @select(s => s.transaction_detail.transactionDetailsData) transactionDetailsData;
 
 
   constructor() { }

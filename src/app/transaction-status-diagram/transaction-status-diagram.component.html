@@ -2,7 +2,7 @@
   <h2>Status of Transaction</h2>
   <div class="transaction-state-diagram">
     <div class="transaction-diagram-container">
-      <div class="status-diagram-item" *ngFor="let item of (transacationDetailsData | async); first as isFirst; last as isLast">
+      <div class="status-diagram-item" *ngFor="let item of (transactionDetailsData | async); first as isFirst; last as isLast">
         <div class="triangle" *ngIf="selectedTransaction.trans_state === item.trans_state"></div>
         <div *ngIf="!isFirst" class="left-connector"></div>
         <div *ngIf="!isLast" class="right-connector"></div>
