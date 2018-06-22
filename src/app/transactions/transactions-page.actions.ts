@@ -6,6 +6,7 @@ export const POST_TRANSACTIONS_SUCCESS = 'POST_TRANSACTIONS_SUCCESS';
 export const GET_COlUMNS_SUCCESS = 'GET_COlUMNS_SUCCESS';
 export const SHOW_HIDDEN_COLUMN = 'SHOW_HIDDEN_COLUMN';
 export const HIDE_COLUMN = 'HIDE_COLUMN';
+export const SAVE_COlUMNS_SUCCESS = "SAVE_COlUMNS_SUCCESS";
 
 export const startGetTransactions = (service:TransactionsService)=>{
     return service.getTransactions()
@@ -37,6 +38,22 @@ export const getColumns = (columns:any[])=>({
     columns
 });
 
+export const postColumns = ()=>({
+    type: SAVE_COlUMNS_SUCCESS
+});
+
+export const startPostColumns = (service:TransactionsService, postData)=>{
+
+    //get state from columns modify it and send it to the service instead of this junk.
+    /*let postData = [
+        {
+          "colName": "trans_source",
+          "visible": true
+        }
+      ];*/
+    return service.postColumns(postData)
+    .pipe(map(columns => postColumns()));
+};
 
 
 

@@ -1,5 +1,5 @@
 import { tassign } from 'tassign'; 
-import { GET_TRANSACTIONS_SUCCESS, HIDE_COLUMN, SHOW_HIDDEN_COLUMN, POST_TRANSACTIONS_SUCCESS, GET_COlUMNS_SUCCESS } from './transactions-page.actions'; 
+import { GET_TRANSACTIONS_SUCCESS, HIDE_COLUMN, SHOW_HIDDEN_COLUMN, POST_TRANSACTIONS_SUCCESS, GET_COlUMNS_SUCCESS, SAVE_COlUMNS_SUCCESS} from './transactions-page.actions'; 
 
 export interface ITransactionsState {
   transactions: any[];
@@ -41,6 +41,11 @@ function hideColumn(state, action) {
 
 }
 
+function saveColumns(state, action){
+  console.log("WE did it bois");
+  return tassign(state, { state });
+}
+
 
 export function transactionsReducer(state: ITransactionsState = TRANSACTIONS_INITIAL_STATE, action): ITransactionsState {
   switch (action.type) {
@@ -48,6 +53,7 @@ export function transactionsReducer(state: ITransactionsState = TRANSACTIONS_INI
     case SHOW_HIDDEN_COLUMN: return addColumn(state, action);
     case GET_COlUMNS_SUCCESS: return getColumns(state, action);
     case HIDE_COLUMN: return hideColumn(state, action);
+    case SAVE_COlUMNS_SUCCESS: return saveColumns(state, action);
   }
 
   return state;

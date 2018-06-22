@@ -6,7 +6,7 @@ import { TransactionsService } from '../services/transactions.service';
 import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {FormGroup, FormControl, FormArray, FormBuilder} from '@angular/forms';
-import { startGetTransactions, startGetColumns, addColumn, hideColumn } from './transactions-page.actions';
+import { startGetTransactions, startGetColumns, addColumn, hideColumn, startPostColumns } from './transactions-page.actions';
 import { map } from 'rxjs/operators';
 
 
@@ -44,22 +44,22 @@ export class TransactionsPageComponent implements OnInit {
   constructor(private service: TransactionsService, iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer, fb: FormBuilder, private ngRedux: NgRedux<IAppState>) {
 
-    //   svg icons
+    //svg icons I am sure there is a better way to add these
     iconRegistry.addSvgIcon(
-      'ic-maintenance',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-maintenance.svg')
+      'ic-filter',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-filter.svg')
     );
     iconRegistry.addSvgIcon(
       'search',
       sanitizer.bypassSecurityTrustResourceUrl('assets/images/search.svg')
     );
     iconRegistry.addSvgIcon(
-      'ic-document',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-document.svg')
+      'ic-settings',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-settings.svg')
     );
     iconRegistry.addSvgIcon(
       'ic-sort',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/images/icon-wi-input-output.svg')
+      sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-sort.svg')
 );
 
     //   form builder
@@ -100,11 +100,16 @@ export class TransactionsPageComponent implements OnInit {
 
     // IF empty??
     if (this.form.get('searchResults').length === 0) {
-      // this.clear();
       this.isOn = false;
       this.canAddFitlers = true;
     }
+  }
 
+  saveColumnsFilter(){
+    startPostColumns(this.service, this.columnsData)
+    .subscribe(action => {
+      this.ngRedux.dispatch(action);
+    });
   }
 
   saveColumns() {
@@ -123,13 +128,6 @@ export class TransactionsPageComponent implements OnInit {
       this.form.get('searches').removeAt(0);
       this.form.get('topics').removeAt(0);
     }
-
-    // this.clear();
-  }
-
-  clear() {
-    (this.form.get('topics') as FormArray).reset();
-    (this.form.get('searches') as FormArray).reset();
   }
 
   addSearch(topic, colNames) {
@@ -146,14 +144,15 @@ export class TransactionsPageComponent implements OnInit {
     //this.getTransactions(); have an array to send to filters.
   }
 
-  toggleColumn(column){
-    if ( this.form.get(column).value ){
+  toggleColumn(columnDisplayName, columnColName){
+
+    if ( this.form.get(columnDisplayName).value ){
        //Make Column Data Real.
-       this.ngRedux.dispatch(addColumn({ col_name: "trans_source", display_name: "Source", is_visible: true }));
+       this.ngRedux.dispatch(addColumn({ col_name: columnColName, display_name: columnDisplayName, is_visible: true }));
     }
     else{
       //Make Column Data Real.
-      this.ngRedux.dispatch(hideColumn({ col_name: "service_name", display_name: "Service Name", is_visible: false }));
+      this.ngRedux.dispatch(hideColumn({ col_name: columnColName, display_name: columnDisplayName, is_visible: false }));
       }
   }
 

@@ -58,8 +58,8 @@
       <span class="header-cell-text">{{ col.display_name }} <mat-icon (click)="sortColumn(col.display_name)" class="header-cell-icon" svgIcon="ic-sort"></mat-icon></span>
     </th>
     </ng-container>
-    <th  class="header-cell-button" (click)="loadFilters()" [ngClass]="{'active': ifShowFiltersRow }"><mat-icon svgIcon="ic-document"></mat-icon></th>
-    <th  class="header-cell-button" (click)="loadColumnSelection()" [ngClass]="{'active': ifShowColumnsRow }"><mat-icon svgIcon="ic-maintenance"></mat-icon></th>
+    <th  class="header-cell-button" (click)="loadFilters()" [ngClass]="{'active': ifShowFiltersRow }"><mat-icon svgIcon="ic-filter"></mat-icon></th>
+    <th  class="header-cell-button" (click)="loadColumnSelection()" [ngClass]="{'active': ifShowColumnsRow }"><mat-icon svgIcon="ic-settings"></mat-icon></th>
   </tr>
 
    <!-- Filters / Column Selection Area -->
@@ -86,14 +86,14 @@
    <tr *ngIf="ifShowColumnsRow" class="ColumnsRow">
      <!-- paramaterize the colspan length based on col array size?-->
      <td colspan = "9">
-      <form [formGroup] ="form">
+      <form  class="checkbox-holder" [formGroup] ="form">
           <mat-checkbox
-          class= "padding-5"
+          class= "checkbox-style"
           *ngFor="let col of columns | async" 
-          (change)="toggleColumn(col.display_name)" 
+          (change)="toggleColumn(col.display_name, col.col_name)" 
           [ngModel] = col.is_visible
           formControlName="{{ col.display_name }}">{{ col.display_name }}</mat-checkbox>
-          <button mat-raised-button color="primary" (click)="saveColumnsFilter()">Save</button>
+          <button mat-raised-button color="primary" class="filters-save-button" (click)="saveColumnsFilter()">Save</button>
           </form>
         </td>
     </tr>
@@ -106,9 +106,13 @@
     </tr> 
 
 <tfoot>
-  <!-- Maybe Change in the future to a local variable-->
-  Showing Search results: {{(transactions|async)?.currentPage }}-{{(transactions|async)?.maxPerPage}} of {{(transactions|async)?.totalResults}}
+  <!-- The first number isn't correct yet-->
+  <span>Showing Search results: {{(transactions|async)?.currentPage }}-{{(transactions|async)?.currentPage * (transactions|async)?.maxPerPage}} of {{(transactions|async)?.totalResults}}</span>
 <!-- Pagination-->
+
+<mat-paginator [length]= (transactions|async)?.totalResults
+              [pageSize]= (transactions|async)?.maxPerPage>
+</mat-paginator>
 </tfoot>
 
 </table>

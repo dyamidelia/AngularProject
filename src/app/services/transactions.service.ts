@@ -19,12 +19,8 @@ export class TransactionsService {
       .pipe(map(res => res.json()));
   }
 
-  postColumns() {
-    return this.http.post('http://10.102.17.21:8080/rest/columnConfigs/3aa41148-e1ab-4b35-a9aa-abf70ba69a17',
-      {
-        'colName': 'source',
-        'visible': true
-      })
+  postColumns( postData) {
+    return this.http.post('http://10.102.17.21:8080/rest/columnConfigs/3aa41148-e1ab-4b35-a9aa-abf70ba69a17', postData)
       .pipe(map(res => res.json()));
   }
 
