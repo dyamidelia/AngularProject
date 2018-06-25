@@ -7,9 +7,9 @@
 }
 .mat-form-field{
   width:85%;
-}
-.mat-form-field input{
-  text-transform: capitalize;
+  input{
+    text-transform: capitalize;
+  }
 }
 .accordion{
     border-bottom: 1px solid #ccc;
@@ -28,7 +28,7 @@
 
 .stateConfigList li{
   text-transform: capitalize;
-  padding: 12PX 8px;
+  padding: 12px 8px;
   border-bottom:1px solid #e6e6e6;
 }
 /* Add State Button */
@@ -43,12 +43,7 @@ button[name="addStateBtn"],button[name="addStatusBtn"]{
 .listHeading p{
   font-size:16px;
 }
-#addStateBlock form{
-  display:flex;
-}
-#addStateBlock button{
-  font-size:30px;
-}
+
 .stateOptions button,.statusOptions button{
   background:inherit;
   border:none;
@@ -59,18 +54,29 @@ button[name="addStateBtn"],button[name="addStatusBtn"]{
 /* #addStateBlock{
   display:flex;
 } */
-#addStateBlock input,#addStatusBlock input{
+.addState input{
   width:90%;
   padding:10px;
   font-style:italic;
   background:#f7f7f7;
   border-radius:5px;
   border: 1px solid #e6e6e6;
+ 
 }
-#addStateBlock button,#addStatusBlock button{
+.addState form{
+  display:flex;
+ }
+.addState button{
   background:inherit;
   border:none;
   padding:0;
   cursor:pointer;
   margin:0px 10px;
+  font-size:30px;
+}
+.stateConfigList button .fa{
+  font-size:30px;
+}
+.listHeading p{
+  font-size:16px
 }
