@@ -12,7 +12,7 @@ import { TRANSACTIONS_COLUMN_DATA, TRANSACTIONS_DETAILS_DATA, ON_TRANSACTION_CHA
 @Component({
   selector: 'app-transaction-details-page',
   templateUrl: './transaction-details-page.component.html',
-  styleUrls: ['./transaction-details-page.component.css'],
+  styleUrls: ['./transaction-details-page.component.less'],
   providers: [TransactionDetailsService]
 })
 export class TransactionDetailsPageComponent implements OnInit {

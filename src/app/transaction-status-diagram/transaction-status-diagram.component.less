@@ -1,0 +1,90 @@
+.transaction-details-status-diagram {
+  display: block;
+  float: left;
+  width: 100%;
+  padding: 25px;
+  box-sizing: border-box;
+.transaction-state-diagram {
+  white-space: nowrap;
+  overflow: auto;
+&::after {
+   content: "";
+   display: block;
+   clear: both;
+ }
+.status-diagram-item {
+  display: inline-block;
+  min-width: 100px;
+  text-align: center;
+  position: relative;
+  padding: 0 40px 40px;
+.left-connector {
+  width: 50%;
+  height: 10px;
+  background: #d4d4d4;
+  border: 1px solid #a7a7a7;
+  border-right: 0;
+  border-left: 0;
+  position: absolute;
+  right: 50%;
+  top: 47px;
+  z-index: 1;
+}
+.right-connector {
+  width: 50%;
+  height: 10px;
+  background: #d4d4d4;
+  border: 1px solid #a7a7a7;
+  border-right: 0;
+  border-left: 0;
+  position: absolute;
+  left: 50%;
+  top: 47px;
+  z-index: 1;
+}
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid #ccc;
+  position: absolute;
+  left: 50%;
+  margin-left: -20px;
+  top: 148px;
+}
+.circle-default {
+  width: 84px;
+  height: 84px;
+  background: transparent;
+  border-radius: 80px;
+  margin: 10px auto;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.circle-highlighter {
+  background: rgba(224,225,226,0.5);
+  border: 1px solid rgba(167,167,167,0.3);
+}
+.circle {
+  width: 70px;
+  height: 70px;
+  background: #d4d4d4;
+  border: 1px solid #a7a7a7;
+  border-radius: 70px;
+  margin: 0 auto;
+  position: absolute;
+  z-index: 2;
+  cursor: pointer;
+  top: 6px;
+  left: 6px;
+}
+}
+}
+.transaction-diagram-container {
+  display: inline-block;
+  border-bottom: 10px solid #ccc;
+}
+}

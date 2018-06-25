@@ -7,7 +7,7 @@ import { ON_TRANSACTION_CHANGE } from '../transaction-details-page/transaction-d
 @Component({
   selector: 'app-transaction-status-diagram',
   templateUrl: './transaction-status-diagram.component.html',
-  styleUrls: ['./transaction-status-diagram.component.css']
+  styleUrls: ['./transaction-status-diagram.component.less']
 })
 export class TransactionStatusDiagramComponent implements OnInit {
   @select(s => s.transaction_detail.transactionDetailsData) transactionDetailsData;
