@@ -1,4 +1,6 @@
+import { select } from '@angular-redux/store';
 import { Component, OnInit, Input } from '@angular/core';
+
 
 @Component({
   selector: 'app-transaction-details-summary',
@@ -6,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./transaction-details-summary.component.css']
 })
 export class TransactionDetailsSummaryComponent implements OnInit {
-  @Input('transacationColumnsData') transacationColumnsData: any;
+  @select(s => s.transaction_detail.transactionColumnsData) transactionColumnsData;
   constructor() { }
   preDefinedColumnNames: any = ['Transaction ID',
     'Source',

@@ -1,4 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { select, NgRedux } from '@angular-redux/store';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { ITransactionDetailsStates } from '../transaction-details-page/transaction-details-page.reducer';
+import { ON_TRANSACTION_CHANGE } from '../transaction-details-page/transaction-details-page.actions';
+
 
 @Component({
   selector: 'app-transaction-status-diagram',
@@ -6,16 +10,30 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./transaction-status-diagram.component.css']
 })
 export class TransactionStatusDiagramComponent implements OnInit {
-  @Input('transactionStatusData') transactionStatusData: any;
-  @Output() selectedTransactionChange = new EventEmitter();
+  @select(s => s.transaction_detail.transactionDetailsData) transactionDetailsData;
+  @select(s => s.transaction_detail.currentTransaction) currentTransaction;
   selectedTransaction: any = {};
-  constructor() { }
+  changesDetected = false;
+
+  constructor(private redux: NgRedux<ITransactionDetailsStates>) { }
   selectState(currentState) {
     this.selectedTransaction = currentState;
-    this.selectedTransactionChange.emit(this.selectedTransaction);
+    this.redux.dispatch({
+      type: ON_TRANSACTION_CHANGE,
+      currentTransaction: this.selectedTransaction
+    });
   }
   ngOnInit() {
-    this.selectedTransaction = this.transactionStatusData[0];
-  }
 
+    this.transactionDetailsData.subscribe((data) => {
+      if ((data && data.length) && !this.selectedTransaction) {
+        this.selectedTransaction = data[0];
+      }
+    });
+    this.currentTransaction.subscribe((data) => {
+      if (data) {
+        this.selectedTransaction = data;
+      }
+    });
+  }
 }

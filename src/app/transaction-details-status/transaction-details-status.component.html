@@ -1,9 +1,21 @@
 <div class="transaction-details-status">
- <h2>Status of Transaction</h2>
-    <div class="transaction-status-items" *ngFor = "let item of transactionStatusData">
-      <div class="status-item time-stamp"><div class="status-title">Time Stamp</div><div class="status-desc">{{item.timeStamp}}</div></div>
-      <div class="status-item state"><div class="status-title">State</div><div class="status-desc">{{item.state}}</div></div>
-      <div class="status-item status"><div class="status-title">status</div><div class="status-desc">{{item.status}}</div></div>
-      <div class="status-item description"><div class="status-title">Description</div><div class="status-desc">{{item.description}}</div></div>
+  <h2>Status of Transaction</h2>
+  <div class="transaction-status-items" *ngFor="let item of (transactionDetailsData | async)">
+    <div class="status-item time-stamp">
+      <div class="status-title">Time Stamp</div>
+      <div class="status-desc">{{item.trans_ts}}</div>
     </div>
+    <div class="status-item state">
+      <div class="status-title">State</div>
+      <div class="status-desc">{{item.trans_state}}</div>
+    </div>
+    <div class="status-item status">
+      <div class="status-title">status</div>
+      <div class="status-desc">{{item.trans_status}}</div>
+    </div>
+    <div class="status-item description">
+      <div class="status-title">Description</div>
+      <div class="status-desc">{{item.trans_desp}}</div>
+    </div>
+  </div>
 </div>

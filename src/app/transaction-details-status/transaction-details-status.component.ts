@@ -1,4 +1,6 @@
+import { select } from '@angular-redux/store';
 import { Component, OnInit, Input } from '@angular/core';
+
 
 @Component({
   selector: 'app-transaction-details-status',
@@ -6,12 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./transaction-details-status.component.css']
 })
 export class TransactionDetailsStatusComponent implements OnInit {
-  @Input('transactionStatusData') transactionStatusData: any;
+  @select(s => s.transaction_detail.transactionDetailsData) transactionDetailsData;
 
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }
