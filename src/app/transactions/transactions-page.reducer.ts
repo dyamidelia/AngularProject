@@ -41,10 +41,7 @@ function hideColumn(state, action) {
 
 }
 
-function saveColumns(state, action){
-  console.log("WE did it bois");
-  return tassign(state, { state });
-}
+
 
 
 export function transactionsReducer(state: ITransactionsState = TRANSACTIONS_INITIAL_STATE, action): ITransactionsState {
@@ -53,7 +50,6 @@ export function transactionsReducer(state: ITransactionsState = TRANSACTIONS_INI
     case SHOW_HIDDEN_COLUMN: return addColumn(state, action);
     case GET_COlUMNS_SUCCESS: return getColumns(state, action);
     case HIDE_COLUMN: return hideColumn(state, action);
-    case SAVE_COlUMNS_SUCCESS: return saveColumns(state, action);
   }
 
   return state;

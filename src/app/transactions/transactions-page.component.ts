@@ -106,10 +106,25 @@ export class TransactionsPageComponent implements OnInit {
   }
 
   saveColumnsFilter(){
-    startPostColumns(this.service, this.columnsData)
-    .subscribe(action => {
-      this.ngRedux.dispatch(action);
+
+    let columnArray = this.columnsData.slice();
+
+    //Remove the un-needed data
+    columnArray.forEach(function (entry) {
+      delete entry['display_name'];
+      delete entry['is_searchable'];
     });
+
+    //Rename the keys until the backend changes data
+    columnArray = columnArray.map(function(obj) {
+      return {
+          colName: obj.col_name,
+          visible: obj.is_visible
+      }
+    })
+
+    //make the post call
+    startPostColumns(this.service, columnArray)
   }
 
   saveColumns() {

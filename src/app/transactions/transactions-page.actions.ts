@@ -43,16 +43,7 @@ export const postColumns = ()=>({
 });
 
 export const startPostColumns = (service:TransactionsService, postData)=>{
-
-    //get state from columns modify it and send it to the service instead of this junk.
-    /*let postData = [
-        {
-          "colName": "trans_source",
-          "visible": true
-        }
-      ];*/
-    return service.postColumns(postData)
-    .pipe(map(columns => postColumns()));
+    service.postColumns(postData);
 };
 
 
