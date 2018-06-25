@@ -3,10 +3,11 @@ import { NgRedux, select } from '@angular-redux/store';
 import { ActivatedRoute } from '@angular/router';
 import { IAppState } from '../reducer';
 import { TransactionsService } from '../services/transactions.service';
-import { MatIconRegistry } from '@angular/material';
-import { DomSanitizer } from '@angular/platform-browser';
-import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms';
-import { startGetTransactions, startGetColumns } from './transactions-page.actions';
+import {MatIconRegistry} from '@angular/material';
+import {DomSanitizer} from '@angular/platform-browser';
+import {FormGroup, FormControl, FormArray, FormBuilder} from '@angular/forms';
+import { startGetTransactions, startGetColumns, addColumn, hideColumn, startPostColumns } from './transactions-page.actions';
+import { map } from 'rxjs/operators';
 
 
 
@@ -28,32 +29,40 @@ export class TransactionsPageComponent implements OnInit {
   ifShowColumnsRow = false;
   form;
   columnsData = [];
-  foods = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' }
-  ];
-  intDisplayedColumns = [];
+  isValidAddForm = false;
+  canAddFitlers = true;
+  canSearchFitlers = false;
+  transactionsData = [];
+  totalPages: number = 0; 
+
+  // Sorting Vars
+  order = 'trans_status';
+  order2 = 'display_name';
+  ascending = true;
 
 
   constructor(private service: TransactionsService, iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer, fb: FormBuilder, private ngRedux: NgRedux<IAppState>) {
 
-    //  svg icons
+    //svg icons I am sure there is a better way to add these
     iconRegistry.addSvgIcon(
-      'ic-maintenance',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-maintenance.svg')
+      'ic-filter',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-filter.svg')
     );
     iconRegistry.addSvgIcon(
       'search',
       sanitizer.bypassSecurityTrustResourceUrl('assets/images/search.svg')
     );
     iconRegistry.addSvgIcon(
-      'ic-document',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-document.svg')
+      'ic-settings',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-settings.svg')
     );
+    iconRegistry.addSvgIcon(
+      'ic-sort',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/images/ic-sort.svg')
+);
 
-    //  form builder
+    //   form builder
     this.form = fb.group({
       'Transaction ID': [],
       'Source': [],
@@ -70,34 +79,70 @@ export class TransactionsPageComponent implements OnInit {
 
   }
 
+  canAddSearchs() {
+    return this.canAddFitlers;
+  }
+
+  isValidForm() {
+    return this.isValidAddForm;
+  }
+
+  canSearch() {
+    return this.canSearchFitlers;
+  }
+
   removeResult(removeTopic: FormControl) {
-    //  Remove Result from formArray
-    const index = this.form.get('topics').controls.indexOf(removeTopic);
-    this.form.get('topics').removeAt(index);
-    this.form.get('searches').removeAt(index);
-    //  Recall Backend
+    // Remove Result from formArray
+    const index = this.form.get('searchResults').controls.indexOf(removeTopic);
+    this.form.get('searchResults').removeAt(index);
+    // this.form.get('searches').removeAt(index);
+    // Recall Backend
 
-    //  IF empty??
-    if (this.form.get('topics').length === 0) {
-      //  this.clear();
+    // IF empty??
+    if (this.form.get('searchResults').length === 0) {
       this.isOn = false;
-      console.log('4');
+      this.canAddFitlers = true;
     }
+  }
 
+  saveColumnsFilter(){
+
+    let columnArray = this.columnsData.slice();
+
+    //Remove the un-needed data
+    columnArray.forEach(function (entry) {
+      delete entry['display_name'];
+      delete entry['is_searchable'];
+    });
+
+    //Rename the keys until the backend changes data
+    columnArray = columnArray.map(function(obj) {
+      return {
+          colName: obj.col_name,
+          visible: obj.is_visible
+      }
+    })
+
+    //make the post call
+    startPostColumns(this.service, columnArray)
   }
 
   saveColumns() {
-    //  Call Backend with Service and send it our variable.
+    //   Call Backend with Service and send it our variable.
     this.isOn = true;
+    this.canSearchFitlers = false;
+    // this.form.patchValue({searchResults:[...this.form.get('searchResults'), ...this.form.get('topics')]});
+    // this.form.set('searchResults',);
+    const len = this.form.get('searches').length;
 
-    // (this.form.get('searchResults') as FormArray).push(this.form.get('topics'));
-    // console.log(this.form.get('searchResults') as FormArray);
-    // this.clear();
-  }
+    for (let i = 0; i < len; i++) {
+      (this.form.get('searchResults') as FormArray).push(this.form.get('searches').at(i));
+    }
 
-  clear() {
-    (this.form.get('topics') as FormArray).reset();
-    (this.form.get('searches') as FormArray).reset();
+    while (this.form.get('searches').length !== 0) {
+      this.form.get('searches').removeAt(0);
+      this.form.get('topics').removeAt(0);
+    }
   }
 
   addSearch(topic, colNames) {
@@ -108,30 +153,29 @@ export class TransactionsPageComponent implements OnInit {
     colNames.value = '';
     this.colSelection = '';
 
+    this.isValidAddForm = false;
+    this.canSearchFitlers = true;
+
+    //this.getTransactions(); have an array to send to filters.
   }
 
-  toggleColumn(column) {
-    if (this.form.get(column).value && !this.intDisplayedColumns.includes(column)) {
-      //  Change to redux dispatch Event
-      //  Add the columnName from ColDisplayList
-      this.intDisplayedColumns.push(column);
-    } else {
-      //  Change to redux dispatch Event
-      //  Remove the columnName from ColDisplayList
-      for (let i = this.intDisplayedColumns.length - 1; i >= 0; i--) {
-        if (this.intDisplayedColumns[i] === column) {
-          this.intDisplayedColumns.splice(i, 1);
-          //   break;       //  <-- Uncomment  if only the first term has to be removed
-        }
-      }
+  toggleColumn(columnDisplayName, columnColName){
+
+    if ( this.form.get(columnDisplayName).value ){
+       //Make Column Data Real.
+       this.ngRedux.dispatch(addColumn({ col_name: columnColName, display_name: columnDisplayName, is_visible: true }));
     }
-    console.log(this.intDisplayedColumns);
+    else{
+      //Make Column Data Real.
+      this.ngRedux.dispatch(hideColumn({ col_name: columnColName, display_name: columnDisplayName, is_visible: false }));
+      }
   }
 
   changeSearchText(event, myNewString) {
     if (event.isUserInput) {
       this.searchString = 'Please type the name of a(n) ' + myNewString;
       this.colSelection = myNewString;
+      this.isValidAddForm = true;
     }
   }
 
@@ -139,10 +183,13 @@ export class TransactionsPageComponent implements OnInit {
     this.getColumns();
     this.getTransactions();
   }
-
-  getTransactions() {
+  
+  getTransactions(){
     startGetTransactions(this.service)
-      .subscribe(action => this.ngRedux.dispatch(action));
+      .subscribe(action => {
+        this.ngRedux.dispatch(action);
+        this.transactionsData = action.transactions;
+      });
   }
 
   getColumns() {
@@ -153,13 +200,22 @@ export class TransactionsPageComponent implements OnInit {
       });
   }
 
-  loadFilters() {
+  //Can combine these two functions that toggle the states of the header buttons into one.
+  loadFilters(){
     this.ifShowFiltersRow = !this.ifShowFiltersRow;
-
+    if ( this.ifShowColumnsRow ){
+      this.ifShowColumnsRow = !this.ifShowColumnsRow;
+    }
   }
-
-  loadColumnSelection() {
+  loadColumnSelection(){
     this.ifShowColumnsRow = !this.ifShowColumnsRow;
+    if ( this.ifShowFiltersRow ){
+      this.ifShowFiltersRow = !this.ifShowFiltersRow;
+    }
   }
 
+  sortColumn(columnName){
+    //Change Icon State
+    //Sort Column with Dispatch Redux Action to Map/Filter the array state?
+  }
 }

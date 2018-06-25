@@ -1,9 +1,11 @@
+<div class="hero-search-area">
 <span class="header-text">Transactions</span>
 
 <span style="line-height: 25px">
 <mat-select  #colNames class="primary-search-select" placeholder="Transactions">
     <mat-option 
     *ngFor="let a of columns | async"
+    [disabled]= "!canAddSearchs()"
     [value]="a.display_name"
     (onSelectionChange)= "changeSearchText( $event, a.display_name )">
       {{ a.display_name }}
@@ -15,15 +17,15 @@
   #topic
   placeholder="{{searchString}}">
 </span>
-
 </span>
 
-<button mat-button color="primary" (click)="addSearch(topic, colNames)"> + </button>
-<button mat-raised-button color="primary" (click)="saveColumns()">Search   <mat-icon class="padding-5" svgIcon="search"></mat-icon></button>
+<button mat-button color="primary" (click)="addSearch(topic, colNames)" [disabled]= "!isValidForm()"> + </button>
+<button mat-raised-button color="primary" (click)="saveColumns()" [disabled]= "!canSearch()">Search   <mat-icon class="padding-5" svgIcon="search"></mat-icon></button>
+</div>
+<!-- End Hero Search Content -->
 
-<br><br>
-<div *ngIf="!isOn" style="line-height: 25px; display: table; margin-left: 105px;">
-<!-- <div *ngIf="!isOn" style="width: 100%; display: table;"> -->
+<!-- Search Content Area-->
+<div class="search-content-area">
     <div style="display: flex; margin-bottom: 5px;">
         <div style="display: table-cell;"> 
             <div class="primary-search-select-filtered" *ngFor="let searches of form.get('searches').controls"> {{ searches.value }}</div>
@@ -34,65 +36,85 @@
                 </div>
              </div>
     </div>
-<!-- </div> -->
   </div>
-
-<br><br>
 
 <div *ngIf="isOn" style="width: 100%; margin-bottom: 12px;">
               <span> Search Results of </span>
               <span 
               class="grey-pillbox"
-              *ngFor="let topic2 of form.get('topics').controls"
+              *ngFor="let topic2 of form.get('searchResults').controls"
               (click)="removeResult( topic2 )" >
                   {{ topic2.value }} X
               </span>
 </div>
 
+<!--Table Begins-->
 <table class="full-width"> 
 
   <!-- Table Headers -->
   <tr class="header-row">
-    <ng-container *ngFor="let col of columns | async" [class.completed]="col.isCompleted">
-    <th *ngIf="col.is_visible">{{ col.display_name }}</th>
+    <ng-container *ngFor="let col of columns | async | orderBy: 'col_name'" [class.completed]="col.isCompleted">
+    <th class="header-cell" align="center" *ngIf="col.is_visible">
+      <span class="header-cell-text">{{ col.display_name }} <mat-icon (click)="sortColumn(col.display_name)" class="header-cell-icon" svgIcon="ic-sort"></mat-icon></span>
+    </th>
     </ng-container>
-    <th><button (click)="loadFilters()" mat-raised-button ><mat-icon svgIcon="ic-document"></mat-icon></button></th>
-    <th><button (click)="loadColumnSelection()" mat-raised-button><mat-icon svgIcon="ic-maintenance"></mat-icon></button></th>
+    <th  class="header-cell-button" (click)="loadFilters()" [ngClass]="{'active': ifShowFiltersRow }"><mat-icon svgIcon="ic-filter"></mat-icon></th>
+    <th  class="header-cell-button" (click)="loadColumnSelection()" [ngClass]="{'active': ifShowColumnsRow }"><mat-icon svgIcon="ic-settings"></mat-icon></th>
   </tr>
 
    <!-- Filters / Column Selection Area -->
    <tr *ngIf="ifShowFiltersRow" class="ColumnsRow">
-     Filter Typeahead Nonsense
+       <!-- paramaterize the colspan length based on col array size?-->
+       <td colspan = "9">
+          <ng-container 
+          *ngFor="let col of columns | async | orderBy: 'col_name'"
+          [class.completed]="col.isCompleted">
+          <mat-select 
+          #colNames class="filters-select" 
+          placeholder="{{col.display_name}}"
+          *ngIf="col.is_visible">
+              <mat-option 
+              *ngFor="let a of columns | async"
+              [value]="a.display_name">
+                {{ a.display_name }}
+              </mat-option>
+          </mat-select>
+          </ng-container>
+        </td>
    </tr>
 
    <tr *ngIf="ifShowColumnsRow" class="ColumnsRow">
+     <!-- paramaterize the colspan length based on col array size?-->
      <td colspan = "9">
-      <form [formGroup] ="form">
+      <form  class="checkbox-holder" [formGroup] ="form">
           <mat-checkbox
-          class= "padding-5"
+          class= "checkbox-style"
           *ngFor="let col of columns | async" 
-          (change)="toggleColumn(col.display_name)" 
+          (change)="toggleColumn(col.display_name, col.col_name)" 
           [ngModel] = col.is_visible
           formControlName="{{ col.display_name }}">{{ col.display_name }}</mat-checkbox>
-          <button mat-raised-button color="primary" (click)="saveColumnsFilter()">Save</button>
+          <button mat-raised-button color="primary" class="filters-save-button" (click)="saveColumnsFilter()">Save</button>
           </form>
         </td>
     </tr>
 
    <!-- Table Data Rows Area -->
-   <tr *ngFor="let t of transactions | async" [class.completed]="t.isCompleted">
-      <td [class.completed]="t.isCompleted">{{ t.trans_id }}</td> 
-      <td [class.completed]="t.isCompleted">{{ t.trans_source }}</td> 
-      <td [class.completed]="t.isCompleted">{{ t.trans_destination }}</td> 
-      <td [class.completed]="t.isCompleted">{{ t.service_name }}</td> 
-      <td [class.completed]="t.isCompleted">{{ t.trans_status }}</td> 
-      <td [class.completed]="t.isCompleted">{{ t.trans_state }}</td> 
-      <td [class.completed]="t.isCompleted">{{ t.create_ts }}</td> 
-   </tr>
+   <tr class="table-row" *ngFor="let t of (transactions|async)?.data " [class.completed]="t.isCompleted"> 
+      <ng-container *ngFor="let col of columns | async">
+          <td class="td-styles" align="center" *ngIf="col.is_visible">{{t[col.col_name]}}</td>
+      </ng-container>
+    </tr> 
+
 <tfoot>
-  <hr>
-  Showing Search results: 1-15 of 90
+  <!-- The first number isn't correct yet-->
+  <span>Showing Search results: {{(transactions|async)?.currentPage }}-{{(transactions|async)?.currentPage * (transactions|async)?.maxPerPage}} of {{(transactions|async)?.totalResults}}</span>
 <!-- Pagination-->
+
+<mat-paginator [length]= (transactions|async)?.totalResults
+              [pageSize]= (transactions|async)?.maxPerPage>
+</mat-paginator>
 </tfoot>
 
 </table>
+
+<!--<pre>{{transactions|async|json}}</pre>-->
