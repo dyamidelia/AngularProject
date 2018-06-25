@@ -26,9 +26,10 @@
               {
                 "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
               },
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/GNH/tib-cloud-nav-bar.min.css"
             ],
-            "scripts": []
+            "scripts": ["src/assets/GNH/GlobalNavbar.js"]
           },
           "configurations": {
             "production": {
