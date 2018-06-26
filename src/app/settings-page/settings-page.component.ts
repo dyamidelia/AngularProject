@@ -14,7 +14,7 @@ import {SettingsHttpService} from '../../app/services/settings-http.service';
 @Component({
   selector: 'app-settings-page',
   templateUrl: './settings-page.component.html',
-  styleUrls: ['./settings-page.component.css']
+  styleUrls: ['./settings-page.component.less']
 })
 
 export class SettingsPageComponent implements OnInit, AfterViewChecked {
