@@ -8,7 +8,6 @@ import {hitURL} from '../app.globals';
 })
 export class TransactionDetailsService {
   // hitURL = 'http://10.102.17.21:8080/rest';
-  
   response = [
     {
       'trans_id': '1ec9cde4-7195-402c-946c-af8f8df1ae24',
