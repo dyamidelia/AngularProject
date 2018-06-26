@@ -26,8 +26,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { SideNavigationComponent } from './side-navigation/side-navigation.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { TransactionsPageComponent } from './transactions/transactions-page.component';
-import { HeaderComponent } from './header/header.component';
-//   import { TableComponent } from './table/table.component';
+// import { HeaderComponent } from './header/header.component';
+//  import { TableComponent } from './table/table.component';
 import { DetailsModule } from './details/details.module';
 import { SideNavigationModule } from './side-navigation/side-navigation.module';
 import { TransactionDetailsPageComponent } from './transaction-details-page/transaction-details-page.component';
@@ -57,7 +57,6 @@ import { OrderByPipe } from './common/order-by.pipe';
     TransactionDetailsPageComponent,
     TransactionDetailsSummaryComponent,
     FilterDataPipe,
-    HeaderComponent,
     TransactionDetailsStatusComponent,
     TransactionDetailsSingleStatusComponent,
     TransactionStatusDiagramComponent,

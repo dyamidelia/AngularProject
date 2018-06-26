@@ -3,6 +3,7 @@
 <head>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+<link rel="stylesheet" href="../assets/GNH/tib-cloud-nav-bar.min.css">
   <meta charset="utf-8">
   <title>AuditCloud</title>
   <base href="/">
@@ -11,6 +12,37 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+  <div id="navbar">
+
+  </div>
   <app-root></app-root>
+  <script type="text/javascript" src="../assets/GNH/globalNavbar.js"></script>
+  <script type="text/javascript">
+  var navbar = new GlobalNavbar({
+       container: "#navbar",
+       title: "Cloud",
+       tenantName: "Sample Tenant",
+       mode: "dev",
+       textAfterLogo: "Transaction Audit",
+       iconMenus: {
+           search: {
+               visible: true  // for versions 0.1.X the propertie is "disabled" instead of "visible".
+           },
+           download: {
+               visible: true
+           },
+           help: {
+               visible: false
+           },
+           notifications: {
+               visible: false
+           },
+           profile: {
+               visible: false
+           }
+        }
+  });
+  navbar.load();
+  </script>
 </body>
 </html>
