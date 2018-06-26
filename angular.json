@@ -31,7 +31,7 @@
               "src/custom-theme.scss",
               "src/assets/GNH/tib-cloud-nav-bar.min.css"
             ],
-            "scripts": ["src/assets/GNH/GlobalNavbar.js"]
+            "scripts": ["src/assets/GNH/globalNavbar.js"]
           },
           "configurations": {
             "production": {
