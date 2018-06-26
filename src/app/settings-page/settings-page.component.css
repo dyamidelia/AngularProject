@@ -17,9 +17,6 @@
     font-size:0.75em;
    color:#000;
 }
-.settings{
-  padding:12px;
-}
 ::ng-deep .card{
 
     border:none;

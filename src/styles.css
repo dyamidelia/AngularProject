@@ -10,7 +10,9 @@ body {
   background: rgb(244, 244, 244);
 }
 
-
+.tibCloudNavBar .navbar{
+  min-height: 0 !important;
+}
 
 
 
