@@ -4,12 +4,20 @@ table {
 .ColumnsRow{
     background-color: #ABA9A9;
     height: 5em;
+    padding-left: 1.5em;
 }
 .checkbox-holder{
     margin-left: 5em;
 }
 .filters-save-button{
     margin-left: 13em;
+}
+.columns-filter-holder{
+    margin-left: 1em;
+    width: 10em;
+}
+.apply-filter-button{
+    margin-right: 1em;
 }
 .header-cell-text{
     border-bottom: 1px solid #ACABAC;
@@ -53,7 +61,6 @@ table {
     padding-right: 6px;
 
 }
-
 .filters-select{
     width: 90px;
     height: 26px;

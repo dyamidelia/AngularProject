@@ -65,22 +65,16 @@
    <!-- Filters / Column Selection Area -->
    <tr *ngIf="ifShowFiltersRow" class="ColumnsRow">
        <!-- paramaterize the colspan length based on col array size?-->
-       <td colspan = "9">
           <ng-container 
           *ngFor="let col of columns | async | orderBy: 'col_name'"
           [class.completed]="col.isCompleted">
-          <mat-select 
-          #colNames class="filters-select" 
-          placeholder="{{col.display_name}}"
-          *ngIf="col.is_visible">
-              <mat-option 
-              *ngFor="let a of columns | async"
-              [value]="a.display_name">
-                {{ a.display_name }}
-              </mat-option>
-          </mat-select>
+          <td>
+          <input class="columns-filter-holder" 
+          placeholder="{{col.display_name}}">
+          </td>
           </ng-container>
-        </td>
+          <td></td>
+          <td><button mat-raised-button color="primary" class="apply-filter-button" (click)="saveFilter()">Apply</button></td>
    </tr>
 
    <tr *ngIf="ifShowColumnsRow" class="ColumnsRow">
@@ -89,8 +83,8 @@
       <form  class="checkbox-holder" [formGroup] ="form">
           <mat-checkbox
           class= "checkbox-style"
-          *ngFor="let col of columns | async" 
-          (change)="toggleColumn(col.display_name, col.col_name)" 
+          *ngFor="let col of columns | async"
+          (change)="toggleColumn(col.display_name, col.col_name)"
           [ngModel] = col.is_visible
           formControlName="{{ col.display_name }}">{{ col.display_name }}</mat-checkbox>
           <button mat-raised-button color="primary" class="filters-save-button" (click)="saveColumnsFilter()">Save</button>
@@ -109,10 +103,6 @@
   <!-- The first number isn't correct yet-->
   <span>Showing Search results: {{(transactions|async)?.currentPage }}-{{(transactions|async)?.currentPage * (transactions|async)?.maxPerPage}} of {{(transactions|async)?.totalResults}}</span>
 <!-- Pagination-->
-
-<mat-paginator [length]= (transactions|async)?.totalResults
-              [pageSize]= (transactions|async)?.maxPerPage>
-</mat-paginator>
 </tfoot>
 
 </table>

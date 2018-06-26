@@ -107,7 +107,7 @@ export class TransactionsPageComponent implements OnInit {
 
   saveColumnsFilter() {
 
-    let columnArray = this.columnsData.slice();
+    let columnArray = JSON.parse(JSON.stringify(this.columnsData))
 
     // Remove the un-needed data
     columnArray.forEach(function (entry) {
@@ -123,8 +123,13 @@ export class TransactionsPageComponent implements OnInit {
       };
     });
 
+    console.log(columnArray);
     // make the post call
     startPostColumns(this.service, columnArray);
+  }
+
+  saveFilter(){
+    
   }
 
   saveColumns() {
