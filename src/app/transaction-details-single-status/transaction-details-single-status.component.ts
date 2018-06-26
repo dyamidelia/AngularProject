@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-transaction-details-single-status',
   templateUrl: './transaction-details-single-status.component.html',
-  styleUrls: ['./transaction-details-single-status.component.css']
+  styleUrls: ['./transaction-details-single-status.component.less']
 })
 export class TransactionDetailsSingleStatusComponent implements OnInit {
   @select(s => s.transaction_detail.transactionDetailsData) transactionDetailsData;
