@@ -128,6 +128,10 @@ table {
 .table-row{
     border-bottom: 1px solid #ABA9A9;
 }
+.table-row:hover{
+    cursor:pointer;
+    background-color:#e9f3fe;
+  }
 .td-styles{
     padding: 11px;
 }

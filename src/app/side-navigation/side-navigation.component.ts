@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class SideNavigationComponent implements OnInit {
   navList = [{ name: 'Home', path: 'home' },
   { name: 'Transactions', path: 'transactions' },
-  { name: 'Transactions Details', path: 'transactionsDetails' },
   { name: 'Settings', path: 'settings' }
   ];
   constructor() { }

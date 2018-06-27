@@ -8,6 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms';
 import { startGetTransactions, startGetColumns, addColumn, hideColumn, startPostColumns } from './transactions-page.actions';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 
@@ -42,7 +43,7 @@ export class TransactionsPageComponent implements OnInit {
 
 
   constructor(private service: TransactionsService, iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer, fb: FormBuilder, private ngRedux: NgRedux<IAppState>) {
+    sanitizer: DomSanitizer, fb: FormBuilder, private ngRedux: NgRedux<IAppState>, private router: Router) {
 
     // svg icons I am sure there is a better way to add these
     iconRegistry.addSvgIcon(
@@ -128,8 +129,8 @@ export class TransactionsPageComponent implements OnInit {
     startPostColumns(this.service, columnArray);
   }
 
-  saveFilter(){
-    
+  saveFilter() {
+
   }
 
   saveColumns() {
@@ -221,5 +222,9 @@ export class TransactionsPageComponent implements OnInit {
   sortColumn(columnName) {
     // Change Icon State
     // Sort Column with Dispatch Redux Action to Map/Filter the array state?
+  }
+  redirectToDetailsPage(i) {
+    this.router.navigate(['transactions/org_1/user-trans-id', i.user_trans_id]);
+
   }
 }
