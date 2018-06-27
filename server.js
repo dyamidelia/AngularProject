@@ -1,5 +1,4 @@
-//Configuration for production
-//Use node app.js for prod, Use gulp serve for live reload in dev
+//Configuration for QA
 
 var express = require('express');
 var path = require('path');
@@ -8,8 +7,8 @@ var app = express();
 
 // Define the port to run on
 app.set('port', 80);
-
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'dist','static')));
+console.log("App is serving files from "+path.join(__dirname, 'dist','static'));
 // Listen for requests
 var server = app.listen(app.get('port'), function() {
     var port = server.address().port;
