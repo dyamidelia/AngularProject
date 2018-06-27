@@ -80,7 +80,8 @@
               </mat-option>
           </mat-select>
           </ng-container>
-        </td>
+          <td></td>
+          <td><button mat-raised-button color="primary" class="apply-filter-button" (click)="saveFilter()">Apply</button></td>
    </tr>
 
    <tr *ngIf="ifShowColumnsRow" class="ColumnsRow">
@@ -109,10 +110,6 @@
   <!-- The first number isn't correct yet-->
   <span>Showing Search results: {{(transactions|async)?.currentPage }}-{{(transactions|async)?.currentPage * (transactions|async)?.maxPerPage}} of {{(transactions|async)?.totalResults}}</span>
 <!-- Pagination-->
-
-<mat-paginator [length]= (transactions|async)?.totalResults
-              [pageSize]= (transactions|async)?.maxPerPage>
-</mat-paginator>
 </tfoot>
 
 </table>

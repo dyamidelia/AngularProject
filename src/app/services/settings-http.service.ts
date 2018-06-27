@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import {hitURL} from '../app.globals';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +11,7 @@ export class SettingsHttpService {
   constructor(private http: HttpClient) { }
   //  <======================== Services for State Configuration ============================================>
   getStates() {
-    return this.http.get(`${this.hitURL}/states/${this.tsc_org_id}`);
+    return this.http.get(`${hitURL}/states/${this.tsc_org_id}`);
   }
   editState(stateObj) {
     // Model Schema
@@ -19,7 +20,7 @@ export class SettingsHttpService {
     //    'state_name': 'string',
     //    'tsc_org_id': 'string'
     //  }
-    return this.http.put(`${this.hitURL}/states/${stateObj.id}`,
+    return this.http.put(`${hitURL}/states/${stateObj.id}`,
       {
         'state_desp': 'desc',
         'state_name': stateObj.state,
@@ -34,7 +35,7 @@ export class SettingsHttpService {
     //    'state_name': 'string',
     //    'tsc_org_id': 'string'
     //  }
-    return this.http.post(`${this.hitURL}/states/`,
+    return this.http.post(`${hitURL}/states/`,
       {
         'state_desp': 'desc',
         'state_name': newState,
@@ -43,11 +44,11 @@ export class SettingsHttpService {
       });
   }
   delState(stateId) {
-    return this.http.delete(`${this.hitURL}/states/${stateId}`);
+    return this.http.delete(`${hitURL}/states/${stateId}`);
   }
   //  <======================== Services for Status Configuration ============================================>
   getStatuses() {
-    return this.http.get(`${this.hitURL}/statuses/${this.tsc_org_id}`);
+    return this.http.get(`${hitURL}/statuses/${this.tsc_org_id}`);
   }
   editStatus(statusObj) {
     // Model Schema
@@ -56,7 +57,7 @@ export class SettingsHttpService {
     //    'state_name': 'string',
     //    'tsc_org_id': 'string'
     //  }
-    return this.http.put(`${this.hitURL}/statuses/${statusObj.id}`,
+    return this.http.put(`${hitURL}/statuses/${statusObj.id}`,
       {
         'status_desp': 'desc',
         'status_name': statusObj.status,
@@ -71,7 +72,7 @@ export class SettingsHttpService {
     //    'status_name': 'string',
     //    'tsc_org_id': 'string'
     //  }
-    return this.http.post(`${this.hitURL}/statuses/`,
+    return this.http.post(`${hitURL}/statuses/`,
       {
         'state_desp': 'desc',
         'status_name': newState,
@@ -80,6 +81,6 @@ export class SettingsHttpService {
       });
   }
   delStatus(statusId) {
-    return this.http.delete(`${this.hitURL}/statuses/${statusId}`);
+    return this.http.delete(`${hitURL}/statuses/${statusId}`);
   }
 }

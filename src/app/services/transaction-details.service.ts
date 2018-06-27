@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 // import { Http, Response } from '@angular/http';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
-
+import {hitURL} from '../app.globals';
 @Injectable({
   providedIn: 'root'
 })
 export class TransactionDetailsService {
-  hitURL = 'http://10.102.17.21:8080/rest';
+  // hitURL = 'http://10.102.17.21:8080/rest';
   tsc_org_id = 'tibco1';
   user_trans_id = '9c09eb86-357f-4d57-af4d-459ffebab4e8';
 
@@ -185,11 +185,11 @@ export class TransactionDetailsService {
   getTransactionDetails(transactionId, userId) {
     /*return this.http.get(`${this.hitURL}/transactions/${this.tsc_org_id}/user-trans-id/${this.user_trans_id}`)
       .pipe(map(res => res.json()));*/
-      return this.http.get(`${this.hitURL}/transactions/${this.tsc_org_id}/user-trans-id/${this.user_trans_id}`);
+      return this.http.get(`${hitURL}/transactions/${this.tsc_org_id}/user-trans-id/${this.user_trans_id}`);
 
   }
   getDisplayNamesForColumns() {
-    return this.http.get(`${this.hitURL}/columnConfigs/detialPage`);
+    return this.http.get(`${hitURL}/columnConfigs/detialPage`);
      // .pipe(map(res => res.json()));
   }
   private handleError(error: any): Promise<any> {
