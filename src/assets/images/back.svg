@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>45CB8163-8EB9-4C79-9DAB-86DB27B47BB6</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M17.240215,12.7034912 L7.79105261,21.7075 C7.38172913,22.0975 6.71736564,22.0975 6.30699261,21.7075 C5.89766913,21.3165 5.89766913,20.6835 6.30699261,20.2925 L15.03188,11.9795 L6.3489745,3.7075 C5.93965103,3.3165 5.93965103,2.6835 6.3489745,2.2925 C6.75934753,1.9025 7.42371102,1.9025 7.8330345,2.2925 L17.2401779,11.2555478 C17.6400262,11.6365199 17.6553283,12.2695 17.2743562,12.6693483 C17.2632523,12.6810024 17.2518686,12.6923867 17.240215,12.7034912 Z" id="path-1"></path>
+    </defs>
+    <g id="Templates" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons" transform="translate(-874.000000, -449.000000)">
+            <g id="Group-3" transform="translate(874.000000, 449.000000)">
+                <g id="icon/back">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="ic-back" transform="translate(12.000000, 12.000000) rotate(-180.000000) translate(-12.000000, -12.000000) "></g>
+                    <g id="color/ink/ink" mask="url(#mask-2)" fill="#212121" fill-rule="evenodd">
+                        <rect id="ink" x="0" y="0" width="24" height="24"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

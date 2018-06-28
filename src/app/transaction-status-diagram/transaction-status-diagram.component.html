@@ -3,10 +3,10 @@
   <div class="transaction-state-diagram">
     <div class="transaction-diagram-container">
       <div class="status-diagram-item" *ngFor="let item of (transactionDetailsData | async); first as isFirst; last as isLast">
-        <div class="triangle" *ngIf="selectedTransaction.trans_state === item.trans_state"></div>
+        <div class="triangle" *ngIf="selectedTransaction.trans_id === item.trans_id"></div>
         <div *ngIf="!isFirst" class="left-connector"></div>
         <div *ngIf="!isLast" class="right-connector"></div>
-        <div class="circle-default" [ngClass]="{'circle-highlighter' : selectedTransaction.trans_state === item.trans_state}">
+        <div class="circle-default" [ngClass]="{'circle-highlighter' : selectedTransaction.trans_id === item.trans_id}">
           <div class="circle" (click)="selectState(item)">
           </div>
         </div>
