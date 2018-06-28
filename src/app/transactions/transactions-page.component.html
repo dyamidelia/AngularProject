@@ -100,12 +100,11 @@
     </tr>
 
    <!-- Table Data Rows Area -->
-   <tr class="table-row" *ngFor="let t of (transactions|async)?.data " (click)="redirectToDetailsPage(t)" [class.completed]="t.isCompleted"> 
+   <tr class="table-row" *ngFor="let t of (transactions|async)?.data " [class.completed]="t.isCompleted">
       <ng-container *ngFor="let col of columns | async">
           <td class="td-styles" align="center" *ngIf="col.is_visible">{{t[col.col_name]}}</td>
       </ng-container>
-      <td class="td-styles" align="center"></td>
-    </tr> 
+    </tr>
 
 <tfoot>
   <!-- The first number isn't correct yet-->

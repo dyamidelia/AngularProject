@@ -8,7 +8,9 @@ import {hitURL} from '../app.globals';
 })
 export class TransactionDetailsService {
   // hitURL = 'http://10.102.17.21:8080/rest';
-  
+  tsc_org_id = 'tibco1';
+  user_trans_id = '9c09eb86-357f-4d57-af4d-459ffebab4e8';
+
   response = [
     {
       'trans_id': '1ec9cde4-7195-402c-946c-af8f8df1ae24',
@@ -183,7 +185,7 @@ export class TransactionDetailsService {
   getTransactionDetails(transactionId, userId) {
     /*return this.http.get(`${this.hitURL}/transactions/${this.tsc_org_id}/user-trans-id/${this.user_trans_id}`)
       .pipe(map(res => res.json()));*/
-      return this.http.get(`${hitURL}/transactions/${transactionId}/user-trans-id/${userId}`);
+      return this.http.get(`${hitURL}/transactions/${this.tsc_org_id}/user-trans-id/${this.user_trans_id}`);
 
   }
   getDisplayNamesForColumns() {

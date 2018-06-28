@@ -16,6 +16,10 @@ export const routes: Routes = [
     component: TransactionsPageComponent
   },
   {
+    path: 'transactionsDetails',
+    component: TransactionDetailsPageComponent
+  },
+  {
     path: 'transactions/:transactionId/user-trans-id/:userId',
     component: TransactionDetailsPageComponent
   },
