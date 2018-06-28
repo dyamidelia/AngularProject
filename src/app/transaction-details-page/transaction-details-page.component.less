@@ -1,47 +1,74 @@
-  .transaction-details-page {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-    padding:2%;
-  }
-  .transaction-details-content {
-    display: table-row;
-    position: relative;
-
-  }
-  app-transaction-details-summary {
-    display: table-cell;
-    width: 30%;
-    vertical-align: top;
-    background-color:  #eeeeee;
-  }
-  .transaction-status-wrapper {
-    display: table-cell;
-    width: 70%;
-    vertical-align: top;
-    background-color: #ffffff;
-    position: relative;
-  .change-view {
+.transaction-details-page-breadcrumb{
+  padding-left:2%;
+  margin-bottom:-2%;
+  position: relative;
+  .back-image{
+    background-image: url(/assets/images/back.svg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    background-repeat: no-repeat;
+    padding: 10px 15px;
     position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 2;
-    border: none;
-    outline: none;
+    left: -10px;
     cursor: pointer;
   }
-  .change-view.grid {
-    background-image: url("/assets/images/grid.png");
-    width: 28px;
-    height: 24px;
-    background-size: 100%;
-    background-repeat: no-repeat;
+  h1{
+    font-size:1.85rem;
+    font-weight: normal;
+    line-height: 0.5rem;
   }
-  .change-view.chart {
-    background-image: url("/assets/images/chart.png");
-    width: 28px;
-    height: 28px;
-    background-size: 100%;
-    background-repeat: no-repeat;
+  h2{
+    font-size:1.125rem;
+    font-weight: normal;
+    .breadcrumb-link{
+      color:#4e92df;
+      cursor:pointer;
+    }
   }
-  }
+}
+.transaction-details-page {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  padding:2%;
+  .transaction-details-content {
+      display: table-row;
+      position: relative;
+      app-transaction-details-summary {
+          display: table-cell;
+          width: 30%;
+          vertical-align: top;
+          background-color: #eeeeee;
+     }
+      .transaction-status-wrapper {
+          display: table-cell;
+          width: 70%;
+          vertical-align: top;
+          background-color: #ffffff;
+          position: relative;
+          .change-view {
+              position: absolute;
+              top: 20px;
+              right: 20px;
+              z-index: 2;
+              border: none;
+              outline: none;
+              cursor: pointer;
+         }
+          .change-view.grid {
+              background-image: url("/assets/images/grid.png");
+              width: 28px;
+              height: 24px;
+              background-size: 100%;
+              background-repeat: no-repeat;
+         }
+          .change-view.chart {
+              background-image: url("/assets/images/chart.png");
+              width: 28px;
+              height: 28px;
+              background-size: 100%;
+              background-repeat: no-repeat;
+         }
+     }
+ }
+}
