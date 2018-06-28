@@ -1,13 +1,13 @@
 <div class="hero-search-area">
-<span class="header-text">Transactions</span>
+    <span class="header-text">Transactions</span>
 
-<span style="line-height: 25px">
+    <span style="line-height: 25px">
 <mat-select  #colNames class="primary-search-select" placeholder="Transactions">
     <mat-option
     *ngFor="let a of columns | async"
     [disabled]= "!canAddSearchs()"
     [value]="a.display_name"
-    (onSelectionChange)= "changeSearchText( $event, a.display_name )">
+    (onSelectionChange)= "changeSearchText( $event, a.display_name,a.col_name )">
       {{ a.display_name }}
     </mat-option>
 </mat-select>
@@ -17,10 +17,10 @@
   #topic
   placeholder="{{searchString}}">
 </span>
-</span>
+    </span>
 
-<button mat-button color="primary" (click)="addSearch(topic, colNames)" [disabled]= "!isValidForm()"> + </button>
-<button mat-raised-button color="primary" (click)="saveColumns()" [disabled]= "!canSearch()">Search   <mat-icon class="padding-5" svgIcon="search"></mat-icon></button>
+    <button mat-button color="primary" (click)="addSearch(topic, colNames)" [disabled]="!isValidForm()"> + </button>
+    <button mat-raised-button color="primary" (click)="onSearchClick()" [disabled]="!canSearch()">Search   <mat-icon class="padding-5" svgIcon="search"></mat-icon></button>
 </div>
 <!-- End Hero Search Content -->
 
@@ -29,88 +29,102 @@
     <div style="display: flex; margin-bottom: 5px;">
         <div style="display: table-cell;">
             <div class="primary-search-select-filtered" *ngFor="let searches of form.get('searches').controls"> {{ searches.value }}</div>
-          </div>
+        </div>
         <div style="display: table-cell;">
-                <div   style="vertical-align: top;" class="primary-search-input-filtered" *ngFor="let topic of form.get('topics').controls">
-                    {{ topic.value }}
-                </div>
-             </div>
+            <div style="vertical-align: top;" class="primary-search-input-filtered" *ngFor="let topic of form.get('topics').controls">
+                {{ topic.value }}
+            </div>
+        </div>
     </div>
-  </div>
+</div>
 
-<div *ngIf="isOn" style="width: 100%; margin-bottom: 12px;">
-              <span> Search Results of </span>
-              <span
-              class="grey-pillbox"
-              *ngFor="let topic2 of form.get('searchResults').controls"
-              (click)="removeResult( topic2 )" >
-                  {{ topic2.value }} X
-              </span>
+<div class="searchResults" *ngIf="isOn" style="width: 100%; margin-bottom: 12px;">
+    <span> Search Results of </span>
+    <span class="grey-pillbox" *ngFor="let topic2 of form.get('topics').controls" (click)="removeSearchResult(topic2)">
+                  {{ topic2.value }} <span>X</span>
+    </span>
 </div>
 
 <!--Table Begins-->
 <table class="full-width">
 
-  <!-- Table Headers -->
-  <tr class="header-row">
-    <ng-container *ngFor="let col of columns | async | orderBy: 'col_name'" [class.completed]="col.isCompleted">
-    <th class="header-cell" align="center" *ngIf="col.is_visible">
-      <span class="header-cell-text">{{ col.display_name }} <mat-icon (click)="sortColumn(col.display_name)" class="header-cell-icon" svgIcon="ic-sort"></mat-icon></span>
-    </th>
-    </ng-container>
-    <th  class="header-cell-button" (click)="loadFilters()" [ngClass]="{'active': ifShowFiltersRow }"><mat-icon svgIcon="ic-filter"></mat-icon></th>
-    <th  class="header-cell-button" (click)="loadColumnSelection()" [ngClass]="{'active': ifShowColumnsRow }"><mat-icon svgIcon="ic-settings"></mat-icon></th>
-  </tr>
+    <!-- Table Headers -->
+    <tr class="header-row">
+        <ng-container *ngFor="let col of columns | async | orderBy: 'col_name'" [class.completed]="col.isCompleted">
+            <th class="header-cell" align="center" *ngIf="col.is_visible">
+                <span class="header-cell-text">{{ col.display_name }} <mat-icon (click)="sortColumn(col.display_name)" class="header-cell-icon" svgIcon="ic-sort"></mat-icon></span>
+            </th>
+        </ng-container>
+        <th class="header-cell-button" (click)="loadFilters()" [ngClass]="{'active': ifShowFiltersRow }">
+            <mat-icon svgIcon="ic-filter"></mat-icon>
+        </th>
+        <th class="header-cell-button" (click)="loadColumnSelection()" [ngClass]="{'active': ifShowColumnsRow }">
+            <mat-icon svgIcon="ic-settings"></mat-icon>
+        </th>
+    </tr>
 
-   <!-- Filters / Column Selection Area -->
-   <tr *ngIf="ifShowFiltersRow" class="ColumnsRow">
-       <!-- paramaterize the colspan length based on col array size?-->
-       <td colspan = "9">
-          <ng-container
-          *ngFor="let col of columns | async | orderBy: 'col_name'"
-          [class.completed]="col.isCompleted">
-          <mat-select
-          #colNames class="filters-select"
-          placeholder="{{col.display_name}}"
-          *ngIf="col.is_visible">
-              <mat-option
-              *ngFor="let a of columns | async"
-              [value]="a.display_name">
-                {{ a.display_name }}
-              </mat-option>
-          </mat-select>
-          </ng-container>
-          <td></td>
-          <td><button mat-raised-button color="primary" class="apply-filter-button" (click)="saveFilter()">Apply</button></td>
-   </tr>
+    <!-- Filters / Column Selection Area -->
+    <tr *ngIf="ifShowFiltersRow" class="ColumnsRow">
+        <!-- paramaterize the colspan length based on col array size?-->
+        <td colspan="9">
 
-   <tr *ngIf="ifShowColumnsRow" class="ColumnsRow">
-     <!-- paramaterize the colspan length based on col array size?-->
-     <td colspan = "9">
-      <form  class="checkbox-holder" [formGroup] ="form">
-          <mat-checkbox
-          class= "checkbox-style"
-          *ngFor="let col of columns | async"
-          (change)="toggleColumn(col.display_name, col.col_name)"
-          [ngModel] = col.is_visible
-          formControlName="{{ col.display_name }}">{{ col.display_name }}</mat-checkbox>
-          <button mat-raised-button color="primary" class="filters-save-button" (click)="saveColumnsFilter()">Save</button>
-          </form>
+            <form class="filters-holder" [formGroup]="filterForm">
+                <ng-container *ngFor="let col of columns | async | orderBy: 'col_name'" [class.completed]="col.isCompleted">
+                    <!--<mat-select #colNames class="filters-select" placeholder="{{col.display_name}}" *ngIf="col.is_visible">
+                        <mat-option *ngFor="let a of columns | async" [value]="a.display_name">
+                          
+                        </mat-option>
+                    </mat-select>-->
+                    <input type="text" (change)="filterTextValueChange()" class="filters-select" formControlName="{{col.col_name}}" placeholder="{{col.display_name}}">
+
+                </ng-container>
+
+                <button mat-raised-button color="primary" class="apply-filter-button" [disabled]="!filterButtonEnabled" (click)="onFilterClick()">Apply</button>
+            </form>
+
         </td>
     </tr>
 
-   <!-- Table Data Rows Area -->
-   <tr class="table-row" *ngFor="let t of (transactions|async)?.data " [class.completed]="t.isCompleted">
-      <ng-container *ngFor="let col of columns | async">
-          <td class="td-styles" align="center" *ngIf="col.is_visible">{{t[col.col_name]}}</td>
-      </ng-container>
+    <tr *ngIf="ifShowFilterResultsDiv" class="filterResultsRow">
+        <td colspan="9">
+            <div class="selectedFiltersData">
+                <div class="block" fxLayout="row" fxLayoutWrap fxLayoutGap="2rem" fxLayoutAlign="center">
+                    <span class="filterTxt"> Filters: </span>
+                    <span class="grey-pillbox" *ngFor="let item of filteredSelectedList" (click)="removeFilterResult(item )">
+                    {{item.value}} <span>X</span>
+                    </span>
+
+                </div>
+                <div class="block clearFilters" fxLayout='row' fxLayoutWrap fxLayoutGap="2rem">
+                    <button color="primary" (click)="clearFilters()" mat-button>Clear Filters</button>
+                </div>
+
+            </div>
+        </td>
     </tr>
 
-<tfoot>
-  <!-- The first number isn't correct yet-->
-  <span>Showing Search results: {{(transactions|async)?.currentPage }}-{{(transactions|async)?.currentPage * (transactions|async)?.maxPerPage}} of {{(transactions|async)?.totalResults}}</span>
-<!-- Pagination-->
-</tfoot>
+    <tr *ngIf="ifShowColumnsRow" class="ColumnsRow">
+        <!-- paramaterize the colspan length based on col array size?-->
+        <td colspan="9">
+            <form class="checkbox-holder" [formGroup]="form">
+                <mat-checkbox class="checkbox-style" *ngFor="let col of columns | async" (change)="toggleColumn(col.display_name, col.col_name)" [ngModel]=c ol.is_visible formControlName="{{ col.display_name }}">{{ col.display_name }}</mat-checkbox>
+                <button mat-raised-button color="primary" class="filters-save-button" (click)="saveColumnsFilter()">Save</button>
+            </form>
+        </td>
+    </tr>
+
+    <!-- Table Data Rows Area -->
+    <tr class="table-row" *ngFor="let t of (transactions|async)?.data " [class.completed]="t.isCompleted">
+        <ng-container *ngFor="let col of columns | async">
+            <td class="td-styles" align="center" *ngIf="col.is_visible">{{t[col.col_name]}}</td>
+        </ng-container>
+    </tr>
+
+    <tfoot>
+        <!-- The first number isn't correct yet-->
+        <span>Showing Search results: {{(transactions|async)?.currentPage }}-{{(transactions|async)?.currentPage * (transactions|async)?.maxPerPage}} of {{(transactions|async)?.totalResults}}</span>
+        <!-- Pagination-->
+    </tfoot>
 
 </table>
 

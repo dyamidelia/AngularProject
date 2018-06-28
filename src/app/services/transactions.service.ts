@@ -23,5 +23,9 @@ export class TransactionsService {
     return this.http.post(`${hitURL}/columnConfigs/3aa41148-e1ab-4b35-a9aa-abf70ba69a17`, postData)
       .pipe(map(res => res.json()));
   }
+  searchFilterColumns( postData) {
+    return this.http.post(`${hitURL}/transactions/org_1/3aa41148-e1ab-4b35-a9aa-abf70ba69a17/1`, postData)
+      .pipe(map(res => res.json()));
+  }
 
 }
